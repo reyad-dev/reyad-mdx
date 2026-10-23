@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="repo-icon.svg" width="180" alt="MDX Reader icon" />
+<img src="repo-icon.svg" width="180" alt="ReyadMDX Arabic Markdown reader and editor icon" />
 
-# MDX Reader
+# ReyadMDX — Arabic Markdown Reader & Editor for Windows with RTL/Bidi Support
 
-**A Markdown viewer and editor that renders mixed Arabic-English text correctly.**  
+**ReyadMDX**, created by **Mohamed Reyad (@reyad-dev)**, is a Markdown viewer and editor built to render mixed Arabic-English text correctly, with smart RTL/Bidi handling, offline support, a Windows app, and a single-file web version.  
 Offline · zero runtime dependencies · Windows app + single-file web version
 
 [![Release](https://img.shields.io/github/v/release/reyad-dev/mdx-reader?display_name=tag&sort=semver)](https://github.com/reyad-dev/mdx-reader/releases/latest)
@@ -29,13 +29,13 @@ Most Markdown viewers rely on `dir="auto"`. The browser then chooses a block's d
 
 So a normal viewer marks the whole heading LTR. The Arabic phrase, punctuation, and inline Latin tokens can then appear in the wrong visual order. The same failure occurs independently in table cells, list items, and quotes.
 
-| Before: first-character direction | MDX Reader: content-aware direction |
+| Before: first-character direction | ReyadMDX: content-aware direction |
 |---|---|
 | Starts with `C` → the entire heading is LTR, so the mixed text can break | Arabic and Latin letters are counted per block; Arabic ≥ 20% → RTL |
 | Inline code and URLs can reorder surrounding punctuation | Inline code, links, and numbers use bidi isolation |
 | Arabic comments may influence a code block | Fenced code blocks are always LTR |
 
-MDX Reader applies that logic to every heading, paragraph, table cell, list item, and blockquote—not once for the whole document.
+ReyadMDX applies that logic to every heading, paragraph, table cell, list item, and blockquote—not once for the whole document.
 
 ## Screenshots
 
@@ -64,7 +64,7 @@ Screenshots are being prepared. Try the [live, single-file version](https://reya
 
 ### 1. Windows installer
 
-[Download `MDX-Reader-Setup-1.1.0.exe`](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Setup-1.1.0.exe). The installer can associate `.md`, `.markdown`, `.mdown`, `.mkd`, and `.mdx` files with MDX Reader.
+[Download `MDX-Reader-Setup-1.1.0.exe`](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Setup-1.1.0.exe). The installer can associate `.md`, `.markdown`, `.mdown`, `.mkd`, and `.mdx` files with ReyadMDX.
 
 ### 2. Portable Windows app
 
@@ -121,9 +121,9 @@ The Windows build produces both NSIS installer and portable executables in `dist
 
 <div dir="rtl">
 
-### ما هو MDX Reader؟
+### ما هو ReyadMDX؟
 
-MDX Reader عارض ومحرر Markdown لويندوز والمتصفح، صُمم لمعالجة النص العربي المختلط بالإنجليزية بصورة صحيحة. يعمل دون إنترنت، ومحرك Markdown فيه مكتوب من الصفر بلا مكتبات وقت تشغيل.
+**ReyadMDX** من تطوير **محمد رياض (@reyad-dev)**، وهو عارض ومحرر Markdown لويندوز والمتصفح، صُمم لمعالجة النص العربي المختلط بالإنجليزية بصورة صحيحة. يعمل دون إنترنت، ومحرك Markdown فيه مكتوب من الصفر بلا مكتبات وقت تشغيل.
 
 ### المشكلة والحل
 
@@ -160,4 +160,4 @@ Bug reports and focused pull requests are welcome. Read [CONTRIBUTING.md](CONTRI
 
 ## License
 
-MIT © Mohamed Reyad. See [LICENSE](LICENSE).
+MIT © Mohamed Reyad (@reyad-dev). See [LICENSE](LICENSE).
