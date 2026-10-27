@@ -19,12 +19,12 @@ Offline · zero runtime dependencies · Windows app + single-file web version
 
 </div>
 
-## The bidi problem—and the fix
+## The bidi problem and the fix
 
 Most Markdown viewers rely on `dir="auto"`. The browser then chooses a block's direction from its **first strong character**. This heading begins with Latin text:
 
 ```markdown
-# CLAUDE.md — مرجع المشروع الكامل لأي موديل AI
+# CLAUDE.md: مرجع المشروع الكامل لأي موديل AI
 ```
 
 So a normal viewer marks the whole heading LTR. The Arabic phrase, punctuation, and inline Latin tokens can then appear in the wrong visual order. The same failure occurs independently in table cells, list items, and quotes.
@@ -35,7 +35,7 @@ So a normal viewer marks the whole heading LTR. The Arabic phrase, punctuation, 
 | Inline code and URLs can reorder surrounding punctuation | Inline code, links, and numbers use bidi isolation |
 | Arabic comments may influence a code block | Fenced code blocks are always LTR |
 
-ReyadMDX applies that logic to every heading, paragraph, table cell, list item, and blockquote—not once for the whole document.
+ReyadMDX applies that logic to every heading, paragraph, table cell, list item, and blockquote, not once for the whole document.
 
 ## Screenshots
 
@@ -115,7 +115,7 @@ npm run dist
 The Windows build produces both NSIS installer and portable executables in `dist/`.
 
 > [!NOTE]
-> On Windows, `electron-builder` may need **Developer Mode** enabled—or an elevated terminal—because its tool archives contain symbolic links. Enable it under **Settings → Privacy & security → For developers** if extraction fails.
+> On Windows, `electron-builder` may need **Developer Mode** enabled or an elevated terminal because its tool archives contain symbolic links. Enable it under **Settings → Privacy & security → For developers** if extraction fails.
 
 ## العربية
 
@@ -127,7 +127,7 @@ The Windows build produces both NSIS installer and portable executables in `dist
 
 ### المشكلة والحل
 
-تعتمد عارضات كثيرة على <code>dir="auto"</code>، فيحدد المتصفح اتجاه العنصر من أول حرف قوي. لذلك يبدأ العنوان <code>CLAUDE.md — مرجع المشروع الكامل لأي موديل AI</code> بحرف إنجليزي ويُعامل كله كعنصر LTR؛ فتضطرب العربية وعلامات الترقيم.
+تعتمد عارضات كثيرة على <code>dir="auto"</code>، فيحدد المتصفح اتجاه العنصر من أول حرف قوي. لذلك يبدأ العنوان <code>CLAUDE.md: مرجع المشروع الكامل لأي موديل AI</code> بحرف إنجليزي ويُعامل كله كعنصر LTR؛ فتضطرب العربية وعلامات الترقيم.
 
 الحل يعمل على ثلاثة مستويات:
 
