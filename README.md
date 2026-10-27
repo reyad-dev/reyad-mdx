@@ -2,7 +2,7 @@
 
 <img src="repo-icon.svg" width="180" alt="ReyadMDX Arabic Markdown reader and editor icon" />
 
-# ReyadMDX — Arabic Markdown Reader & Editor for Windows with RTL/Bidi Support
+# ReyadMDX | Arabic Markdown Reader & Editor for Windows with RTL/Bidi Support
 
 **ReyadMDX**, created by **Mohamed Reyad (@reyad-dev)**, is a Markdown viewer and editor built to render mixed Arabic-English text correctly, with smart RTL/Bidi handling, offline support, a Windows app, and a single-file web version.  
 Offline · zero runtime dependencies · Windows app + single-file web version
