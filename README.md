@@ -13,7 +13,7 @@ Offline · zero runtime dependencies · Windows app + single-file web version
 ![Download size](https://img.shields.io/badge/download-~75_MB-blue)
 
 [![Download for Windows](https://img.shields.io/badge/Download-Windows_installer-2563eb?style=for-the-badge&logo=windows)](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Setup-1.1.1.exe)
-[![Live Demo](https://img.shields.io/badge/Open-Live_Demo-7c3aed?style=for-the-badge&logo=github)](https://reyad-dev.github.io/mdx-reader/)
+[![Live Demo](https://img.shields.io/badge/Open-Live_Demo-7c3aed?style=for-the-badge&logo=github)](https://reyad-dev.github.io/reyad-mdx/)
 
 [العربية](#العربية) · [Features](#features) · [Install](#installation) · [How it works](#how-the-bidi-engine-works)
 
