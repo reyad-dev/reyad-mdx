@@ -218,6 +218,10 @@ ipcMain.handle('open-file', async () => {
 });
 
 ipcMain.handle('read-path', async (_e, p) => {
+  // ملفات Markdown/نص بس — النافذة متقدرش تطلب أي ملف تاني من الجهاز
+  if (typeof p !== 'string' || !MD_EXT.includes(path.extname(p).slice(1).toLowerCase())) {
+    return { ok: false, error: 'Unsupported file type' };
+  }
   try { return { ok: true, path: p, content: await fs.readFile(p, 'utf8') }; }
   catch (err) { return { ok: false, error: String(err) }; }
 });

@@ -2309,10 +2309,13 @@ html, body {
       }
       // رابط نسبي لملف Markdown تاني جنب الملف الحالي ⇒ افتحه جوه البرنامج
       var rel = href.split('#')[0].split('?')[0];
+      try { rel = decodeURIComponent(rel); } catch (err) { return; }
       if (HAS_NATIVE && state.path && /\.(md|markdown|mdown|mkd|mdx|txt)$/i.test(rel)) {
+        // نسبي بس: ممنوع مسار كامل (C:\ أو /) أو مسار شبكة (\\server) من جوه المستند
+        if (/^([a-z]:|[\\/])/i.test(rel)) return;
         if (state.dirty) { toast(t('saveFirst')); return; }
         var base = state.path.replace(/[\\/][^\\/]*$/, '');
-        var full = /^([a-z]:)?[\\/]/i.test(rel) ? rel : base + '/' + decodeURIComponent(rel);
+        var full = base + '/' + rel;
         N.readPath(full).then(function (r) {
           if (r.ok) setDoc(r.content, r.path); else toast(t('errOpen'));
         });
