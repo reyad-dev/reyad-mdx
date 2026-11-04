@@ -12,7 +12,7 @@ Offline · zero runtime dependencies · Windows app + single-file web version
 [![Platform](https://img.shields.io/badge/platform-Windows-0078D4?logo=windows)](https://github.com/reyad-dev/mdx-reader/releases/latest)
 ![Download size](https://img.shields.io/badge/download-~75_MB-blue)
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows_installer-2563eb?style=for-the-badge&logo=windows)](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Setup-1.1.0.exe)
+[![Download for Windows](https://img.shields.io/badge/Download-Windows_installer-2563eb?style=for-the-badge&logo=windows)](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Setup-1.1.1.exe)
 [![Live Demo](https://img.shields.io/badge/Open-Live_Demo-7c3aed?style=for-the-badge&logo=github)](https://reyad-dev.github.io/mdx-reader/)
 
 [العربية](#العربية) · [Features](#features) · [Install](#installation) · [How it works](#how-the-bidi-engine-works)
@@ -64,11 +64,11 @@ Screenshots are being prepared. Try the [live, single-file version](https://reya
 
 ### 1. Windows installer
 
-[Download `MDX-Reader-Setup-1.1.0.exe`](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Setup-1.1.0.exe). The installer can associate `.md`, `.markdown`, `.mdown`, `.mkd`, and `.mdx` files with ReyadMDX.
+[Download `MDX-Reader-Setup-1.1.1.exe`](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Setup-1.1.1.exe). The installer can associate `.md`, `.markdown`, `.mdown`, `.mkd`, and `.mdx` files with ReyadMDX.
 
 ### 2. Portable Windows app
 
-[Download `MDX-Reader-Portable-1.1.0.exe`](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Portable-1.1.0.exe) and run it without installation.
+[Download `MDX-Reader-Portable-1.1.1.exe`](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Portable-1.1.1.exe) and run it without installation.
 
 ### 3. Browser version
 
@@ -145,8 +145,8 @@ The Windows build produces both NSIS installer and portable executables in `dist
 
 ### التثبيت والتشغيل
 
-- **المثبت:** [تنزيل نسخة ويندوز](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Setup-1.1.0.exe) لربط ملفات Markdown بالتطبيق.
-- **المحمولة:** [تنزيل النسخة المحمولة](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Portable-1.1.0.exe) وتشغيلها دون تثبيت.
+- **المثبت:** [تنزيل نسخة ويندوز](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Setup-1.1.1.exe) لربط ملفات Markdown بالتطبيق.
+- **المحمولة:** [تنزيل النسخة المحمولة](https://github.com/reyad-dev/mdx-reader/releases/latest/download/MDX-Reader-Portable-1.1.1.exe) وتشغيلها دون تثبيت.
 - **المتصفح:** افتح [النسخة الحية](https://reyad-dev.github.io/mdx-reader/) أو نزّل ملف <code>MDX-Reader-Standalone.html</code> وافتحه محليًا.
 - **من السورس:** نفّذ <code>npm install</code> ثم <code>npm start</code>. للبناء نفّذ <code>npm run dist</code>.
 

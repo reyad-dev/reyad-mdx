@@ -34,6 +34,7 @@
       saved: 'تم الحفظ ✓', copied: 'تم النسخ ✓', copyBtn: 'نسخ',
       noResults: 'لا نتائج', of: 'من',
       errOpen: 'تعذّر فتح الملف', errSave: 'تعذّر الحفظ',
+      saveFirst: 'احفظ التعديلات الأول قبل فتح ملف تاني',
       unsaved: 'يوجد تعديلات غير محفوظة. هل تريد المتابعة؟',
       exported: 'تم التصدير ✓', untitled: 'مستند-جديد'
     },
@@ -61,6 +62,7 @@
       saved: 'Saved ✓', copied: 'Copied ✓', copyBtn: 'Copy',
       noResults: 'No results', of: 'of',
       errOpen: 'Could not open file', errSave: 'Could not save',
+      saveFirst: 'Save your changes before opening another file',
       unsaved: 'You have unsaved changes. Continue?',
       exported: 'Exported ✓', untitled: 'untitled'
     }
@@ -247,21 +249,46 @@
     });
   }
 
+  /* الروابط: أي رابط جوه المعاينة لازم يتمسك هنا. لو سبناه يمشي عادي
+     النافذة بتروح للرابط نفسه (شاشة سودا) ومفيش رجوع للملف. */
+  var linksWired = false;
   function wireLinks() {
-    el.preview.querySelectorAll('a[href]').forEach(function (a) {
-      var href = a.getAttribute('href') || '';
+    if (linksWired) return;
+    linksWired = true;
+    el.preview.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a || !el.preview.contains(a)) return;
+      e.preventDefault();
+      var href = (a.getAttribute('href') || '').trim();
+      if (!href) return;
+
       if (href.charAt(0) === '#') {
-        a.addEventListener('click', function (e) {
-          e.preventDefault();
-          var target = document.getElementById(href.slice(1));
-          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        var target = document.getElementById(decodeURIComponent(href.slice(1)));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      if (/^[a-z][a-z0-9+.\-]*:/i.test(href)) {
+        // http/https/mailto بس — أي بروتوكول تاني (file: وغيره) ممكن يشغّل برامج
+        if (!/^(https?|mailto):/i.test(href)) return;
+        if (HAS_NATIVE) N.openExternal(href);
+        else window.open(href, '_blank', 'noopener');
+        return;
+      }
+      // رابط نسبي لملف Markdown تاني جنب الملف الحالي ⇒ افتحه جوه البرنامج
+      var rel = href.split('#')[0].split('?')[0];
+      if (HAS_NATIVE && state.path && /\.(md|markdown|mdown|mkd|mdx|txt)$/i.test(rel)) {
+        if (state.dirty) { toast(t('saveFirst')); return; }
+        var base = state.path.replace(/[\\/][^\\/]*$/, '');
+        var full = /^([a-z]:)?[\\/]/i.test(rel) ? rel : base + '/' + decodeURIComponent(rel);
+        N.readPath(full).then(function (r) {
+          if (r.ok) setDoc(r.content, r.path); else toast(t('errOpen'));
         });
-      } else if (/^(https?|mailto):/i.test(href)) {
-        a.addEventListener('click', function (e) {
-          e.preventDefault();
-          if (HAS_NATIVE) N.openExternal(href);
-          else window.open(href, '_blank', 'noopener');
-        });
+        return;
+      }
+      // دومين من غير بروتوكول (example.com) ⇒ افتحه في المتصفح
+      if (/^[\w-]+(\.[\w-]+)+(\/|$)/.test(href)) {
+        if (HAS_NATIVE) N.openExternal('https://' + href);
+        else window.open('https://' + href, '_blank', 'noopener');
       }
     });
   }

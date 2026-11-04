@@ -95,6 +95,14 @@
 
   /* --------------------------- المعالجة السطرية --------------------------- */
 
+  var TEX_SYM = {
+    '\\leftarrow': '←', '\\rightarrow': '→', '\\to': '→', '\\gets': '←',
+    '\\Leftarrow': '⇐', '\\Rightarrow': '⇒', '\\leftrightarrow': '↔', '\\Leftrightarrow': '⇔',
+    '\\uparrow': '↑', '\\downarrow': '↓', '\\longleftarrow': '⟵', '\\longrightarrow': '⟶',
+    '\\times': '×', '\\div': '÷', '\\pm': '±', '\\approx': '≈', '\\neq': '≠',
+    '\\le': '≤', '\\leq': '≤', '\\ge': '≥', '\\geq': '≥', '\\checkmark': '✓', '\\infty': '∞'
+  };
+
   function matchClose(src, start, open, close) {
     // يرجّع فهرس القوس المغلق المطابق
     var depth = 0;
@@ -147,6 +155,9 @@
       if (c === '$' && src[i + 1] !== '$') {
         var mm = /^\$([^\n$]+?)\$/.exec(src.slice(i));
         if (mm) {
+          // رموز LaTeX البسيطة (زي $\leftarrow$) تتحول للرمز نفسه
+          var sym = TEX_SYM[mm[1].trim()];
+          if (sym) { out += sym; i += mm[0].length; continue; }
           out += '<span class="md-math" dir="ltr">' + esc(mm[1]) + '</span>';
           i += mm[0].length; continue;
         }
@@ -408,9 +419,22 @@
           if (/:$/.test(s)) return 'end';
           return '';
         });
+        /* صف مقطوع: النسخ من صفحات الشات بيحوّل <br><br> جوه الخلية لأسطر
+           فاضية، فالصف بيتقسم نصين. لو الهيدر بيقفل بـ | والصف لأ، نكمّل
+           الصف من الأسطر اللي بعده (متخطين الفاضي) لحد ما يتقفل. */
+        var pipeEnd = /\|[ \t]*$/;
+        var headClosed = pipeEnd.test(line);
         var rows = [], r2 = i + 2;
         while (r2 < lines.length && !isBlank(lines[r2]) && lines[r2].indexOf('|') !== -1) {
-          rows.push(splitRow(lines[r2])); r2++;
+          var rowSrc = lines[r2], nxt = r2 + 1, joins = 0;
+          while (headClosed && !pipeEnd.test(rowSrc) && joins < 8) {
+            var nb = nxt;
+            while (nb < lines.length && isBlank(lines[nb])) nb++;
+            if (nb >= lines.length || lines[nb].indexOf('|') === -1 || /^[ \t]*\|/.test(lines[nb])) break;
+            rowSrc += ' ' + lines[nb].trim();
+            nxt = nb + 1; joins++;
+          }
+          rows.push(splitRow(rowSrc)); r2 = nxt;
         }
         var t = '<div class="md-tablewrap"><table class="md-table"><thead><tr>';
         head.forEach(function (h, ci) {

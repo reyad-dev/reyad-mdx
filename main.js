@@ -122,8 +122,15 @@ function createWindow() {
 
   // أي رابط خارجي يفتح في المتصفح مش جوه التطبيق
   win.webContents.setWindowOpenHandler(({ url }) => {
-    shell.openExternal(url);
+    if (isSafeExternal(url)) shell.openExternal(url);
     return { action: 'deny' };
+  });
+
+  // شبكة أمان: النافذة متسيبش صفحة التطبيق أبدًا (كانت بتجيب شاشة سودا)
+  win.webContents.on('will-navigate', (e, url) => {
+    if (url === win.webContents.getURL()) return;   // إعادة تحميل عادية
+    e.preventDefault();
+    if (isSafeExternal(url)) shell.openExternal(url);
   });
 
   buildMenu();
@@ -245,7 +252,13 @@ ipcMain.handle('close-now', () => {
   if (win) win.close();
 });
 
-ipcMain.handle('open-external', (_e, url) => { shell.openExternal(url); });
+// المسموح بس: http / https / mailto
+function isSafeExternal(url) {
+  try { return ['http:', 'https:', 'mailto:'].includes(new URL(url).protocol); }
+  catch (e) { return false; }
+}
+
+ipcMain.handle('open-external', (_e, url) => { if (isSafeExternal(url)) shell.openExternal(url); });
 ipcMain.handle('set-title', (_e, name) => { if (win) win.setTitle(name + ' — ' + TITLE); });
 
 /* -------------------------------- الإقلاع -------------------------------- */

@@ -1,6 +1,6 @@
 {
   "name": "mdx-reader",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Markdown viewer and editor with first-class Arabic/RTL support",
   "main": "main.js",
   "author": "Tariq",
@@ -37,11 +37,25 @@
   "build": {
     "appId": "com.tariq.mdxreader",
     "productName": "MDX Reader",
-    "directories": { "output": "dist", "buildResources": "build" },
-    "files": ["main.js", "preload.js", "app/**/*", "package.json"],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "app/**/*",
+      "package.json"
+    ],
     "fileAssociations": [
       {
-        "ext": ["md", "markdown", "mdown", "mkd", "mdx"],
+        "ext": [
+          "md",
+          "markdown",
+          "mdown",
+          "mkd",
+          "mdx"
+        ],
         "name": "Markdown Document",
         "description": "Markdown Document",
         "role": "Editor",
@@ -51,8 +65,18 @@
     "win": {
       "icon": "build/icon.ico",
       "target": [
-        { "target": "nsis", "arch": ["x64"] },
-        { "target": "portable", "arch": ["x64"] }
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
       ]
     },
     "nsis": {
