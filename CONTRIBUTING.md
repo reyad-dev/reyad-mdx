@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve MDX Reader.
+Thanks for helping improve ReyadMDX.
 
 ## Report a bug
 

@@ -1,0 +1,50 @@
+plugins { id 'com.android.application' }
+
+def metadata = new groovy.json.JsonSlurper().parse(rootProject.file('../package.json'))
+
+android {
+    namespace 'dev.reyad.mdx'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'dev.reyad.mdx'
+        minSdk 26
+        targetSdk 35
+        versionCode 10200
+        versionName metadata.version
+        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    sourceSets.main.assets.srcDirs = [layout.buildDirectory.dir('generated/readerAssets')]
+    buildTypes {
+        release {
+            // A local sideload build; production signing is configured through CI secrets.
+            if (System.getenv('ANDROID_KEYSTORE_PATH')) {
+                signingConfigs.create('distribution') {
+                    storeFile file(System.getenv('ANDROID_KEYSTORE_PATH'))
+                    storePassword System.getenv('ANDROID_KEYSTORE_PASSWORD')
+                    keyAlias System.getenv('ANDROID_KEY_ALIAS')
+                    keyPassword System.getenv('ANDROID_KEY_PASSWORD')
+                }
+                signingConfig signingConfigs.distribution
+            }
+        }
+    }
+}
+
+tasks.register('prepareReaderAssets', Copy) {
+    from rootProject.file('../app')
+    into layout.buildDirectory.dir('generated/readerAssets/reader')
+    include '*.html', '*.css', '*.js', '*.svg', '*.png'
+    filesMatching('index.html') {
+        filter { line -> line.replace('<script src="app.js"></script>',
+            '<script src="android.js"></script><script src="app.js"></script>') }
+    }
+}
+tasks.named('preBuild').configure { dependsOn 'prepareReaderAssets' }
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.12.1'
+}

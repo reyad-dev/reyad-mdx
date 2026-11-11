@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#4f46e5">
 <link rel="canonical" href="https://reyad-dev.github.io/reyad-mdx/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="MDX Reader">
+<meta property="og:site_name" content="ReyadMDX">
 <meta property="og:title" content="ReyadMDX | Arabic &amp; RTL Markdown Viewer and Editor">
 <meta property="og:description" content="Read and edit mixed Arabic-English Markdown without broken direction or punctuation. Offline and dependency-free at runtime.">
 <meta property="og:url" content="https://reyad-dev.github.io/reyad-mdx/">
@@ -21,17 +21,20 @@
 <meta name="twitter:description" content="Correct mixed Arabic-English Markdown rendering in an offline Windows app and web version.">
 <meta name="twitter:image" content="https://reyad-dev.github.io/reyad-mdx/og-image.png">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="mobile.css">
 </head>
 <body>
 <div class="app" id="app">
 
   <!-- ============================ شريط الأدوات ============================ -->
   <div class="toolbar">
-    <div class="brand"><span class="dot"></span><span>MDX</span></div>
+    <div class="brand"><span class="dot"></span><span>ReyadMDX</span></div>
 
     <button class="btn" id="btnOpen"    title="Ctrl+O"><span class="ico">📂</span><span data-i18n="open">فتح</span></button>
     <button class="btn" id="btnSave"    title="Ctrl+S"><span class="ico">💾</span><span data-i18n="save">حفظ</span></button>
     <button class="btn" id="btnSaveAs"  title="Ctrl+Shift+S"><span class="ico">📄</span><span data-i18n="saveAs">حفظ باسم</span></button>
+    <button class="btn" id="btnUndo" title="تراجع (Ctrl+Z)" disabled><span aria-hidden="true">↶</span><span data-i18n="undo">تراجع</span></button>
+    <button class="btn" id="btnRedo" title="إعادة (Ctrl+Y / Ctrl+Shift+Z)" disabled><span aria-hidden="true">↷</span><span data-i18n="redo">إعادة</span></button>
 
     <div class="tb-sep"></div>
 
@@ -60,8 +63,8 @@
 
     <!-- اتجاه العرض -->
     <select class="select" id="dirSel" title="اتجاه النص">
+      <option value="rtl" selected data-i18n="dirRtl">→ فرض من اليمين لليسار</option>
       <option value="smart" data-i18n="dirSmart">🧠 ذكي — عربي = RTL</option>
-      <option value="rtl"   data-i18n="dirRtl">→ فرض من اليمين لليسار</option>
       <option value="ltr"   data-i18n="dirLtr">← فرض من اليسار لليمين</option>
       <option value="auto"  data-i18n="dirAuto">↔ حسب أول حرف</option>
     </select>
@@ -111,6 +114,8 @@
       </div>
     </div>
   </div>
+
+  <button class="btn scroll-edge" id="btnScrollEdge" type="button" title="إلى أسفل المستند" aria-label="إلى أسفل المستند" hidden>↓</button>
 
   <!-- ============================= شريط الحالة ============================ -->
   <div class="statusbar">
@@ -195,5 +200,6 @@
 
 <script src="markdown.js"></script>
 <script src="app.js"></script>
+<script src="mobile.js"></script>
 </body>
 </html>

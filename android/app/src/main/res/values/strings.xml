@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ReyadMDX</string>
+    <string name="unsaved">يوجد تعديلات غير محفوظة. احفظها قبل الخروج؟</string>
+    <string name="save">حفظ</string>
+    <string name="discard">خروج بدون حفظ</string>
+    <string name="cancel">إلغاء</string>
+    <string name="webview_required">حدّث Android System WebView لتشغيل ReyadMDX.</string>
+</resources>

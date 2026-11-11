@@ -1,11 +1,11 @@
 @echo off
 chcp 65001 >nul
-title MDX Reader
+title ReyadMDX
 cd /d "%~dp0"
 
 echo.
 echo   ==========================================
-echo    MDX Reader - Markdown viewer / editor
+echo    ReyadMDX - Markdown viewer / editor
 echo   ==========================================
 echo.
 
@@ -34,7 +34,7 @@ if not exist "node_modules\electron" (
 
 :: Stop stale instances so Electron can acquire its single-instance lock.
 taskkill /F /IM electron.exe >nul 2>nul
-taskkill /F /IM "MDX Reader.exe" >nul 2>nul
+taskkill /F /IM "ReyadMDX.exe" >nul 2>nul
 
 echo   Starting...
 call npm start

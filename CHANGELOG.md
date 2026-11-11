@@ -1,6 +1,24 @@
 # Changelog
 
-All notable changes to MDX Reader are documented here. This project follows [Semantic Versioning](https://semver.org/).
+All notable changes to ReyadMDX are documented here. This project follows [Semantic Versioning](https://semver.org/).
+
+## [1.2.0] - 2026-11-11
+
+### Added
+
+- Windows right-click menu with copy, cut, paste, select all, undo, and redo.
+- Undo/redo toolbar buttons and editor history covering paste, typing, formatting, and indentation.
+- One top/bottom navigation button, following the active editor or preview pane.
+- Offline Android app with system file picker, save/save as, share targets, and file associations for all six supported extensions.
+- Android draft recovery and file-picker recovery when the system recreates the app process.
+- Automated browser/Electron checks and Android build/lint workflows.
+
+### Changed
+
+- Forced RTL is the default; existing settings migrate once and later direction choices persist.
+- App title, Windows executable, shortcuts, package metadata, and download names now use ReyadMDX.
+- TXT files are also registered by the Windows installer.
+- Split view now synchronizes the textarea's actual scroll position.
 
 ## [1.1.1] - 2026-11-04
 
@@ -27,3 +45,5 @@ All notable changes to MDX Reader are documented here. This project follows [Sem
 [1.1.1]: https://github.com/reyad-dev/mdx-reader/releases/tag/v1.1.1
 [1.1.0]: https://github.com/mmagdym1/mdx-reader/releases/tag/v1.1.0
 
+
+[1.2.0]: https://github.com/reyad-dev/reyad-mdx/releases/tag/v1.2.0

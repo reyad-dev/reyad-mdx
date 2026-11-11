@@ -41,6 +41,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/MDX-Reader-Setup-*.exe
-            dist/MDX-Reader-Portable-*.exe
+            dist/ReyadMDX-Setup-*.exe
+            dist/ReyadMDX-Portable-*.exe
           generate_release_notes: true

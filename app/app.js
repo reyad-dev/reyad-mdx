@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MDX Reader — منطق التطبيق
+   ReyadMDX — منطق التطبيق
    يعمل داخل Electron (مع فتح/حفظ حقيقي) أو داخل أي متصفح (وضع احتياطي)
    ========================================================================== */
 (function () {
@@ -11,7 +11,8 @@
   /* ------------------------------ الترجمات ------------------------------- */
   var I18N = {
     ar: {
-      open: 'فتح', save: 'حفظ', saveAs: 'حفظ باسم',
+      open: 'فتح', save: 'حفظ', saveAs: 'حفظ باسم', undo: 'تراجع', redo: 'إعادة',
+      scrollTop: 'إلى أعلى المستند', scrollBottom: 'إلى أسفل المستند',
       viewPreview: 'معاينة', viewSplit: 'مقسوم', viewEditor: 'تحرير',
       toc: 'الفهرس', outline: 'محتويات المستند',
       searchPh: 'بحث في المستند…',
@@ -39,7 +40,8 @@
       exported: 'تم التصدير ✓', untitled: 'مستند-جديد'
     },
     en: {
-      open: 'Open', save: 'Save', saveAs: 'Save As',
+      open: 'Open', save: 'Save', saveAs: 'Save As', undo: 'Undo', redo: 'Redo',
+      scrollTop: 'Go to document top', scrollBottom: 'Go to document bottom',
       viewPreview: 'Preview', viewSplit: 'Split', viewEditor: 'Edit',
       toc: 'Outline', outline: 'Table of contents',
       searchPh: 'Search document…',
@@ -70,28 +72,25 @@
 
   /* ------------------------------ الحالة --------------------------------- */
   var DEFAULTS = {
-    uiLang: 'ar', theme: 'dark', dir: 'smart', view: 'preview', toc: true,
+    uiLang: 'ar', theme: 'dark', dir: 'rtl', view: 'preview', toc: true,
     fontFamily: '"Segoe UI","IBM Plex Sans Arabic","Noto Sans Arabic",Tahoma,sans-serif',
     fontSize: 17, lineHeight: 2, contentWidth: 900,
     syncScroll: true, autoSave: false
   };
+  var SETTINGS_VERSION = 3;
   var S = load();
   var state = {
     path: null, name: null, text: '', dirty: false, pendingClose: false,
-    fileHandle: null, hits: [], hitIndex: -1, lastRenderedText: null
+    fileHandle: null, hits: [], hitIndex: -1, lastRenderedText: null, savedText: ''
   };
-
-  var SETTINGS_VERSION = 2;
 
   function load() {
     try {
       var raw = localStorage.getItem('mdx.settings');
       var s = Object.assign({}, DEFAULTS, raw ? JSON.parse(raw) : {});
-      // ترقية: الوضع القديم "auto" كان بيعتمد على أول حرف ويكسر الأسطر المختلطة
-      if ((s._v || 1) < 2) {
-        if (s.dir === 'auto') s.dir = 'smart';
-        s._v = SETTINGS_VERSION;
-      }
+      // Apply the new default once, then preserve any direction explicitly chosen.
+      if ((s._v || 1) < SETTINGS_VERSION) s.dir = 'rtl';
+      s._v = SETTINGS_VERSION;
       return s;
     } catch (e) { return Object.assign({}, DEFAULTS, { _v: SETTINGS_VERSION }); }
   }
@@ -132,8 +131,11 @@
       var v = (I18N[lang] || {})[k];
       if (v !== undefined) n.setAttribute('placeholder', v);
     });
-    if (!state.path) el.fileName.textContent = t('noFile');
+    if (!state.name) el.fileName.textContent = t('noFile');
     $('uiLang').value = lang;
+    $('btnUndo').title = t('undo') + ' (Ctrl+Z)';
+    $('btnRedo').title = t('redo') + ' (Ctrl+Y / Ctrl+Shift+Z)';
+    updateScrollEdge();
     updateStats();
   }
 
@@ -177,6 +179,8 @@
       b.classList.toggle('active', b.dataset.view === S.view);
     });
     el.stMode.textContent = t('view' + S.view.charAt(0).toUpperCase() + S.view.slice(1));
+    activeScrollPane = S.view === 'preview' ? 'preview' : 'editor';
+    requestAnimationFrame(updateScrollEdge);
   }
 
   function applyToc() {
@@ -204,6 +208,8 @@
       el.welcome.style.display = '';
       el.tocList.innerHTML = '';
       updateStats();
+      applyDir();
+      requestAnimationFrame(updateScrollEdge);
       return;
     }
     var res = window.MDX.render(src, { dir: S.dir });
@@ -215,6 +221,7 @@
     wireLinks();
     updateStats();
     if (el.search.value) runSearch(el.search.value, false);
+    requestAnimationFrame(updateScrollEdge);
   }
 
   function buildToc(toc) {
@@ -326,18 +333,41 @@
       syncFrom('preview');
     }, { passive: true });
 
-    el.paneEditor.addEventListener('scroll', function () { syncFrom('editor'); }, { passive: true });
+    el.editor.addEventListener('scroll', function () { syncFrom('editor'); }, { passive: true });
+    [el.editor, el.panePreview].forEach(function (pane) {
+      pane.addEventListener('pointerdown', function () {
+        activeScrollPane = pane === el.editor ? 'editor' : 'preview';
+        updateScrollEdge();
+      }, { passive: true });
+      pane.addEventListener('scroll', updateScrollEdge, { passive: true });
+    });
+    new ResizeObserver(updateScrollEdge).observe(el.panes);
   }
 
   var syncing = false;
   function syncFrom(who) {
     if (!S.syncScroll || S.view !== 'split' || syncing) return;
     syncing = true;
-    var a = who === 'editor' ? el.paneEditor : el.panePreview;
-    var b = who === 'editor' ? el.panePreview : el.paneEditor;
+    var a = who === 'editor' ? el.editor : el.panePreview;
+    var b = who === 'editor' ? el.panePreview : el.editor;
     var ratio = a.scrollTop / Math.max(1, a.scrollHeight - a.clientHeight);
     b.scrollTop = ratio * Math.max(0, b.scrollHeight - b.clientHeight);
     requestAnimationFrame(function () { syncing = false; });
+  }
+
+  var activeScrollPane = 'preview';
+  function scrollPane() {
+    return S.view === 'editor' || (S.view === 'split' && activeScrollPane === 'editor') ? el.editor : el.panePreview;
+  }
+  function updateScrollEdge() {
+    var pane = scrollPane(), button = $('btnScrollEdge');
+    var overflow = pane.scrollHeight - pane.clientHeight;
+    button.hidden = overflow <= 2;
+    var toTop = pane.scrollTop > 4;
+    button.dataset.edge = toTop ? 'top' : 'bottom';
+    button.textContent = toTop ? '↑' : '↓';
+    button.title = t(toTop ? 'scrollTop' : 'scrollBottom');
+    button.setAttribute('aria-label', button.title);
   }
 
   /* ================================ البحث ================================ */
@@ -422,10 +452,14 @@
   /* =============================== الملفات =============================== */
 
   function setDoc(text, path, name) {
+    clearTimeout(autoSaveTimer);
+    state.fileHandle = null;
     state.text = text;
+    state.savedText = text;
     state.path = path || null;
     state.name = name || (path ? path.split(/[\\/]/).pop() : null);
     el.editor.value = text;
+    resetHistory();
     el.fileName.textContent = state.name || t('noFile');
     el.filePath.textContent = path || '';
     setDirty(false);
@@ -433,7 +467,17 @@
     if (HAS_NATIVE && state.name) N.setTitle(state.name);
     render();
     el.panePreview.scrollTop = 0;
-    el.paneEditor.scrollTop = 0;
+    el.editor.scrollTop = 0;
+    requestAnimationFrame(updateScrollEdge);
+    persistDraft();
+  }
+
+  function persistDraft() {
+    if (!N || N.platform !== 'android') return;
+    try {
+      localStorage.setItem('mdx.android.draft', JSON.stringify({ text: state.text, savedText: state.savedText,
+        path: state.path, name: state.name }));
+    } catch (e) { /* Large documents can exceed WebView's localStorage quota. */ }
   }
 
   function setDirty(v) {
@@ -443,9 +487,10 @@
   }
 
   function markDirty() {
-    setDirty(true);
+    setDirty(state.text !== state.savedText);
     el.stSaved.textContent = '';
     if (S.autoSave && state.path) scheduleAutoSave();
+    persistDraft();
   }
 
   var autoSaveTimer = null;
@@ -458,7 +503,7 @@
     if (state.dirty && !confirm(t('unsaved'))) return;
     if (HAS_NATIVE) {
       var r = await N.openFile();
-      if (r && r.ok) setDoc(r.content, r.path);
+      if (r && r.ok) setDoc(r.content, r.path, r.name);
       else if (r && r.error) toast(t('errOpen'));
       return;
     }
@@ -468,8 +513,8 @@
           types: [{ description: 'Markdown', accept: { 'text/markdown': ['.md', '.markdown', '.mdown', '.mkd', '.mdx', '.txt'] } }]
         });
         var f = await h.getFile();
-        state.fileHandle = h;
         setDoc(await f.text(), f.name, f.name);
+        state.fileHandle = h;
       } catch (e) { /* ألغى المستخدم */ }
       return;
     }
@@ -481,6 +526,7 @@
     if (HAS_NATIVE) {
       var r = await N.saveFile(state.path, state.text);
       if (r && r.ok) afterSave(silent);
+      else if (r && r.readOnly) return doSaveAs();
       else { state.pendingClose = false; toast(t('errSave')); }
       return;
     }
@@ -500,11 +546,12 @@
     if (HAS_NATIVE) {
       var r = await N.saveFileAs(suggested, state.text);
       if (r && r.ok) {
-        state.path = r.path; state.name = r.path.split(/[\\/]/).pop();
+        state.path = r.path; state.name = r.name || r.path.split(/[\\/]/).pop();
         el.fileName.textContent = state.name; el.filePath.textContent = r.path;
         N.setTitle(state.name); afterSave();
       } else {
         state.pendingClose = false;   // ألغى الحفظ ⇒ ألغِ الإغلاق كمان
+        if (r && r.error) toast(t('errSave'));
       }
       return;
     }
@@ -526,7 +573,9 @@
   }
 
   function afterSave(silent) {
+    state.savedText = state.text;
     setDirty(false);
+    persistDraft();
     el.stSaved.textContent = t('saved');
     el.stSaved.className = 'sb-item ok';
     if (!silent) toast(t('saved'));
@@ -549,7 +598,7 @@
 
   /* --------------------------- تصدير HTML مستقل -------------------------- */
   async function exportHtml() {
-    var res = window.MDX.render(state.text);
+    var res = window.MDX.render(state.text, { dir: S.dir });
     var css = '';
     // نسخة مستقلة: التنسيقات مضمّنة داخل <style>
     document.querySelectorAll('style').forEach(function (s) { css += s.textContent + '\n'; });
@@ -590,16 +639,74 @@
   }
 
   /* ============================ مساعدات المحرر =========================== */
+  var history = [], historyIndex = -1, historyTime = 0, historyType = '';
+  function snapshot() {
+    return { text: el.editor.value, start: el.editor.selectionStart, end: el.editor.selectionEnd, top: el.editor.scrollTop };
+  }
+  function updateHistoryButtons() {
+    $('btnUndo').disabled = historyIndex <= 0;
+    $('btnRedo').disabled = historyIndex >= history.length - 1;
+    if (N && N.setEditState) N.setEditState({
+      focused: document.activeElement === el.editor,
+      canUndo: historyIndex > 0, canRedo: historyIndex < history.length - 1
+    });
+  }
+  function resetHistory() {
+    history = [snapshot()]; historyIndex = 0; historyTime = 0; historyType = '';
+    updateHistoryButtons();
+  }
+  function rememberSelection() {
+    if (history[historyIndex] && history[historyIndex].text === el.editor.value) {
+      history[historyIndex] = snapshot();
+    }
+  }
+  function recordEdit(type) {
+    if (history[historyIndex] && history[historyIndex].text === el.editor.value) return;
+    var now = Date.now();
+    var group = /^(insertText|deleteContentBackward|deleteContentForward)$/.test(type) &&
+      type === historyType && now - historyTime < 750 && historyIndex > 0 && historyIndex === history.length - 1;
+    history = history.slice(0, historyIndex + 1);
+    if (group) history[historyIndex] = snapshot();
+    else { history.push(snapshot()); historyIndex++; }
+    // Bound memory, retaining at least the current and preceding transaction.
+    var bytes = history.reduce(function (n, entry) { return n + entry.text.length * 2; }, 0);
+    while (history.length > 2 && (history.length > 100 || bytes > 16 * 1024 * 1024)) {
+      bytes -= history.shift().text.length * 2; historyIndex--;
+    }
+    historyTime = now; historyType = type || '';
+    state.text = el.editor.value; markDirty(); scheduleRender();
+    updateHistoryButtons(); requestAnimationFrame(updateScrollEdge);
+  }
+  function editHistory(action) {
+    // Leave search boxes and settings inputs with their own native editing history.
+    if (document.activeElement !== el.editor && document.activeElement.matches('input,textarea,[contenteditable="true"]')) {
+      document.execCommand(action); return;
+    }
+    var next = historyIndex + (action === 'undo' ? -1 : 1);
+    if (next < 0 || next >= history.length) return;
+    historyIndex = next;
+    var entry = history[next];
+    el.editor.value = entry.text;
+    el.editor.focus({ preventScroll: true });
+    el.editor.setSelectionRange(entry.start, entry.end);
+    el.editor.scrollTop = entry.top;
+    historyTime = 0; historyType = '';
+    state.text = entry.text; markDirty(); render(); updateHistoryButtons();
+  }
+  function replaceSelection(text, start, end) {
+    rememberSelection();
+    el.editor.setRangeText(text, start, end, 'end');
+    recordEdit('format');
+  }
   function wrapSelection(before, after, placeholder) {
     var ta = el.editor;
     var s = ta.selectionStart, e = ta.selectionEnd;
     var sel = ta.value.slice(s, e) || (placeholder || '');
-    var v = ta.value.slice(0, s) + before + sel + after + ta.value.slice(e);
-    ta.value = v;
+    replaceSelection(before + sel + after, s, e);
     ta.focus();
     ta.selectionStart = s + before.length;
     ta.selectionEnd = s + before.length + sel.length;
-    state.text = v; markDirty(); scheduleRender();
+    rememberSelection();
   }
 
   /* ============================== الأحداث ================================ */
@@ -615,7 +722,16 @@
     $('btnOpen').addEventListener('click', doOpen);
     $('btnSave').addEventListener('click', function () { doSave(); });
     $('btnSaveAs').addEventListener('click', doSaveAs);
-    $('btnPrint').addEventListener('click', function () { window.print(); });
+    $('btnPrint').addEventListener('click', function () { if (N && N.print) N.print(); else window.print(); });
+    ['Undo', 'Redo'].forEach(function (name) {
+      $('btn' + name).addEventListener('mousedown', function (e) { e.preventDefault(); });
+      $('btn' + name).addEventListener('click', function () { editHistory(name.toLowerCase()); });
+    });
+    $('btnScrollEdge').addEventListener('click', function () {
+      var pane = scrollPane();
+      pane.scrollTo({ top: this.dataset.edge === 'top' ? 0 : pane.scrollHeight, behavior: 'instant' });
+      updateScrollEdge();
+    });
     $('btnExportHtml').addEventListener('click', exportHtml);
 
     $('btnToc').addEventListener('click', function () { S.toc = !S.toc; save(); applyToc(); });
@@ -643,19 +759,26 @@
     $('syncScroll').addEventListener('change', function (e) { S.syncScroll = e.target.checked; save(); });
     $('autoSave').addEventListener('change', function (e) { S.autoSave = e.target.checked; save(); });
     $('btnResetSettings').addEventListener('click', function () {
-      S = Object.assign({}, DEFAULTS); save(); applyAll(); render();
+      S = Object.assign({}, DEFAULTS, { _v: SETTINGS_VERSION }); save(); applyAll(); render();
     });
 
     // المحرر
-    el.editor.addEventListener('input', function () {
-      state.text = el.editor.value; markDirty(); scheduleRender();
+    el.editor.addEventListener('beforeinput', function (e) {
+      if (e.inputType === 'historyUndo' || e.inputType === 'historyRedo') {
+        e.preventDefault(); editHistory(e.inputType === 'historyUndo' ? 'undo' : 'redo');
+      } else rememberSelection();
     });
+    el.editor.addEventListener('input', function (e) { recordEdit(e.inputType || 'input'); });
+    el.editor.addEventListener('compositionend', function () { historyTime = 0; });
+    el.editor.addEventListener('pointerdown', function () { historyTime = 0; });
+    el.editor.addEventListener('focus', updateHistoryButtons);
+    el.editor.addEventListener('blur', updateHistoryButtons);
     el.editor.addEventListener('keydown', function (e) {
+      if (/^(Arrow|Home|End|Page)/.test(e.key)) historyTime = 0;
       if (e.key === 'Tab') {
         e.preventDefault();
         var s = el.editor.selectionStart;
-        el.editor.setRangeText('  ', s, el.editor.selectionEnd, 'end');
-        state.text = el.editor.value; markDirty(); scheduleRender();
+        replaceSelection('  ', s, el.editor.selectionEnd);
       }
     });
 
@@ -677,6 +800,7 @@
     el.filePicker.addEventListener('change', function (e) {
       var f = e.target.files[0];
       if (!f) return;
+      state.fileHandle = null;
       var rd = new FileReader();
       rd.onload = function () { setDoc(String(rd.result), null, f.name); };
       rd.readAsText(f, 'utf-8');
@@ -696,6 +820,7 @@
       e.preventDefault(); dragDepth = 0; document.body.classList.remove('dragging');
       var f = e.dataTransfer.files && e.dataTransfer.files[0];
       if (!f) return;
+      if (state.dirty && !confirm(t('unsaved'))) return;
       if (HAS_NATIVE && f.path) {
         N.readPath(f.path).then(function (r) { if (r.ok) setDoc(r.content, r.path); });
         return;
@@ -710,7 +835,10 @@
       var ctrl = e.ctrlKey || e.metaKey;
       if (!ctrl) return;
       var k = e.key.toLowerCase();
-      if (k === 'o') { e.preventDefault(); doOpen(); }
+      if (document.activeElement === el.editor && (k === 'z' || k === 'y')) {
+        e.preventDefault(); editHistory(k === 'y' || e.shiftKey ? 'redo' : 'undo');
+      }
+      else if (k === 'o') { e.preventDefault(); doOpen(); }
       else if (k === 's') { e.preventDefault(); e.shiftKey ? doSaveAs() : doSave(); }
       else if (k === 'f') { e.preventDefault(); el.search.focus(); el.search.select(); }
       else if (k === 'e') { e.preventDefault(); S.view = (S.view === 'editor' ? 'preview' : 'editor'); save(); applyView(); }
@@ -741,20 +869,42 @@
 
   /* =============================== الإقلاع =============================== */
   function boot() {
+    resetHistory();
+    save();
     applyAll();
     bind();
     setupScrollSpy();
 
     if (HAS_NATIVE) {
       // ملف مُمرَّر من ويندوز (فتح بواسطة…)
-      N.onOpenPath(function (r) { if (r && r.ok) setDoc(r.content, r.path); });
+      if (N.platform === 'android') {
+        try {
+          var draft = JSON.parse(localStorage.getItem('mdx.android.draft'));
+          if (draft && typeof draft.text === 'string') {
+            setDoc(draft.text, draft.path, draft.name);
+            state.savedText = typeof draft.savedText === 'string' ? draft.savedText : draft.text;
+            setDirty(state.text !== state.savedText);
+            persistDraft();
+          }
+        } catch (e) {}
+      }
+      N.onOpenPath(function (r) {
+        if (r && r.ok && (!state.dirty || confirm(t('unsaved')))) setDoc(r.content, r.path, r.name);
+        else if (r && r.error) toast(t('errOpen'));
+      });
       N.onMenu(function (action) {
         if (action === 'open') doOpen();
         else if (action === 'save') doSave();
+        else if (action === 'undo' || action === 'redo') editHistory(action);
         else if (action === 'save-then-close') {
           state.pendingClose = true;
           doSave();
         }
+      });
+      if (N.onSavedPath) N.onSavedPath(function (r) {
+        if (!r.ok) { toast(t('errSave')); return; }
+        if (r.exportOnly) toast(t('exported'));
+        else { setDoc(r.content, r.path, r.name); afterSave(); }
       });
       N.ready();
     }

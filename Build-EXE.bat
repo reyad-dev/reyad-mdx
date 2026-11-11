@@ -1,5 +1,5 @@
 @echo off
-title MDX Reader - Build installer
+title ReyadMDX - Build installer
 setlocal
 
 set "APPDIR=%~dp0"

@@ -1,4 +1,4 @@
-/* MDX Reader — mobile-only interaction helpers. */
+/* ReyadMDX — mobile-only interaction helpers. */
 (function () {
   'use strict';
 

@@ -20,14 +20,16 @@ let out = html;
 out = inject(
   out,
   '<link rel="stylesheet" href="styles.css">',
-  '<style>\n' + css + '\n\n' + mobileCss + '\n</style>'
+  '<style>\n' + css + '\n</style>'
 );
+out = inject(out, '<link rel="stylesheet" href="mobile.css">', '<style>\n' + mobileCss + '\n</style>');
 out = inject(out, '<script src="markdown.js"></script>', '<script>\n' + md + '\n</script>');
 out = inject(
   out,
   '<script src="app.js"></script>',
-  '<script>\n' + js + '\n</script>\n<script>\n' + mobileJs + '\n</script>'
+  '<script>\n' + js + '\n</script>'
 );
+out = inject(out, '<script src="mobile.js"></script>', '<script>\n' + mobileJs + '\n</script>');
 
 const targets = [
   path.join(__dirname, 'MDX-Reader-Standalone.html'),

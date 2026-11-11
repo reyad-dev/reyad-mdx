@@ -1,18 +1,18 @@
 {
-  "name": "mdx-reader",
-  "version": "1.1.1",
+  "name": "reyad-mdx",
+  "version": "1.2.0",
   "description": "Markdown viewer and editor with first-class Arabic/RTL support",
   "main": "main.js",
-  "author": "Tariq",
+  "author": "Mohamed Reyad (@reyad-dev)",
   "license": "MIT",
   "private": true,
-  "homepage": "https://reyad-dev.github.io/mdx-reader/",
+  "homepage": "https://reyad-dev.github.io/reyad-mdx/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reyad-dev/mdx-reader.git"
+    "url": "git+https://github.com/reyad-dev/reyad-mdx.git"
   },
   "bugs": {
-    "url": "https://github.com/reyad-dev/mdx-reader/issues"
+    "url": "https://github.com/reyad-dev/reyad-mdx/issues"
   },
   "keywords": [
     "markdown",
@@ -28,15 +28,19 @@
     "start": "electron .",
     "standalone": "node build-standalone.js",
     "dist": "electron-builder --win --x64",
-    "portable": "electron-builder --win portable --x64"
+    "portable": "electron-builder --win portable --x64",
+    "android:build": "cd android && gradlew.bat assembleDebug",
+    "test": "playwright test",
+    "android:test": "node scripts/test-android.js"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "electron": "^31.0.0",
     "electron-builder": "^24.13.3"
   },
   "build": {
     "appId": "com.tariq.mdxreader",
-    "productName": "MDX Reader",
+    "productName": "ReyadMDX",
     "directories": {
       "output": "dist",
       "buildResources": "build"
@@ -54,7 +58,8 @@
           "markdown",
           "mdown",
           "mkd",
-          "mdx"
+          "mdx",
+          "txt"
         ],
         "name": "Markdown Document",
         "description": "Markdown Document",
@@ -80,18 +85,18 @@
       ]
     },
     "nsis": {
-      "artifactName": "MDX-Reader-Setup-${version}.${ext}",
+      "artifactName": "ReyadMDX-Setup-${version}.${ext}",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "MDX Reader",
+      "shortcutName": "ReyadMDX",
       "installerIcon": "build/icon.ico",
       "uninstallerIcon": "build/icon.ico",
       "installerHeaderIcon": "build/icon.ico"
     },
     "portable": {
-      "artifactName": "MDX-Reader-Portable-${version}.${ext}"
+      "artifactName": "ReyadMDX-Portable-${version}.${ext}"
     }
   }
 }

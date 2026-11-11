@@ -2,17 +2,17 @@
 
 <img src="repo-icon.svg" width="180" alt="ReyadMDX Arabic Markdown reader and editor icon" />
 
-# ReyadMDX | Arabic Markdown Reader & Editor for Windows with RTL/Bidi Support
+# ReyadMDX | Arabic Markdown Reader & Editor for Windows & Android with RTL/Bidi Support
 
-**ReyadMDX**, created by **Mohamed Reyad (@reyad-dev)**, is a Markdown viewer and editor built to render mixed Arabic-English text correctly, with smart RTL/Bidi handling, offline support, a Windows app, and a single-file web version.  
-Offline · zero runtime dependencies · Windows app + single-file web version
+**ReyadMDX**, created by **Mohamed Reyad (@reyad-dev)**, is a Markdown viewer and editor built to render mixed Arabic-English text correctly, with smart RTL/Bidi handling, offline support, Windows and Android apps, and a single-file web version.
+Offline · dependency-free Markdown engine · Windows + Android + web
 
 [![Release](https://img.shields.io/github/v/release/reyad-dev/reyad-mdx?display_name=tag&sort=semver)](https://github.com/reyad-dev/reyad-mdx/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-0078D4?logo=windows)](https://github.com/reyad-dev/reyad-mdx/releases/latest)
 ![Download size](https://img.shields.io/badge/download-~75_MB-blue)
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows_installer-2563eb?style=for-the-badge&logo=windows)](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/MDX-Reader-Setup-1.1.1.exe)
+[![Download for Windows](https://img.shields.io/badge/Download-Windows_installer-2563eb?style=for-the-badge&logo=windows)](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Setup-1.2.0.exe)
 [![Live Demo](https://img.shields.io/badge/Open-Live_Demo-7c3aed?style=for-the-badge&logo=github)](https://reyad-dev.github.io/reyad-mdx/)
 
 [العربية](#العربية) · [Features](#features) · [Install](#installation) · [How it works](#how-the-bidi-engine-works)
@@ -51,30 +51,36 @@ Screenshots are being prepared. Try the [live, single-file version](https://reya
 
 | Area | What is included |
 |---|---|
-| Arabic and bidi | Per-block smart direction, forced RTL/LTR modes, first-character compatibility mode, isolated inline Latin text |
+| Arabic and bidi | Forced RTL by default; optional smart, LTR, and first-character modes; isolated inline Latin text |
 | Markdown | Tables with alignment, task lists, reference links, footnotes, front matter, GitHub callouts, raw HTML |
 | Code | Always-LTR fenced blocks and syntax highlighting for JavaScript/TypeScript, Python, SQL, Shell, and JSON |
-| Editing | Preview, synchronized split view, editor view, optional autosave, Markdown formatting shortcuts |
-| Navigation | Generated outline with scroll tracking and diacritic/hamza-insensitive Arabic search |
+| Editing | Preview, synchronized split view, editor view, undo/redo buttons and shortcuts, native right-click menu, optional autosave |
+| Navigation | One top/bottom jump button for editor and preview, generated outline, diacritic/hamza-insensitive Arabic search |
 | Appearance | Dark, midnight, light, and sepia themes; font family, size, line height, and content-width controls |
-| Files and export | Windows `.md` file association, drag and drop, standalone HTML export, print/PDF |
+| Files and export | Windows and Android file associations for `.md`, `.markdown`, `.mdown`, `.mkd`, `.mdx`, `.txt`; HTML export and print/PDF |
 | Runtime | Custom Markdown engine, fully offline, no runtime packages or remote CSS/JavaScript |
 
 ## Installation
 
 ### 1. Windows installer
 
-[Download `MDX-Reader-Setup-1.1.1.exe`](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/MDX-Reader-Setup-1.1.1.exe). The installer can associate `.md`, `.markdown`, `.mdown`, `.mkd`, and `.mdx` files with ReyadMDX.
+[Download `ReyadMDX-Setup-1.2.0.exe`](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Setup-1.2.0.exe). The installer can associate `.md`, `.markdown`, `.mdown`, `.mkd`, `.mdx`, and `.txt` files with ReyadMDX.
 
 ### 2. Portable Windows app
 
-[Download `MDX-Reader-Portable-1.1.1.exe`](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/MDX-Reader-Portable-1.1.1.exe) and run it without installation.
+[Download `ReyadMDX-Portable-1.2.0.exe`](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Portable-1.2.0.exe) and run it without installation.
 
 ### 3. Browser version
 
 Use the [live demo](https://reyad-dev.github.io/reyad-mdx/), or download [`MDX-Reader-Standalone.html`](MDX-Reader-Standalone.html) and open it locally. All CSS and JavaScript are inline; no connection is required. Drag a Markdown file onto the window to open it.
 
-### 4. Run from source
+### 4. Android (Android 8.0 or newer)
+
+[Download `ReyadMDX-1.2.0.apk`](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-1.2.0.apk) and allow installation from your browser/file manager when Android asks.
+
+Open a supported file in your file manager, choose **ReyadMDX**, then **Always** if you want it as the default. Android controls this choice; apps cannot silently replace your default file handler. The app also accepts **Share** for text and Markdown. Use **Open** inside ReyadMDX if your file manager reports an unrecognized MIME type. File access uses the system picker, without broad storage permissions. Read-only files offer **Save as** automatically. All reading and editing work offline; the first source build downloads Android build dependencies.
+
+### 5. Run from source
 
 ```powershell
 git clone https://github.com/reyad-dev/reyad-mdx.git
@@ -87,6 +93,7 @@ npm start
 
 | Shortcut | Action |
 |---|---|
+| `Ctrl+Z` / `Ctrl+Y` / `Ctrl+Shift+Z` | Undo / redo |
 | `Ctrl+O` | Open a file |
 | `Ctrl+S` / `Ctrl+Shift+S` | Save / Save as |
 | `Ctrl+F` | Search (`Enter` next, `Shift+Enter` previous) |
@@ -102,7 +109,7 @@ npm start
 
 The renderer in [`app/markdown.js`](app/markdown.js) is written from scratch and has no external runtime dependency. `detectDir()` counts Arabic-script and Latin letters inside each block. If Arabic is at least 20% of the counted letters, that block becomes RTL; if it contains no Arabic, it becomes LTR. `dattr()` emits the corresponding `dir` attribute for headings, paragraphs, cells, list items, quotes, and footnotes.
 
-Inline code, links, and numeric spans are isolated with CSS `unicode-bidi: isolate`, preventing an LTR fragment from changing punctuation order in its RTL sentence. Fenced code is always rendered LTR, regardless of comment language. The document-direction selector can override smart detection without changing the interface language.
+Inline code, links, and numeric spans are isolated with CSS `unicode-bidi: isolate`, preventing an LTR fragment from changing punctuation order in its RTL sentence. Fenced code is always rendered LTR, regardless of comment language. Forced RTL is the default in version 1.2.0, including a one-time migration for existing settings. Choose Smart to enable the per-block detection described above. Your subsequent choice is saved independently of the interface language. Code blocks remain LTR in all modes.
 
 ## Build from source
 
@@ -114,6 +121,17 @@ npm run dist
 
 The Windows build produces both NSIS installer and portable executables in `dist/`.
 
+Android (JDK 17 and Android SDK 35):
+
+```powershell
+cd android
+.\gradlew.bat assembleDebug lintDebug
+```
+
+On macOS/Linux use `./gradlew assembleDebug lintDebug`. The APK is in `android/app/build/outputs/apk/debug/`. Release signing is configured using `ANDROID_KEYSTORE_PATH`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, and `ANDROID_KEY_PASSWORD`. The GitHub Actions tag build uses repository secrets to produce a signed release APK.
+
+Run UI checks with `npx playwright install chromium` and `npm test`; the suite covers the standalone page and the Electron app. For the Android smoke test, install the debug APK on an unlocked device/emulator with English system UI, make `adb` available, then run `npm run android:test`.
+
 > [!NOTE]
 > On Windows, `electron-builder` may need **Developer Mode** enabled or an elevated terminal because its tool archives contain symbolic links. Enable it under **Settings → Privacy & security → For developers** if extraction fails.
 
@@ -123,7 +141,7 @@ The Windows build produces both NSIS installer and portable executables in `dist
 
 ### ما هو ReyadMDX؟
 
-**ReyadMDX** من تطوير **محمد رياض (@reyad-dev)**، وهو عارض ومحرر Markdown لويندوز والمتصفح، صُمم لمعالجة النص العربي المختلط بالإنجليزية بصورة صحيحة. يعمل دون إنترنت، ومحرك Markdown فيه مكتوب من الصفر بلا مكتبات وقت تشغيل.
+**ReyadMDX** من تطوير **محمد رياض (@reyad-dev)**، وهو عارض ومحرر Markdown لويندوز وأندرويد والمتصفح، صُمم لمعالجة النص العربي المختلط بالإنجليزية بصورة صحيحة. يعمل دون إنترنت، ومحرك Markdown فيه مكتوب من الصفر بلا مكتبات وقت تشغيل.
 
 ### المشكلة والحل
 
@@ -139,14 +157,17 @@ The Windows build produces both NSIS installer and portable executables in `dist
 
 - دعم جداول GFM وقوائم المهام والاقتباسات التنبيهية والحواشي والروابط المرجعية وبيانات front matter.
 - ثلاثة أوضاع: معاينة، ومقسوم بتحرير ومعاينة متزامنة، وتحرير.
-- لغة الواجهة مستقلة عن اتجاه المستند: ذكي، أو RTL، أو LTR، أو حسب أول حرف.
+- فرض الاتجاه من اليمين لليسار هو الافتراضي؛ ويمكن اختيار الوضع الذكي أو LTR أو حسب أول حرف، مع حفظ الاختيار.
+- كلك يمين للنسخ والقص واللصق، وأزرار التراجع والإعادة، وزر واحد يتبدل بين أعلى وأسفل المستند.
+- تطبيق أندرويد يفتح ملفات MD وTXT وMarkdown وباقي الامتدادات المدعومة من مدير الملفات أو المشاركة، مع فتح وحفظ عبر منتقي ملفات النظام.
 - أربعة ثيمات وفهرس تلقائي وبحث عربي يتجاهل التشكيل والهمزات.
 - حفظ تلقائي اختياري، وتصدير HTML مستقل، وطباعة/PDF، وفتح ملفات Markdown بالسحب والإفلات.
 
 ### التثبيت والتشغيل
 
-- **المثبت:** [تنزيل نسخة ويندوز](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/MDX-Reader-Setup-1.1.1.exe) لربط ملفات Markdown بالتطبيق.
-- **المحمولة:** [تنزيل النسخة المحمولة](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/MDX-Reader-Portable-1.1.1.exe) وتشغيلها دون تثبيت.
+- **المثبت:** [تنزيل نسخة ويندوز](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Setup-1.2.0.exe) لربط ملفات Markdown بالتطبيق.
+- **المحمولة:** [تنزيل النسخة المحمولة](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Portable-1.2.0.exe) وتشغيلها دون تثبيت.
+- **أندرويد:** [تنزيل APK](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-1.2.0.apk)، ثم افتح الملف من مدير الملفات واختر ReyadMDX ← دائمًا.
 - **المتصفح:** افتح [النسخة الحية](https://reyad-dev.github.io/reyad-mdx/) أو نزّل ملف <code>MDX-Reader-Standalone.html</code> وافتحه محليًا.
 - **من السورس:** نفّذ <code>npm install</code> ثم <code>npm start</code>. للبناء نفّذ <code>npm run dist</code>.
 

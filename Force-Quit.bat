@@ -1,11 +1,11 @@
 @echo off
-title MDX Reader - Force quit
+title ReyadMDX - Force quit
 echo.
-echo   Closing any stuck MDX Reader / Electron instance...
+echo   Closing any stuck ReyadMDX / Electron instance...
 echo.
 
-taskkill /F /IM "MDX Reader.exe" >nul 2>nul
-if not errorlevel 1 echo   - closed: MDX Reader.exe
+taskkill /F /IM "ReyadMDX.exe" >nul 2>nul
+if not errorlevel 1 echo   - closed: ReyadMDX.exe
 
 taskkill /F /IM electron.exe >nul 2>nul
 if not errorlevel 1 echo   - closed: electron.exe

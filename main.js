@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MDX Reader — عملية Electron الرئيسية
+   ReyadMDX — عملية Electron الرئيسية
    ========================================================================== */
 const { app, BrowserWindow, dialog, ipcMain, shell, Menu, nativeTheme } = require('electron');
 const path = require('path');
@@ -27,7 +27,11 @@ let forceClose = false;   // تخطّي سؤال الإغلاق
 let closeAsked = false;   // رسالة الإغلاق معروضة دلوقتي؟
 
 // عنوان النافذة بيحمل رقم الإصدار عشان تعرف أي نسخة شغالة
-const TITLE = 'MDX Reader v' + app.getVersion();
+const TITLE = 'ReyadMDX v' + app.getVersion();
+app.setName('ReyadMDX');
+// Preserve settings from existing Windows installations after the product rename.
+app.setPath('userData', app.commandLine.getSwitchValue('user-data-dir') || path.join(app.getPath('appData'), 'mdx-reader'));
+let editorHistory = { focused: false, canUndo: false, canRedo: false };
 
 const MD_EXT = ['md', 'markdown', 'mdown', 'mkd', 'mdx', 'txt'];
 
@@ -103,7 +107,7 @@ function createWindow() {
         buttons: ['حفظ / Save', 'إغلاق بدون حفظ / Close', 'إلغاء / Cancel'],
         defaultId: 0,
         cancelId: 2,
-        title: 'MDX Reader',
+        title: 'ReyadMDX',
         message: 'يوجد تعديلات غير محفوظة',
         detail: 'Save your changes before closing?'
       });
@@ -134,6 +138,27 @@ function createWindow() {
   });
 
   buildMenu();
+  win.webContents.on('context-menu', (_event, params) => {
+    const flags = params.editFlags;
+    const template = [];
+    if (params.isEditable) {
+      template.push(
+        { label: 'تراجع / Undo', enabled: editorHistory.focused ? editorHistory.canUndo : flags.canUndo,
+          click: () => win.webContents.send('menu', 'undo') },
+        { label: 'إعادة / Redo', enabled: editorHistory.focused ? editorHistory.canRedo : flags.canRedo,
+          click: () => win.webContents.send('menu', 'redo') },
+        { type: 'separator' },
+        { role: 'cut', label: 'قص / Cut', enabled: flags.canCut }
+      );
+    }
+    template.push({ role: 'copy', label: 'نسخ / Copy', enabled: flags.canCopy });
+    if (params.isEditable) template.push({ role: 'paste', label: 'لصق / Paste', enabled: flags.canPaste });
+    template.push({ type: 'separator' }, { role: 'selectAll', label: 'تحديد الكل / Select all' });
+    if (isSafeExternal(params.linkURL)) {
+      template.push({ label: 'فتح الرابط / Open link', click: () => shell.openExternal(params.linkURL) });
+    }
+    Menu.buildFromTemplate(template).popup({ window: win });
+  });
 }
 
 function buildMenu() {
@@ -157,7 +182,9 @@ function buildMenu() {
     {
       label: 'تحرير / Edit',
       submenu: [
-        { role: 'undo', label: 'تراجع' }, { role: 'redo', label: 'إعادة' },
+        { label: 'تراجع / Undo', accelerator: 'CmdOrCtrl+Z', click: () => win.webContents.send('menu', 'undo') },
+        { label: 'إعادة / Redo', accelerator: 'CmdOrCtrl+Shift+Z', click: () => win.webContents.send('menu', 'redo') },
+        { label: 'إعادة / Redo', accelerator: 'Ctrl+Y', visible: false, click: () => win.webContents.send('menu', 'redo') },
         { type: 'separator' },
         { role: 'cut', label: 'قص' }, { role: 'copy', label: 'نسخ' },
         { role: 'paste', label: 'لصق' }, { role: 'selectAll', label: 'تحديد الكل' }
@@ -249,6 +276,9 @@ ipcMain.handle('save-file-as', async (_e, suggested, content) => {
 });
 
 ipcMain.handle('set-dirty', (_e, v) => { isDirty = !!v; });
+ipcMain.handle('edit-state', (_e, state) => {
+  editorHistory = { focused: !!state.focused, canUndo: !!state.canUndo, canRedo: !!state.canRedo };
+});
 
 ipcMain.handle('close-now', () => {
   forceClose = true;

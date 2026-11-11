@@ -8,6 +8,7 @@ contextBridge.exposeInMainWorld('mdxNative', {
   saveFile:     (p, c) => ipcRenderer.invoke('save-file', p, c),
   saveFileAs:   (name, c) => ipcRenderer.invoke('save-file-as', name, c),
   setDirty:     (v) => ipcRenderer.invoke('set-dirty', v),
+  setEditState: (state) => ipcRenderer.invoke('edit-state', state),
   closeNow:     () => ipcRenderer.invoke('close-now'),
   openExternal: (url) => ipcRenderer.invoke('open-external', url),
   setTitle:     (name) => ipcRenderer.invoke('set-title', name),

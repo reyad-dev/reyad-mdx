@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MDX Reader — التنسيقات
+   ReyadMDX — التنسيقات
    كل الأبعاد بخصائص منطقية (inline-start/end) عشان تشتغل RTL و LTR بنفس الجودة
    ========================================================================== */
 
@@ -356,6 +356,25 @@ html, body {
   word-break: break-word;
 }
 #editor::placeholder { color: var(--fg-3); }
+.pane-editor { overflow: hidden; }
+.btn:disabled { opacity: .4; cursor: default; }
+.scroll-edge {
+  position: fixed;
+  inset-inline-end: 22px;
+  bottom: calc(52px + env(safe-area-inset-bottom, 0px));
+  z-index: 25;
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  font-size: 26px;
+  box-shadow: var(--shadow);
+}
+.scroll-edge[hidden] { display: none; }
+.scroll-edge:hover { background: var(--accent); filter: brightness(1.15); }
+@media print { .scroll-edge { display: none !important; } }
 
 /* ============================== محتوى المستند ============================= */
 .md-body {
