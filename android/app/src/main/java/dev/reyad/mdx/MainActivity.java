@@ -169,7 +169,10 @@ public class MainActivity extends Activity {
                 Intent intent = new Intent(save ? Intent.ACTION_CREATE_DOCUMENT : Intent.ACTION_OPEN_DOCUMENT);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 // Providers often report mdx/mkd as octet-stream; don't hide these files.
-                intent.setType(save ? (args.getString(0).endsWith(".html") ? "text/html" : "text/plain") : "*/*");
+                String suggested = save ? args.getString(0).toLowerCase(java.util.Locale.ROOT) : "";
+                String mime = suggested.endsWith(".html") ? "text/html" : suggested.endsWith(".txt") ? "text/plain"
+                        : suggested.endsWith(".md") ? "text/markdown" : "*/*";
+                intent.setType(save ? mime : "*/*");
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                         | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
                 if (save) {

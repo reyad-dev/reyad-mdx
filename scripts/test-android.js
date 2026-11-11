@@ -13,6 +13,13 @@ const { execFileSync } = require('node:child_process');
   const sdk = process.env.ANDROID_HOME || process.env.ANDROID_SDK_ROOT || (process.platform === 'win32' ? path.join(os.homedir(), 'AppData/Local/Android/Sdk') : '');
   const adb = sdk ? path.join(sdk, 'platform-tools', process.platform === 'win32' ? 'adb.exe' : 'adb') : 'adb';
   async function shell(command) { return execFileSync(adb, ['-s', device.serial(), 'shell', '-T', command], { timeout: 30000 }); }
+  function readSavedFile(name) {
+    const target = path.resolve('test-results', name);
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    // adb pull preserves bytes; shell cat can translate line endings on Windows.
+    execFileSync(adb, ['-s', device.serial(), 'pull', '/sdcard/Download/' + name, target], { stdio: 'pipe' });
+    return fs.readFileSync(target, 'utf8');
+  }
   const stem = 'RMDX-' + String(Date.now()).slice(-6);
   const filename = stem + '.md', copyName = stem + '-copy.md';
   const original = '# اختبار عربي\n\nOpened with Android\n';
@@ -48,7 +55,12 @@ const { execFileSync } = require('node:child_process');
       }
     }
     async function currentPage() {
-      const pid = (await shell('pidof dev.reyad.mdx')).toString().trim();
+      let pid;
+      for (let attempt = 0; attempt < 20 && !pid; attempt++) {
+        pid = (await shell('pidof dev.reyad.mdx || true')).toString().trim();
+        if (!pid) await new Promise(resolve => setTimeout(resolve, 250));
+      }
+      assert.ok(pid, 'Android did not resume the Activity');
       return (await device.webView({ socketName: 'webview_devtools_remote_' + pid })).page();
     }
     await shell('am force-stop com.microsoft.playwright.androiddriver');
@@ -82,7 +94,7 @@ const { execFileSync } = require('node:child_process');
     await page.locator('#btnScrollEdge').click(); assert.ok(await editor.evaluate(el => el.scrollTop > 100));
     await page.locator('#btnSave').click();
     await page.waitForFunction(() => !document.getElementById('pathbar').classList.contains('is-dirty'));
-    assert.equal((await shell('cat /sdcard/Download/' + filename)).toString(), changed);
+    assert.equal(readSavedFile(filename), changed);
     console.log('PASS: file associations, native open, UTF-8, undo/redo, scroll, save');
 
     await page.locator('#btnSaveAs').click();
@@ -92,7 +104,7 @@ const { execFileSync } = require('node:child_process');
     await shell('cmd input text ' + copyName);
     await nativeTap('text', 'SAVE');
     page = await documentPage(copyName);
-    assert.equal((await shell('cat /sdcard/Download/' + copyName)).toString(), changed);
+    assert.equal(readSavedFile(copyName), changed);
     console.log('PASS: native Save As and document filename');
 
     await shell('am start -W -n dev.reyad.mdx/.MainActivity -a android.intent.action.SEND -t text/plain --es android.intent.extra.TEXT received-shared-text');
@@ -102,7 +114,7 @@ const { execFileSync } = require('node:child_process');
     fs.mkdirSync(path.resolve('test-results'), { recursive: true });
     fs.writeFileSync(path.resolve('test-results/android-smoke.png'), await device.screenshot());
   } finally {
-    await shell('rm -f /sdcard/Download/' + filename + ' /sdcard/Download/' + copyName + ' /sdcard/reyad-check-ui.xml');
+    await shell('rm -f /sdcard/Download/' + filename + ' /sdcard/Download/' + copyName + ' /sdcard/Download/' + copyName + '.txt /sdcard/reyad-check-ui.xml');
     await device.close();
   }
 })().catch(error => { console.error(error); process.exitCode = 1; });
