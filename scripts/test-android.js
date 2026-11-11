@@ -12,7 +12,7 @@ const { execFileSync } = require('node:child_process');
   assert.ok(device, 'Connect an Android device/emulator first');
   const sdk = process.env.ANDROID_HOME || process.env.ANDROID_SDK_ROOT || (process.platform === 'win32' ? path.join(os.homedir(), 'AppData/Local/Android/Sdk') : '');
   const adb = sdk ? path.join(sdk, 'platform-tools', process.platform === 'win32' ? 'adb.exe' : 'adb') : 'adb';
-  async function shell(command) { return execFileSync(adb, ['-s', device.serial(), 'shell', command], { timeout: 30000 }); }
+  async function shell(command) { return execFileSync(adb, ['-s', device.serial(), 'shell', '-T', command], { timeout: 30000 }); }
   const stem = 'RMDX-' + String(Date.now()).slice(-6);
   const filename = stem + '.md', copyName = stem + '-copy.md';
   const original = '# اختبار عربي\n\nOpened with Android\n';
