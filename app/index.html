@@ -20,6 +20,7 @@
 <meta name="twitter:title" content="ReyadMDX | Arabic &amp; RTL Markdown Viewer and Editor">
 <meta name="twitter:description" content="Correct mixed Arabic-English Markdown rendering in an offline Windows app and web version.">
 <meta name="twitter:image" content="https://reyad-dev.github.io/reyad-mdx/og-image.png">
+<link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="mobile.css">
 </head>
@@ -144,15 +145,17 @@
     <div class="row">
       <label>
         <span data-i18n="fontFamily">خط العرض</span>
-        <span class="hint" data-i18n="fontFamilyHint">اختر خطًا مثبتًا على جهازك</span>
+        <span class="hint" data-i18n="fontFamilyHint">اختر خطًا مدمجًا (كايرو، المراعي، تجوال) أو خطًا من جهازك</span>
       </label>
       <select class="select" id="fontSel">
-        <option value='"Segoe UI","IBM Plex Sans Arabic","Noto Sans Arabic",Tahoma,sans-serif'>Segoe UI (افتراضي)</option>
+        <option value='"Segoe UI","IBM Plex Sans Arabic","Noto Sans Arabic",Tahoma,sans-serif' data-i18n="fontDefault">Segoe UI (افتراضي)</option>
+        <option value='"Cairo","Segoe UI",sans-serif' data-i18n="fontCairo">Cairo (كايرو)</option>
+        <option value='"Almarai","Segoe UI",sans-serif' data-i18n="fontAlmarai">Almarai (المراعي)</option>
+        <option value='"Tajawal","Segoe UI",sans-serif' data-i18n="fontTajawal">Tajawal (تجوال)</option>
         <option value='Tahoma,"Segoe UI",sans-serif'>Tahoma</option>
         <option value='"IBM Plex Sans Arabic","Segoe UI",sans-serif'>IBM Plex Sans Arabic</option>
         <option value='"Noto Naskh Arabic","Traditional Arabic",serif'>Noto Naskh Arabic</option>
         <option value='"Dubai","Segoe UI",sans-serif'>Dubai</option>
-        <option value='"Cairo","Segoe UI",sans-serif'>Cairo</option>
         <option value='"Amiri","Traditional Arabic",serif'>Amiri</option>
         <option value='"Traditional Arabic",serif'>Traditional Arabic</option>
         <option value='"Arial",sans-serif'>Arial</option>

@@ -2,6 +2,19 @@
 
 All notable changes to ReyadMDX are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [1.2.1] - 2026-11-12
+
+### Added
+
+- Embedded local Arabic fonts: **Cairo** (كايرو), **Almarai** (المراعي), and **Tajawal** (تجوال) in WOFF2 format with zero external network dependencies and complete offline support across Windows, web, and Android.
+- Support for normal (400) and bold (700) weights for all embedded Arabic fonts.
+- Bilingual font labels in typography settings with automatic localization.
+- Automated Playwright font test suite validating font loading, application to preview and editor, and settings persistence.
+
+### Changed
+
+- Standalone HTML, web viewer, and exported HTML files now embed font definitions locally, preventing CORS and file protocol restrictions.
+
 ## [1.2.0] - 2026-11-11
 
 ### Added
@@ -47,3 +60,4 @@ All notable changes to ReyadMDX are documented here. This project follows [Seman
 
 
 [1.2.0]: https://github.com/reyad-dev/reyad-mdx/releases/tag/v1.2.0
+[1.2.1]: https://github.com/reyad-dev/reyad-mdx/releases/tag/v1.2.1

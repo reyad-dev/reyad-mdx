@@ -12,7 +12,7 @@ Offline · dependency-free Markdown engine · Windows + Android + web
 [![Platform](https://img.shields.io/badge/platform-Windows-0078D4?logo=windows)](https://github.com/reyad-dev/reyad-mdx/releases/latest)
 ![Download size](https://img.shields.io/badge/download-~75_MB-blue)
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows_installer-2563eb?style=for-the-badge&logo=windows)](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Setup-1.2.0.exe)
+[![Download for Windows](https://img.shields.io/badge/Download-Windows_installer-2563eb?style=for-the-badge&logo=windows)](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Setup-1.2.1.exe)
 [![Live Demo](https://img.shields.io/badge/Open-Live_Demo-7c3aed?style=for-the-badge&logo=github)](https://reyad-dev.github.io/reyad-mdx/)
 
 [العربية](#العربية) · [Features](#features) · [Install](#installation) · [How it works](#how-the-bidi-engine-works)
@@ -56,7 +56,7 @@ Screenshots are being prepared. Try the [live, single-file version](https://reya
 | Code | Always-LTR fenced blocks and syntax highlighting for JavaScript/TypeScript, Python, SQL, Shell, and JSON |
 | Editing | Preview, synchronized split view, editor view, undo/redo buttons and shortcuts, native right-click menu, optional autosave |
 | Navigation | One top/bottom jump button for editor and preview, generated outline, diacritic/hamza-insensitive Arabic search |
-| Appearance | Dark, midnight, light, and sepia themes; font family, size, line height, and content-width controls |
+| Appearance | Dark, midnight, light, and sepia themes; embedded local Arabic fonts (Cairo, Almarai, Tajawal); font size, line height, and content-width controls |
 | Files and export | Windows and Android file associations for `.md`, `.markdown`, `.mdown`, `.mkd`, `.mdx`, `.txt`; HTML export and print/PDF |
 | Runtime | Custom Markdown engine, fully offline, no runtime packages or remote CSS/JavaScript |
 
@@ -64,11 +64,11 @@ Screenshots are being prepared. Try the [live, single-file version](https://reya
 
 ### 1. Windows installer
 
-[Download `ReyadMDX-Setup-1.2.0.exe`](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Setup-1.2.0.exe). The installer can associate `.md`, `.markdown`, `.mdown`, `.mkd`, `.mdx`, and `.txt` files with ReyadMDX.
+[Download `ReyadMDX-Setup-1.2.1.exe`](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Setup-1.2.1.exe). The installer can associate `.md`, `.markdown`, `.mdown`, `.mkd`, `.mdx`, and `.txt` files with ReyadMDX.
 
 ### 2. Portable Windows app
 
-[Download `ReyadMDX-Portable-1.2.0.exe`](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Portable-1.2.0.exe) and run it without installation.
+[Download `ReyadMDX-Portable-1.2.1.exe`](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Portable-1.2.1.exe) and run it without installation.
 
 ### 3. Browser version
 
@@ -76,7 +76,7 @@ Use the [live demo](https://reyad-dev.github.io/reyad-mdx/), or download [`MDX-R
 
 ### 4. Android (Android 8.0 or newer)
 
-[Download `ReyadMDX-1.2.0.apk`](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-1.2.0.apk) and allow installation from your browser/file manager when Android asks.
+[Download `ReyadMDX-1.2.1.apk`](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-1.2.1.apk) and allow installation from your browser/file manager when Android asks.
 
 Open a supported file in your file manager, choose **ReyadMDX**, then **Always** if you want it as the default. Android controls this choice; apps cannot silently replace your default file handler. The app also accepts **Share** for text and Markdown. Use **Open** inside ReyadMDX if your file manager reports an unrecognized MIME type. File access uses the system picker, without broad storage permissions. Read-only files offer **Save as** automatically. All reading and editing work offline; the first source build downloads Android build dependencies.
 
@@ -160,14 +160,14 @@ Run UI checks with `npx playwright install chromium` and `npm test`; the suite c
 - فرض الاتجاه من اليمين لليسار هو الافتراضي؛ ويمكن اختيار الوضع الذكي أو LTR أو حسب أول حرف، مع حفظ الاختيار.
 - كلك يمين للنسخ والقص واللصق، وأزرار التراجع والإعادة، وزر واحد يتبدل بين أعلى وأسفل المستند.
 - تطبيق أندرويد يفتح ملفات MD وTXT وMarkdown وباقي الامتدادات المدعومة من مدير الملفات أو المشاركة، مع فتح وحفظ عبر منتقي ملفات النظام.
-- أربعة ثيمات وفهرس تلقائي وبحث عربي يتجاهل التشكيل والهمزات.
+- خطوط عربية مدمجة محلياً (Cairo, Almarai, Tajawal)، وأربعة ثيمات وفهرس تلقائي وبحث عربي يتجاهل التشكيل والهمزات.
 - حفظ تلقائي اختياري، وتصدير HTML مستقل، وطباعة/PDF، وفتح ملفات Markdown بالسحب والإفلات.
 
 ### التثبيت والتشغيل
 
-- **المثبت:** [تنزيل نسخة ويندوز](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Setup-1.2.0.exe) لربط ملفات Markdown بالتطبيق.
-- **المحمولة:** [تنزيل النسخة المحمولة](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Portable-1.2.0.exe) وتشغيلها دون تثبيت.
-- **أندرويد:** [تنزيل APK](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-1.2.0.apk)، ثم افتح الملف من مدير الملفات واختر ReyadMDX ← دائمًا.
+- **المثبت:** [تنزيل نسخة ويندوز](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Setup-1.2.1.exe) لربط ملفات Markdown بالتطبيق.
+- **المحمولة:** [تنزيل النسخة المحمولة](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Portable-1.2.1.exe) وتشغيلها دون تثبيت.
+- **أندرويد:** [تنزيل APK](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-1.2.1.apk)، ثم افتح الملف من مدير الملفات واختر ReyadMDX ← دائمًا.
 - **المتصفح:** افتح [النسخة الحية](https://reyad-dev.github.io/reyad-mdx/) أو نزّل ملف <code>MDX-Reader-Standalone.html</code> وافتحه محليًا.
 - **من السورس:** نفّذ <code>npm install</code> ثم <code>npm start</code>. للبناء نفّذ <code>npm run dist</code>.
 

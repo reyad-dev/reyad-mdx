@@ -1,6 +1,6 @@
 {
   "name": "reyad-mdx",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Markdown viewer and editor with first-class Arabic/RTL support",
   "main": "main.js",
   "author": "Mohamed Reyad (@reyad-dev)",

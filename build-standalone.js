@@ -4,6 +4,7 @@ const path = require('path');
 
 const dir = path.join(__dirname, 'app');
 const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
+const fontsCss = fs.existsSync(path.join(dir, 'fonts.css')) ? fs.readFileSync(path.join(dir, 'fonts.css'), 'utf8') : '';
 const css = fs.readFileSync(path.join(dir, 'styles.css'), 'utf8');
 const mobileCss = fs.readFileSync(path.join(dir, 'mobile.css'), 'utf8');
 const md = fs.readFileSync(path.join(dir, 'markdown.js'), 'utf8');
@@ -17,6 +18,13 @@ function inject(src, needle, content) {
 }
 
 let out = html;
+if (fontsCss) {
+  out = inject(
+    out,
+    '<link rel="stylesheet" href="fonts.css">',
+    '<style>\n' + fontsCss + '\n</style>'
+  );
+}
 out = inject(
   out,
   '<link rel="stylesheet" href="styles.css">',
