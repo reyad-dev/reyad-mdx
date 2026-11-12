@@ -2,22 +2,39 @@
 
 <img src="repo-icon.svg" width="180" alt="ReyadMDX Arabic Markdown reader and editor icon" />
 
-# ReyadMDX | Arabic Markdown Reader & Editor for Windows & Android with RTL/Bidi Support
+# ReyadMDX | Arabic Markdown Reader & Editor
+### 🌐 Web App · 📱 Android Mobile App · 💻 Windows Desktop Program
 
-**ReyadMDX**, created by **Mohamed Reyad (@reyad-dev)**, is a Markdown viewer and editor built to render mixed Arabic-English text correctly, with smart RTL/Bidi handling, offline support, Windows and Android apps, and a single-file web version.
-Offline · dependency-free Markdown engine · Windows + Android + web
+**ReyadMDX**, created by **Mohamed Reyad (@reyad-dev)**, is an all-in-one Markdown viewer and editor built from scratch with first-class Arabic RTL/Bidi support, embedded local Arabic fonts (Cairo, Almarai, Tajawal), and zero external dependencies.
 
 [![Release](https://img.shields.io/github/v/release/reyad-dev/reyad-mdx?display_name=tag&sort=semver)](https://github.com/reyad-dev/reyad-mdx/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-Windows-0078D4?logo=windows)](https://github.com/reyad-dev/reyad-mdx/releases/latest)
-![Download size](https://img.shields.io/badge/download-~75_MB-blue)
+[![Platform: Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D4?logo=windows&logoColor=white)](https://github.com/reyad-dev/reyad-mdx/releases/latest)
+[![Platform: Android](https://img.shields.io/badge/Android-8.0%2B-3DDC84?logo=android&logoColor=white)](https://github.com/reyad-dev/reyad-mdx/releases/latest)
+[![Platform: Web](https://img.shields.io/badge/Web-Any%20Browser-orange?logo=googlechrome&logoColor=white)](https://reyad-dev.github.io/reyad-mdx/)
 
-[![Download for Windows](https://img.shields.io/badge/Download-Windows_installer-2563eb?style=for-the-badge&logo=windows)](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Setup-1.2.1.exe)
-[![Live Demo](https://img.shields.io/badge/Open-Live_Demo-7c3aed?style=for-the-badge&logo=github)](https://reyad-dev.github.io/reyad-mdx/)
+<br>
 
-[العربية](#العربية) · [Features](#features) · [Install](#installation) · [How it works](#how-the-bidi-engine-works)
+[![Download Windows Installer](https://img.shields.io/badge/💻%20Windows-Installer%20(.exe)-2563eb?style=for-the-badge&logo=windows)](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Setup-1.2.1.exe)
+[![Download Portable Windows](https://img.shields.io/badge/💼%20Windows-Portable%20(.exe)-0284c7?style=for-the-badge&logo=windows)](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Portable-1.2.1.exe)
+[![Download Android APK](https://img.shields.io/badge/📱%20Android-App%20(.apk)-16a34a?style=for-the-badge&logo=android&logoColor=white)](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-1.2.1.apk)
+[![Open Live Web Demo](https://img.shields.io/badge/🌐%20Web-Live%20Demo-7c3aed?style=for-the-badge&logo=googlechrome&logoColor=white)](https://reyad-dev.github.io/reyad-mdx/)
+
+<br>
+
+[العربية](#العربية) · [Available Platforms](#available-platforms) · [Features](#features) · [Installation](#installation) · [Shortcuts](#keyboard-shortcuts) · [How it works](#how-the-bidi-engine-works)
 
 </div>
+
+## Available Platforms
+
+ReyadMDX is available across three dedicated environments:
+
+| Platform | What you get | How to get it |
+|---|---|---|
+| **💻 Windows Desktop Program** | Complete desktop software with native right-click menus, full keyboard shortcuts, file associations (`.md`, `.markdown`, `.txt`, `.mdx`, `.mdown`, `.mkd`), print to PDF, and export. Available as an installer or zero-install portable. | [Download Setup (.exe)](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Setup-1.2.1.exe) · [Download Portable (.exe)](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-Portable-1.2.1.exe) |
+| **📱 Android Mobile Application** | Lightweight, fully offline Android app for phones and tablets. Opens files from your file manager, accepts system Share actions, preserves drafts across lifecycle events, and includes embedded Arabic fonts. | [Download Android APK](https://github.com/reyad-dev/reyad-mdx/releases/latest/download/ReyadMDX-1.2.1.apk) (Android 8.0+) |
+| **🌐 Web & Standalone HTML** | 100% self-contained single-file HTML page. All scripts, styles, and Arabic fonts are embedded locally as base64. Runs offline in any modern browser without servers or installation. | [Open Live Demo](https://reyad-dev.github.io/reyad-mdx/) · Download [`MDX-Reader-Standalone.html`](MDX-Reader-Standalone.html) |
 
 ## The bidi problem and the fix
 
@@ -109,7 +126,7 @@ npm start
 
 The renderer in [`app/markdown.js`](app/markdown.js) is written from scratch and has no external runtime dependency. `detectDir()` counts Arabic-script and Latin letters inside each block. If Arabic is at least 20% of the counted letters, that block becomes RTL; if it contains no Arabic, it becomes LTR. `dattr()` emits the corresponding `dir` attribute for headings, paragraphs, cells, list items, quotes, and footnotes.
 
-Inline code, links, and numeric spans are isolated with CSS `unicode-bidi: isolate`, preventing an LTR fragment from changing punctuation order in its RTL sentence. Fenced code is always rendered LTR, regardless of comment language. Forced RTL is the default in version 1.2.0, including a one-time migration for existing settings. Choose Smart to enable the per-block detection described above. Your subsequent choice is saved independently of the interface language. Code blocks remain LTR in all modes.
+Inline code, links, and numeric spans are isolated with CSS `unicode-bidi: isolate`, preventing an LTR fragment from changing punctuation order in its RTL sentence. Fenced code is always rendered LTR, regardless of comment language. Forced RTL is the default, with existing settings migrating once. Choose Smart to enable the per-block detection described above. Your subsequent choice is saved independently of the interface language. Code blocks remain LTR in all modes.
 
 ## Build from source
 
@@ -141,7 +158,10 @@ Run UI checks with `npx playwright install chromium` and `npm test`; the suite c
 
 ### ما هو ReyadMDX؟
 
-**ReyadMDX** من تطوير **محمد رياض (@reyad-dev)**، وهو عارض ومحرر Markdown لويندوز وأندرويد والمتصفح، صُمم لمعالجة النص العربي المختلط بالإنجليزية بصورة صحيحة. يعمل دون إنترنت، ومحرك Markdown فيه مكتوب من الصفر بلا مكتبات وقت تشغيل.
+**ReyadMDX** من تطوير **محمد رياض (@reyad-dev)**، وهو عارض ومحرر Markdown عربي احترافي صُمم لمعالجة النص العربي المختلط بالإنجليزية بدقة كاملة، متوفر على **3 منصات متكاملة**:
+- **🌐 نسخة الويب المستقلة:** تعمل في أي متصفح بملف HTML واحد دون إنترنت.
+- **📱 تطبيق أندرويد (Mobile App):** تطبيق مخصص للهواتف والأجهزة اللوحية يفتح ملفات MD من مدير الملفات أو المشاركة.
+- **💻 برنامج ويندوز المكتبي (Desktop):** متوفر كمثبّت رسمي أو كبرنامج محمول (Portable) يعمل فوراً مع دعم كامل لاختصارات لوحة المفاتيح.
 
 ### المشكلة والحل
 
