@@ -43,4 +43,5 @@ jobs:
           files: |
             dist/ReyadMDX-Setup-*.exe
             dist/ReyadMDX-Portable-*.exe
+            MDX-Reader-Standalone.html
           generate_release_notes: true

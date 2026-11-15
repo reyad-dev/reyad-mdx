@@ -204,6 +204,11 @@ function buildMenu() {
       ]
     }
   ];
+  template.push({
+    label: 'مساعدة / Help',
+    submenu: [{ label: 'الإصدار والتحديثات / Version and updates',
+      click: () => win.webContents.send('menu', 'check-updates') }]
+  });
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
 
@@ -218,6 +223,24 @@ async function sendOpen(p) {
 }
 
 /* --------------------------------- IPC ---------------------------------- */
+ipcMain.handle('app-info', () => ({ version: app.getVersion(), platform: 'windows',
+  portable: !!process.env.PORTABLE_EXECUTABLE_FILE }));
+
+// Fixed endpoint: renderer content cannot use this bridge to request arbitrary URLs.
+ipcMain.handle('latest-release', async () => {
+  try {
+    const response = await fetch('https://api.github.com/repos/reyad-dev/reyad-mdx/releases/latest', {
+      headers: { Accept: 'application/vnd.github+json', 'User-Agent': 'ReyadMDX/' + app.getVersion(),
+        'X-GitHub-Api-Version': '2022-11-28' },
+      signal: AbortSignal.timeout(15000), redirect: 'error'
+    });
+    if (response.status === 404) return { ok: false, error: 'no-release' };
+    if (response.status === 403 || response.status === 429) return { ok: false, error: 'rate-limit' };
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    return { ok: true, release: await response.json() };
+  } catch (error) { return { ok: false, error: 'network' }; }
+});
+
 ipcMain.handle('ready', () => {
   rendererReady = true;
   const p = pendingPath || pathFromArgv(process.argv);

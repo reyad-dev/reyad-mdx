@@ -2,6 +2,22 @@
 
 All notable changes to ReyadMDX are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [1.3.0] - 2026-11-15
+
+### Added
+
+- Visible version badge and bilingual Version and updates panel on Windows, Android, web and standalone HTML.
+- Automatic startup checks for desktop and Android, plus manual checks against official stable GitHub Releases.
+- Update notices with platform-specific installer, portable or APK downloads; installation remains user initiated.
+- Offline, rate-limit, invalid-release and incomplete-upload handling without interrupting document editing.
+- Shared release-policy and UI tests, including Electron IPC and mobile layouts.
+
+### Changed
+
+- Package metadata supplies the build version everywhere; Android version codes derive from it automatically.
+- Release tags must match the package version. Windows release builds also attach the standalone HTML.
+- Documented shared web changes versus native changes and how installed copies receive updates.
+
 ## [1.2.1] - 2026-11-12
 
 ### Added

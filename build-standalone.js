@@ -1,6 +1,7 @@
 /* يبني نسختين HTML مستقلتين تمامًا: نسخة محلية ونسخة GitHub Pages */
 const fs = require('fs');
 const path = require('path');
+require('./scripts/sync-version');
 
 const dir = path.join(__dirname, 'app');
 const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
@@ -38,6 +39,10 @@ out = inject(
   '<script>\n' + js + '\n</script>'
 );
 out = inject(out, '<script src="mobile.js"></script>', '<script>\n' + mobileJs + '\n</script>');
+for (const file of ['version.js', 'updates.js']) {
+  out = inject(out, '<script src="' + file + '"></script>',
+    '<script>\n' + fs.readFileSync(path.join(dir, file), 'utf8') + '\n</script>');
+}
 
 const targets = [
   path.join(__dirname, 'MDX-Reader-Standalone.html'),

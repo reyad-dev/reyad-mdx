@@ -1,6 +1,8 @@
 plugins { id 'com.android.application' }
 
 def metadata = new groovy.json.JsonSlurper().parse(rootProject.file('../package.json'))
+def versionParts = metadata.version.tokenize('.').collect { it.toInteger() }
+assert versionParts.size() == 3 && versionParts[1] < 100 && versionParts[2] < 100
 
 android {
     namespace 'dev.reyad.mdx'
@@ -9,7 +11,7 @@ android {
         applicationId 'dev.reyad.mdx'
         minSdk 26
         targetSdk 35
-        versionCode 10201
+        versionCode versionParts[0] * 10000 + versionParts[1] * 100 + versionParts[2]
         versionName metadata.version
         testInstrumentationRunner 'android.test.InstrumentationTestRunner'
     }
@@ -35,12 +37,16 @@ android {
 }
 
 tasks.register('prepareReaderAssets', Copy) {
+    inputs.property('readerVersion', metadata.version)
     from rootProject.file('../app')
     into layout.buildDirectory.dir('generated/readerAssets/reader')
     include '*.html', '*.css', '*.js', '*.svg', '*.png', 'fonts/**'
     filesMatching('index.html') {
         filter { line -> line.replace('<script src="app.js"></script>',
             '<script src="android.js"></script><script src="app.js"></script>') }
+    }
+    doLast {
+        new File(destinationDir, 'version.js').text = 'window.MDX_VERSION = "' + metadata.version + '";\n'
     }
 }
 tasks.named('preBuild').configure { dependsOn 'prepareReaderAssets' }

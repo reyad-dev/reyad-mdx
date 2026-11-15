@@ -2,6 +2,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('mdxNative', {
+  platform: 'windows',
+  getAppInfo:   () => ipcRenderer.invoke('app-info'),
+  getLatestRelease: () => ipcRenderer.invoke('latest-release'),
   ready:        () => ipcRenderer.invoke('ready'),
   openFile:     () => ipcRenderer.invoke('open-file'),
   readPath:     (p) => ipcRenderer.invoke('read-path', p),

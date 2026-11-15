@@ -20,6 +20,8 @@
   }
   window.mdxNative = {
     platform: 'android',
+    getAppInfo: function () { return call('app-info'); },
+    getLatestRelease: function () { return call('latest-release'); },
     ready: function () { return call('ready'); },
     openFile: function () { return call('open-file'); },
     readPath: function (p) { return call('read-path', [p]); },

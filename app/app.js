@@ -896,6 +896,7 @@
       });
       N.onMenu(function (action) {
         if (action === 'open') doOpen();
+        else if (action === 'check-updates' && window.MDXUpdates) window.MDXUpdates.open();
         else if (action === 'save') doSave();
         else if (action === 'undo' || action === 'redo') editHistory(action);
         else if (action === 'save-then-close') {

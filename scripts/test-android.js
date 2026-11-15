@@ -70,6 +70,10 @@ const { execFileSync } = require('node:child_process');
     let page = await currentPage();
     page.setDefaultTimeout(15000);
     await page.waitForFunction(() => !!window.mdxNative);
+    assert.deepEqual(await page.evaluate(() => window.mdxNative.getAppInfo()), {
+      version: require('../package.json').version, platform: 'android', portable: false
+    });
+    assert.equal(await page.locator('#btnVersion').textContent(), 'v' + require('../package.json').version);
     assert.equal(await page.locator('#dirSel').inputValue(), 'rtl');
     for (const extension of ['md', 'markdown', 'mdown', 'mkd', 'mdx', 'txt']) {
       for (const mime of ['text/plain', 'application/octet-stream']) {

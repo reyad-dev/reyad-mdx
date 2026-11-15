@@ -32,6 +32,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.net.URL;
+import javax.net.ssl.HttpsURLConnection;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,7 @@ public class MainActivity extends Activity {
     private final List<JSONObject> queuedEvents = new ArrayList<>();
     private final Set<String> grantedDocuments = new HashSet<>();
     private final ExecutorService files = Executors.newSingleThreadExecutor();
+    private final ExecutorService updates = Executors.newSingleThreadExecutor();
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
@@ -144,6 +147,17 @@ public class MainActivity extends Activity {
         int id = message.getInt("id");
         JSONArray args = message.getJSONArray("args");
         switch (message.getString("action")) {
+            case "app-info":
+                try {
+                    respond(reply, id, result("version", getPackageManager().getPackageInfo(getPackageName(), 0).versionName,
+                            "platform", "android", "portable", false));
+                } catch (android.content.pm.PackageManager.NameNotFoundException error) {
+                    respond(reply, id, result("error", "metadata"));
+                }
+                break;
+            case "latest-release":
+                updates.execute(() -> respond(reply, id, latestRelease()));
+                break;
             case "ready":
                 bridge = reply; ready = true;
                 respond(reply, id, result("ok", true));
@@ -210,6 +224,33 @@ public class MainActivity extends Activity {
             }
             default: respond(reply, id, result("ok", false, "error", "Unknown action"));
         }
+    }
+
+    // Runs off the UI thread and never exposes arbitrary network access to document content.
+    private JSONObject latestRelease() {
+        HttpsURLConnection connection = null;
+        try {
+            connection = (HttpsURLConnection) new URL("https://api.github.com/repos/reyad-dev/reyad-mdx/releases/latest").openConnection();
+            connection.setConnectTimeout(15000);
+            connection.setReadTimeout(15000);
+            connection.setInstanceFollowRedirects(false);
+            connection.setRequestProperty("Accept", "application/vnd.github+json");
+            connection.setRequestProperty("User-Agent", "ReyadMDX-Android");
+            connection.setRequestProperty("X-GitHub-Api-Version", "2022-11-28");
+            int status = connection.getResponseCode();
+            if (status == 404) return result("ok", false, "error", "no-release");
+            if (status == 403 || status == 429) return result("ok", false, "error", "rate-limit");
+            if (status != 200) return result("ok", false, "error", "network");
+            try (InputStream input = connection.getInputStream(); ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+                byte[] bytes = new byte[8192]; int count;
+                while ((count = input.read(bytes)) != -1) {
+                    if (output.size() + count > 1024 * 1024) throw new java.io.IOException("Release response too large");
+                    output.write(bytes, 0, count);
+                }
+                return result("ok", true, "release", new JSONObject(output.toString(StandardCharsets.UTF_8.name())));
+            }
+        } catch (Exception error) { return result("ok", false, "error", "network"); }
+        finally { if (connection != null) connection.disconnect(); }
     }
 
     private String displayName(Uri uri) {
@@ -343,6 +384,7 @@ public class MainActivity extends Activity {
 
     @Override protected void onDestroy() {
         files.shutdown();
+        updates.shutdownNow();
         if (webView != null) { webView.stopLoading(); webView.destroy(); }
         super.onDestroy();
     }

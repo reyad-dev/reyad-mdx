@@ -29,7 +29,7 @@
 
   <!-- ============================ شريط الأدوات ============================ -->
   <div class="toolbar">
-    <div class="brand"><span class="dot"></span><span>ReyadMDX</span></div>
+    <div class="brand"><span class="dot"></span><span>ReyadMDX</span><button class="btn version-badge" id="btnVersion" dir="ltr" aria-label="الإصدار والتحديثات / Version and updates"></button></div>
 
     <button class="btn" id="btnOpen"    title="Ctrl+O"><span class="ico">📂</span><span data-i18n="open">فتح</span></button>
     <button class="btn" id="btnSave"    title="Ctrl+S"><span class="ico">💾</span><span data-i18n="save">حفظ</span></button>
@@ -87,6 +87,7 @@
     <span class="dirty-dot"></span>
     <span class="file-name" id="fileName" data-i18n="noFile">لا يوجد ملف مفتوح</span>
     <span class="file-path" id="filePath"></span>
+    <button class="btn update-notice" id="updateNotice" hidden aria-live="polite"></button>
   </div>
 
   <!-- ============================== المحتوى ============================== -->
@@ -191,6 +192,17 @@
       <input type="checkbox" id="autoSave">
     </div>
 
+    <section class="update-panel" aria-labelledby="updateHeading">
+      <h4 id="updateHeading">الإصدار والتحديثات</h4>
+      <p id="appVersion" dir="auto"></p>
+      <p id="updateStatus" role="status" aria-live="polite"></p>
+      <p class="hint" id="updateHint"></p>
+      <div class="update-actions">
+        <button class="btn" id="btnCheckUpdates">التحقق من التحديثات</button>
+        <a class="btn primary" id="btnDownloadUpdate" hidden target="_blank" rel="noopener noreferrer">تنزيل التحديث</a>
+      </div>
+    </section>
+
     <div class="modal-actions">
       <button class="btn" id="btnExportHtml"><span data-i18n="exportHtml">تصدير HTML</span></button>
       <button class="btn" id="btnResetSettings"><span data-i18n="reset">استعادة الافتراضي</span></button>
@@ -204,5 +216,7 @@
 <script src="markdown.js"></script>
 <script src="app.js"></script>
 <script src="mobile.js"></script>
+<script src="version.js"></script>
+<script src="updates.js"></script>
 </body>
 </html>
