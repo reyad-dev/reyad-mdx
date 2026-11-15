@@ -19,57 +19,48 @@ function appIcon() {
   return undefined;
 }
 
-let win = null;
-let pendingPath = null;   // ملف مُمرَّر من سطر الأوامر / "فتح بواسطة"
-let rendererReady = false;
-let isDirty = false;      // فيه تعديلات غير محفوظة؟
-let forceClose = false;   // تخطّي سؤال الإغلاق
-let closeAsked = false;   // رسالة الإغلاق معروضة دلوقتي؟
+// Each document owns its window, save state and undo state.
+const windows = new Map();
+const pendingPaths = [];
 
 // عنوان النافذة بيحمل رقم الإصدار عشان تعرف أي نسخة شغالة
 const TITLE = 'ReyadMDX v' + app.getVersion();
 app.setName('ReyadMDX');
 // Preserve settings from existing Windows installations after the product rename.
 app.setPath('userData', app.commandLine.getSwitchValue('user-data-dir') || path.join(app.getPath('appData'), 'mdx-reader'));
-let editorHistory = { focused: false, canUndo: false, canRedo: false };
 
 const MD_EXT = ['md', 'markdown', 'mdown', 'mkd', 'mdx', 'txt'];
 
 /* ------------------------- التقاط الملف من ويندوز ------------------------ */
-function pathFromArgv(argv) {
+function pathFromArgv(argv, workingDirectory = process.cwd()) {
   const args = argv.slice(app.isPackaged ? 1 : 2);
   for (const a of args) {
     if (a.startsWith('-')) continue;
     const ext = path.extname(a).slice(1).toLowerCase();
-    if (MD_EXT.includes(ext)) return a;
+    if (MD_EXT.includes(ext)) return path.resolve(workingDirectory, a);
   }
   return null;
 }
 
-// نسخة واحدة فقط: أي فتح جديد يروح للنافذة الحالية
+// Keep one main process, with a separate document window for every launch.
 const gotLock = app.requestSingleInstanceLock();
 if (!gotLock) {
   app.quit();
 } else {
-  app.on('second-instance', (_e, argv) => {
-    const p = pathFromArgv(argv);
-    if (win) {
-      if (win.isMinimized()) win.restore();
-      win.focus();
-      if (p) sendOpen(p);
-    }
+  app.on('second-instance', (_e, argv, workingDirectory) => {
+    app.whenReady().then(() => createWindow(pathFromArgv(argv, workingDirectory)));
   });
 }
 
 // macOS
 app.on('open-file', (e, p) => {
   e.preventDefault();
-  if (rendererReady) sendOpen(p); else pendingPath = p;
+  if (app.isReady()) createWindow(p); else pendingPaths.push(p);
 });
 
 /* ------------------------------- النافذة -------------------------------- */
-function createWindow() {
-  win = new BrowserWindow({
+function createWindow(initialPath = null) {
+  const win = new BrowserWindow({
     width: 1280,
     height: 860,
     minWidth: 720,
@@ -86,20 +77,23 @@ function createWindow() {
     }
   });
 
+  const context = { win, pendingPath: initialPath, isDirty: false, forceClose: false, closeAsked: false,
+    editorHistory: { focused: false, canUndo: false, canRedo: false } };
+  windows.set(win.id, context);
   win.loadFile(path.join(__dirname, 'app', 'index.html'));
   win.once('ready-to-show', () => win.show());
-  win.on('closed', () => { win = null; });
+  win.on('closed', () => windows.delete(win.id));
 
   /* سؤال الحفظ عند الإغلاق.
      بنستخدم showMessageBoxSync عن قصد: النسخة غير المتزامنة مع
      preventDefault بتسيب النافذة معلّقة لو حصل أي خطأ في الـ Promise.
-     المتزامنة بتقف وتستنى الرد، والافتراضي إن النافذة تقفل. */
+     المتزامنة بتقف وتستنى الرد، ولو حصل خطأ بنحافظ على المستند. */
   win.on('close', (e) => {
-    if (forceClose || !isDirty) return;
-    if (closeAsked) return;          // الرسالة معروضة بالفعل، متفتحش تانية
+    if (context.forceClose || !context.isDirty) return;
+    if (context.closeAsked) { e.preventDefault(); return; }
 
-    let choice = 1;                  // الافتراضي الآمن: اقفل بدون حفظ
-    closeAsked = true;
+    let choice = 2;
+    context.closeAsked = true;
     try {
       choice = dialog.showMessageBoxSync(win, {
         type: 'warning',
@@ -112,12 +106,12 @@ function createWindow() {
         detail: 'Save your changes before closing?'
       });
     } catch (err) {
-      choice = 1;                    // أي خطأ ⇒ اقفل، متعلّقش النافذة
+      choice = 2;
     }
-    closeAsked = false;
+    context.closeAsked = false;
 
     if (choice === 2) { e.preventDefault(); return; }   // إلغاء ⇒ ابقَ مفتوحًا
-    if (choice === 1) { isDirty = false; return; }      // اقفل من غير حفظ
+    if (choice === 1) { context.isDirty = false; return; }
 
     // احفظ ثم اغلق: الـ renderer ينادي close-now بعد نجاح الحفظ
     e.preventDefault();
@@ -139,6 +133,7 @@ function createWindow() {
 
   buildMenu();
   win.webContents.on('context-menu', (_event, params) => {
+    const editorHistory = context.editorHistory;
     const flags = params.editFlags;
     const template = [];
     if (params.isEditable) {
@@ -159,6 +154,16 @@ function createWindow() {
     }
     Menu.buildFromTemplate(template).popup({ window: win });
   });
+  return win;
+}
+
+function activeWindow() {
+  return BrowserWindow.getFocusedWindow() || BrowserWindow.getAllWindows()[0];
+}
+
+function sendMenu(action) {
+  const win = activeWindow();
+  if (win) win.webContents.send('menu', action);
 }
 
 function buildMenu() {
@@ -166,15 +171,17 @@ function buildMenu() {
     {
       label: 'ملف / File',
       submenu: [
-        { label: 'فتح… / Open…', accelerator: 'CmdOrCtrl+O', click: () => win.webContents.send('menu', 'open') },
-        { label: 'حفظ / Save', accelerator: 'CmdOrCtrl+S', click: () => win.webContents.send('menu', 'save') },
+        { label: 'نافذة جديدة / New window', accelerator: 'CmdOrCtrl+N', click: () => createWindow() },
+        { label: 'فتح… / Open…', accelerator: 'CmdOrCtrl+O', click: () => sendMenu('open') },
+        { label: 'حفظ / Save', accelerator: 'CmdOrCtrl+S', click: () => sendMenu('save') },
+        { label: 'إغلاق الملف / Close document', accelerator: 'CmdOrCtrl+W', click: () => sendMenu('close-document') },
         { type: 'separator' },
-        { label: 'طباعة / Print', accelerator: 'CmdOrCtrl+P', click: () => win.webContents.print() },
+        { label: 'طباعة / Print', accelerator: 'CmdOrCtrl+P', click: () => { const win = activeWindow(); if (win) win.webContents.print(); } },
         { type: 'separator' },
         {
           label: 'إغلاق إجباري بدون حفظ / Force close',
           accelerator: 'CmdOrCtrl+Shift+Q',
-          click: () => { forceClose = true; isDirty = false; if (win) win.close(); }
+          click: () => { const win = activeWindow(); if (win) { windows.get(win.id).forceClose = true; win.close(); } }
         },
         { role: 'quit', label: 'خروج / Quit' }
       ]
@@ -182,9 +189,9 @@ function buildMenu() {
     {
       label: 'تحرير / Edit',
       submenu: [
-        { label: 'تراجع / Undo', accelerator: 'CmdOrCtrl+Z', click: () => win.webContents.send('menu', 'undo') },
-        { label: 'إعادة / Redo', accelerator: 'CmdOrCtrl+Shift+Z', click: () => win.webContents.send('menu', 'redo') },
-        { label: 'إعادة / Redo', accelerator: 'Ctrl+Y', visible: false, click: () => win.webContents.send('menu', 'redo') },
+        { label: 'تراجع / Undo', accelerator: 'CmdOrCtrl+Z', click: () => sendMenu('undo') },
+        { label: 'إعادة / Redo', accelerator: 'CmdOrCtrl+Shift+Z', click: () => sendMenu('redo') },
+        { label: 'إعادة / Redo', accelerator: 'Ctrl+Y', visible: false, click: () => sendMenu('redo') },
         { type: 'separator' },
         { role: 'cut', label: 'قص' }, { role: 'copy', label: 'نسخ' },
         { role: 'paste', label: 'لصق' }, { role: 'selectAll', label: 'تحديد الكل' }
@@ -207,18 +214,19 @@ function buildMenu() {
   template.push({
     label: 'مساعدة / Help',
     submenu: [{ label: 'الإصدار والتحديثات / Version and updates',
-      click: () => win.webContents.send('menu', 'check-updates') }]
+      click: () => sendMenu('check-updates') }]
   });
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
 
-async function sendOpen(p) {
+async function sendOpen(win, p) {
   try {
     const content = await fs.readFile(p, 'utf8');
+    if (win.isDestroyed()) return;
     win.webContents.send('open-path', { ok: true, path: p, content });
     win.setTitle(path.basename(p) + ' — ' + TITLE);
   } catch (err) {
-    win.webContents.send('open-path', { ok: false, error: String(err) });
+    if (!win.isDestroyed()) win.webContents.send('open-path', { ok: false, error: String(err) });
   }
 }
 
@@ -241,15 +249,24 @@ ipcMain.handle('latest-release', async () => {
   } catch (error) { return { ok: false, error: 'network' }; }
 });
 
-ipcMain.handle('ready', () => {
-  rendererReady = true;
-  const p = pendingPath || pathFromArgv(process.argv);
-  pendingPath = null;
-  if (p) sendOpen(p);
+function windowContext(event) {
+  const win = BrowserWindow.fromWebContents(event.sender);
+  if (!win || !windows.has(win.id)) throw new Error('Unknown document window');
+  return windows.get(win.id);
+}
+
+ipcMain.handle('new-window', () => { createWindow(); return { ok: true }; });
+
+ipcMain.handle('ready', (event) => {
+  const context = windowContext(event);
+  const p = context.pendingPath;
+  context.pendingPath = null;
+  if (p) sendOpen(context.win, p);
   return true;
 });
 
-ipcMain.handle('open-file', async () => {
+ipcMain.handle('open-file', async (event, options) => {
+  const { win } = windowContext(event);
   const r = await dialog.showOpenDialog(win, {
     title: 'اختر ملف Markdown',
     properties: ['openFile'],
@@ -259,6 +276,10 @@ ipcMain.handle('open-file', async () => {
     ]
   });
   if (r.canceled || !r.filePaths.length) return { ok: false, canceled: true };
+  if (options && options.newWindow) {
+    createWindow(r.filePaths[0]);
+    return { ok: false, openedInNewWindow: true };
+  }
   try {
     const p = r.filePaths[0];
     const content = await fs.readFile(p, 'utf8');
@@ -281,7 +302,8 @@ ipcMain.handle('save-file', async (_e, p, content) => {
   catch (err) { return { ok: false, error: String(err) }; }
 });
 
-ipcMain.handle('save-file-as', async (_e, suggested, content) => {
+ipcMain.handle('save-file-as', async (event, suggested, content) => {
+  const { win } = windowContext(event);
   const r = await dialog.showSaveDialog(win, {
     title: 'حفظ باسم',
     defaultPath: suggested,
@@ -298,15 +320,16 @@ ipcMain.handle('save-file-as', async (_e, suggested, content) => {
   } catch (err) { return { ok: false, error: String(err) }; }
 });
 
-ipcMain.handle('set-dirty', (_e, v) => { isDirty = !!v; });
-ipcMain.handle('edit-state', (_e, state) => {
-  editorHistory = { focused: !!state.focused, canUndo: !!state.canUndo, canRedo: !!state.canRedo };
+ipcMain.handle('set-dirty', (event, v) => { windowContext(event).isDirty = !!v; });
+ipcMain.handle('edit-state', (event, state) => {
+  windowContext(event).editorHistory = { focused: !!state.focused, canUndo: !!state.canUndo, canRedo: !!state.canRedo };
 });
 
-ipcMain.handle('close-now', () => {
-  forceClose = true;
-  isDirty = false;
-  if (win) win.close();
+ipcMain.handle('close-now', (event) => {
+  const context = windowContext(event);
+  context.forceClose = true;
+  context.isDirty = false;
+  context.win.close();
 });
 
 // المسموح بس: http / https / mailto
@@ -316,13 +339,14 @@ function isSafeExternal(url) {
 }
 
 ipcMain.handle('open-external', (_e, url) => { if (isSafeExternal(url)) shell.openExternal(url); });
-ipcMain.handle('set-title', (_e, name) => { if (win) win.setTitle(name + ' — ' + TITLE); });
+ipcMain.handle('set-title', (event, name) => { windowContext(event).win.setTitle(name ? name + ' — ' + TITLE : TITLE); });
 
 /* -------------------------------- الإقلاع -------------------------------- */
-app.whenReady().then(createWindow);
-
-// أي طلب خروج (Alt+F4 / Quit / إغلاق الجلسة) ما يتعلّقش على سؤال الحفظ
-app.on('before-quit', () => { forceClose = true; });
+app.whenReady().then(() => {
+  if (!gotLock) return;
+  if (pendingPaths.length) pendingPaths.splice(0).forEach(p => createWindow(p));
+  else createWindow(pathFromArgv(process.argv));
+});
 
 app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit(); });
 app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });

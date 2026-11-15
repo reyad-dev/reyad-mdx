@@ -43,16 +43,19 @@ test.describe('Arabic local fonts (Cairo, Almarai, Tajawal)', () => {
 
       // 1. Test selecting Cairo
       await page.locator('#fontSel').selectOption('"Cairo","Segoe UI",sans-serif');
+      await expect(page.locator('#editor')).toHaveCSS('font-family', /Cairo/);
       const cairoFont = await page.evaluate(() => document.documentElement.style.getPropertyValue('--ar-font'));
       expect(cairoFont).toContain('Cairo');
 
       // 2. Test selecting Almarai
       await page.locator('#fontSel').selectOption('"Almarai","Segoe UI",sans-serif');
+      await expect(page.locator('#editor')).toHaveCSS('font-family', /Almarai/);
       const almaraiFont = await page.evaluate(() => document.documentElement.style.getPropertyValue('--ar-font'));
       expect(almaraiFont).toContain('Almarai');
 
       // 3. Test selecting Tajawal
       await page.locator('#fontSel').selectOption('"Tajawal","Segoe UI",sans-serif');
+      await expect(page.locator('#editor')).toHaveCSS('font-family', /Tajawal/);
       const tajawalFont = await page.evaluate(() => document.documentElement.style.getPropertyValue('--ar-font'));
       expect(tajawalFont).toContain('Tajawal');
 

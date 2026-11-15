@@ -2,6 +2,16 @@
 
 All notable changes to ReyadMDX are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [1.3.1] - 2026-11-15
+
+### Fixed
+
+- Android's font policy now permits the embedded font data. Cairo, Almarai and Tajawal load offline, and the selected font applies to the editor as well as the preview.
+- Android lists available bundled fonts and the system default instead of unavailable desktop font families.
+- New and Close document actions clear the current draft and undo history after confirming unsaved changes. Deliberately closed Android documents stay closed after restarting, and consumed file/share intents are not replayed on Activity recreation.
+- Opening another Windows file creates a separate document window. Menus, file dialogs, save state, close prompts and undo state belong to their originating window.
+- Desktop reloads preserve each window's own document and unsaved edits. A completed save for an old document cannot mark a newly opened draft saved.
+
 ## [1.3.0] - 2026-11-15
 
 ### Added

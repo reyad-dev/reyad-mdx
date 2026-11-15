@@ -7,10 +7,13 @@
 
   var HAS_NATIVE = typeof window.mdxNative !== 'undefined';
   var N = window.mdxNative || null;
+  var androidDocumentClosed = false;
 
   /* ------------------------------ الترجمات ------------------------------- */
   var I18N = {
     ar: {
+      newDoc: 'جديد', closeDoc: 'إغلاق الملف',
+      discardDocument: 'يوجد تعديلات غير محفوظة. هل تريد تجاهلها وفتح صفحة فارغة؟',
       open: 'فتح', save: 'حفظ', saveAs: 'حفظ باسم', undo: 'تراجع', redo: 'إعادة',
       scrollTop: 'إلى أعلى المستند', scrollBottom: 'إلى أسفل المستند',
       viewPreview: 'معاينة', viewSplit: 'مقسوم', viewEditor: 'تحرير',
@@ -28,19 +31,21 @@
       dropHere: 'أفلت ملف .md هنا',
       settings: 'الإعدادات', settingsSub: 'كل الإعدادات تُحفظ تلقائيًا',
       fontFamily: 'خط العرض', fontFamilyHint: 'اختر خطًا مدمجًا (كايرو، المراعي، تجوال) أو خطًا من جهازك',
-      fontDefault: 'Segoe UI (افتراضي)', fontCairo: 'Cairo (كايرو)', fontAlmarai: 'Almarai (المراعي)', fontTajawal: 'Tajawal (تجوال)',
+      fontDefault: 'خط النظام (افتراضي)', fontCairo: 'Cairo (كايرو)', fontAlmarai: 'Almarai (المراعي)', fontTajawal: 'Tajawal (تجوال)',
       fontSize: 'حجم الخط', lineHeight: 'تباعد الأسطر', contentWidth: 'عرض النص',
       syncScroll: 'تزامن التمرير في الوضع المقسوم',
       autoSave: 'حفظ تلقائي', autoSaveHint: 'يحفظ الملف بعد ثانيتين من آخر تعديل',
       exportHtml: 'تصدير HTML', reset: 'استعادة الافتراضي', done: 'تم',
       saved: 'تم الحفظ ✓', copied: 'تم النسخ ✓', copyBtn: 'نسخ',
       noResults: 'لا نتائج', of: 'من',
-      errOpen: 'تعذّر فتح الملف', errSave: 'تعذّر الحفظ',
+      errOpen: 'تعذّر فتح الملف', errSave: 'تعذّر الحفظ', errClose: 'تعذّر إغلاق المستند. حاول مجددًا.',
       saveFirst: 'احفظ التعديلات الأول قبل فتح ملف تاني',
       unsaved: 'يوجد تعديلات غير محفوظة. هل تريد المتابعة؟',
       exported: 'تم التصدير ✓', untitled: 'مستند-جديد'
     },
     en: {
+      newDoc: 'New', closeDoc: 'Close document',
+      discardDocument: 'You have unsaved changes. Discard them and open a blank document?',
       open: 'Open', save: 'Save', saveAs: 'Save As', undo: 'Undo', redo: 'Redo',
       scrollTop: 'Go to document top', scrollBottom: 'Go to document bottom',
       viewPreview: 'Preview', viewSplit: 'Split', viewEditor: 'Edit',
@@ -58,14 +63,14 @@
       dropHere: 'Drop a .md file here',
       settings: 'Settings', settingsSub: 'Everything is saved automatically',
       fontFamily: 'Display font', fontFamilyHint: 'Choose a built-in font (Cairo, Almarai, Tajawal) or system font',
-      fontDefault: 'Segoe UI (Default)', fontCairo: 'Cairo', fontAlmarai: 'Almarai', fontTajawal: 'Tajawal',
+      fontDefault: 'System font (Default)', fontCairo: 'Cairo', fontAlmarai: 'Almarai', fontTajawal: 'Tajawal',
       fontSize: 'Font size', lineHeight: 'Line height', contentWidth: 'Content width',
       syncScroll: 'Sync scrolling in split view',
       autoSave: 'Auto-save', autoSaveHint: 'Saves 2 seconds after the last edit',
       exportHtml: 'Export HTML', reset: 'Reset to defaults', done: 'Done',
       saved: 'Saved ✓', copied: 'Copied ✓', copyBtn: 'Copy',
       noResults: 'No results', of: 'of',
-      errOpen: 'Could not open file', errSave: 'Could not save',
+      errOpen: 'Could not open file', errSave: 'Could not save', errClose: 'Could not close the document. Try again.',
       saveFirst: 'Save your changes before opening another file',
       unsaved: 'You have unsaved changes. Continue?',
       exported: 'Exported ✓', untitled: 'untitled'
@@ -82,7 +87,7 @@
   var SETTINGS_VERSION = 3;
   var S = load();
   var state = {
-    path: null, name: null, text: '', dirty: false, pendingClose: false,
+    path: null, name: null, text: '', dirty: false, pendingClose: false, documentId: 0,
     fileHandle: null, hits: [], hitIndex: -1, lastRenderedText: null, savedText: ''
   };
 
@@ -454,8 +459,11 @@
   /* =============================== الملفات =============================== */
 
   function setDoc(text, path, name) {
+    state.documentId++;
     clearTimeout(autoSaveTimer);
     state.fileHandle = null;
+    state.pendingClose = false;
+    state.docDir = null;
     state.text = text;
     state.savedText = text;
     state.path = path || null;
@@ -466,7 +474,7 @@
     el.filePath.textContent = path || '';
     setDirty(false);
     el.welcome.style.display = 'none';
-    if (HAS_NATIVE && state.name) N.setTitle(state.name);
+    if (HAS_NATIVE) N.setTitle(state.name || '');
     render();
     el.panePreview.scrollTop = 0;
     el.editor.scrollTop = 0;
@@ -475,10 +483,21 @@
   }
 
   function persistDraft() {
-    if (!N || N.platform !== 'android') return;
+    if (!N) return;
     try {
-      localStorage.setItem('mdx.android.draft', JSON.stringify({ text: state.text, savedText: state.savedText,
-        path: state.path, name: state.name }));
+      var storage = N.platform === 'android' ? localStorage : sessionStorage;
+      var key = N.platform === 'android' ? 'mdx.android.draft' : 'mdx.window.draft';
+      if (!state.text && !state.path && !state.name) storage.removeItem(key);
+      else {
+        storage.setItem(key, JSON.stringify({ text: state.text, savedText: state.savedText,
+          path: state.path, name: state.name }));
+        if (N.platform === 'android' && N.setDocumentClosed && androidDocumentClosed) {
+          androidDocumentClosed = false;
+          N.setDocumentClosed(false).then(function (result) {
+            if (!result.ok) androidDocumentClosed = true;
+          }, function () { androidDocumentClosed = true; });
+        }
+      }
     } catch (e) { /* Large documents can exceed WebView's localStorage quota. */ }
   }
 
@@ -501,10 +520,34 @@
     autoSaveTimer = setTimeout(function () { doSave(true); }, 2000);
   }
 
+  async function closeDocument(edit) {
+    if (state.dirty && !confirm(t('discardDocument'))) return;
+    if (N && N.setDocumentClosed) {
+      try {
+        var result = await N.setDocumentClosed(true);
+        if (!result.ok) { toast(t('errClose')); return; }
+        androidDocumentClosed = true;
+      } catch (error) { toast(t('errClose')); return; }
+    }
+    clearTimeout(renderTimer);
+    el.search.value = '';
+    clearSearch();
+    el.stSaved.textContent = '';
+    el.filePicker.value = '';
+    setDoc('', null, null);
+    if (edit) { S.view = 'editor'; save(); applyView(); el.editor.focus(); }
+  }
+
+  function doNew() {
+    if (N && N.newWindow) N.newWindow();
+    else closeDocument(true);
+  }
+
   async function doOpen() {
-    if (state.dirty && !confirm(t('unsaved'))) return;
+    var separateWindow = !!(N && N.platform === 'windows' && (state.path || state.name || state.text));
+    if (!separateWindow && state.dirty && !confirm(t('unsaved'))) return;
     if (HAS_NATIVE) {
-      var r = await N.openFile();
+      var r = await N.openFile({ newWindow: separateWindow });
       if (r && r.ok) setDoc(r.content, r.path, r.name);
       else if (r && r.error) toast(t('errOpen'));
       return;
@@ -525,9 +568,11 @@
 
   async function doSave(silent) {
     if (!state.path && !state.fileHandle) return doSaveAs();
+    var documentId = state.documentId, savedText = state.text;
     if (HAS_NATIVE) {
-      var r = await N.saveFile(state.path, state.text);
-      if (r && r.ok) afterSave(silent);
+      var r = await N.saveFile(state.path, savedText);
+      if (documentId !== state.documentId) return;
+      if (r && r.ok) afterSave(silent, savedText);
       else if (r && r.readOnly) return doSaveAs();
       else { state.pendingClose = false; toast(t('errSave')); }
       return;
@@ -535,8 +580,8 @@
     if (state.fileHandle) {
       try {
         var w = await state.fileHandle.createWritable();
-        await w.write(state.text); await w.close();
-        afterSave(silent);
+        await w.write(savedText); await w.close();
+        if (documentId === state.documentId) afterSave(silent, savedText);
       } catch (e) { state.pendingClose = false; toast(t('errSave')); }
       return;
     }
@@ -544,13 +589,15 @@
   }
 
   async function doSaveAs() {
+    var documentId = state.documentId, savedText = state.text;
     var suggested = state.name || (t('untitled') + '.md');
     if (HAS_NATIVE) {
-      var r = await N.saveFileAs(suggested, state.text);
+      var r = await N.saveFileAs(suggested, savedText);
+      if (documentId !== state.documentId) return;
       if (r && r.ok) {
         state.path = r.path; state.name = r.name || r.path.split(/[\\/]/).pop();
         el.fileName.textContent = state.name; el.filePath.textContent = r.path;
-        N.setTitle(state.name); afterSave();
+        N.setTitle(state.name); afterSave(false, savedText);
       } else {
         state.pendingClose = false;   // ألغى الحفظ ⇒ ألغِ الإغلاق كمان
         if (r && r.error) toast(t('errSave'));
@@ -563,10 +610,11 @@
           suggestedName: suggested,
           types: [{ description: 'Markdown', accept: { 'text/markdown': ['.md'] } }]
         });
+        if (documentId !== state.documentId) return;
         state.fileHandle = h; state.name = h.name;
         el.fileName.textContent = h.name;
-        var w = await h.createWritable(); await w.write(state.text); await w.close();
-        afterSave();
+        var w = await h.createWritable(); await w.write(savedText); await w.close();
+        if (documentId === state.documentId) afterSave(false, savedText);
       } catch (e) {}
       return;
     }
@@ -574,16 +622,16 @@
     afterSave();
   }
 
-  function afterSave(silent) {
-    state.savedText = state.text;
-    setDirty(false);
+  function afterSave(silent, savedText) {
+    state.savedText = savedText === undefined ? state.text : savedText;
+    setDirty(state.text !== state.savedText);
     persistDraft();
     el.stSaved.textContent = t('saved');
     el.stSaved.className = 'sb-item ok';
     if (!silent) toast(t('saved'));
     setTimeout(function () { el.stSaved.textContent = ''; }, 4000);
     // لو الحفظ كان جزء من "احفظ ثم اغلق"
-    if (state.pendingClose && HAS_NATIVE) {
+    if (state.pendingClose && HAS_NATIVE && !state.dirty) {
       state.pendingClose = false;
       N.closeNow();
     }
@@ -721,6 +769,8 @@
   }
 
   function bind() {
+    $('btnNew').addEventListener('click', doNew);
+    $('btnCloseDoc').addEventListener('click', function () { closeDocument(false); });
     $('btnOpen').addEventListener('click', doOpen);
     $('btnSave').addEventListener('click', function () { doSave(); });
     $('btnSaveAs').addEventListener('click', doSaveAs);
@@ -841,6 +891,8 @@
         e.preventDefault(); editHistory(k === 'y' || e.shiftKey ? 'redo' : 'undo');
       }
       else if (k === 'o') { e.preventDefault(); doOpen(); }
+      else if (k === 'n') { e.preventDefault(); doNew(); }
+      else if (k === 'w') { e.preventDefault(); closeDocument(false); }
       else if (k === 's') { e.preventDefault(); e.shiftKey ? doSaveAs() : doSave(); }
       else if (k === 'f') { e.preventDefault(); el.search.focus(); el.search.select(); }
       else if (k === 'e') { e.preventDefault(); S.view = (S.view === 'editor' ? 'preview' : 'editor'); save(); applyView(); }
@@ -870,7 +922,23 @@
   }
 
   /* =============================== الإقلاع =============================== */
-  function boot() {
+  async function boot() {
+    if (N && N.platform === 'android') {
+      if (N.getDocumentState) {
+        try {
+          var documentState = await N.getDocumentState();
+          androidDocumentClosed = !!documentState.closed;
+        } catch (error) {}
+        if (androidDocumentClosed) {
+          try { localStorage.removeItem('mdx.android.draft'); } catch (error) {}
+        }
+      }
+      // These families are bundled. Desktop-only system fonts all fall back to the same Android font.
+      Array.from($('fontSel').options).slice(4).forEach(function (option) { option.remove(); });
+      if (!Array.from($('fontSel').options).some(function (option) { return option.value === S.fontFamily; })) S.fontFamily = DEFAULTS.fontFamily;
+      I18N.ar.fontFamilyHint = 'خطوط مدمجة تعمل بدون تنزيل أو إنترنت';
+      I18N.en.fontFamilyHint = 'Built-in fonts work without downloads or internet';
+    }
     resetHistory();
     save();
     applyAll();
@@ -878,24 +946,25 @@
     setupScrollSpy();
 
     if (HAS_NATIVE) {
-      // ملف مُمرَّر من ويندوز (فتح بواسطة…)
-      if (N.platform === 'android') {
-        try {
-          var draft = JSON.parse(localStorage.getItem('mdx.android.draft'));
-          if (draft && typeof draft.text === 'string') {
-            setDoc(draft.text, draft.path, draft.name);
-            state.savedText = typeof draft.savedText === 'string' ? draft.savedText : draft.text;
-            setDirty(state.text !== state.savedText);
-            persistDraft();
-          }
-        } catch (e) {}
-      }
+      // Android restores its draft; desktop reloads restore only this window's document.
+      try {
+        var storage = N.platform === 'android' ? localStorage : sessionStorage;
+        var draft = JSON.parse(storage.getItem(N.platform === 'android' ? 'mdx.android.draft' : 'mdx.window.draft'));
+        if (draft && typeof draft.text === 'string') {
+          setDoc(draft.text, draft.path, draft.name);
+          state.savedText = typeof draft.savedText === 'string' ? draft.savedText : draft.text;
+          setDirty(state.text !== state.savedText);
+          persistDraft();
+        }
+      } catch (e) {}
       N.onOpenPath(function (r) {
         if (r && r.ok && (!state.dirty || confirm(t('unsaved')))) setDoc(r.content, r.path, r.name);
         else if (r && r.error) toast(t('errOpen'));
       });
       N.onMenu(function (action) {
         if (action === 'open') doOpen();
+        else if (action === 'new') doNew();
+        else if (action === 'close-document') closeDocument(false);
         else if (action === 'check-updates' && window.MDXUpdates) window.MDXUpdates.open();
         else if (action === 'save') doSave();
         else if (action === 'undo' || action === 'redo') editHistory(action);

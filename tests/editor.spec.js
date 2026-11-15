@@ -131,5 +131,8 @@ test('Electron clipboard paste, native context menu, menu undo/redo and branding
     const items = await electron.evaluate(() => global.contextItems);
     expect(items.some(item => item.role === 'copy')).toBe(true);
     expect(items.some(item => item.role === 'paste')).toBe(false);
-  } finally { await electron.close(); }
+  } finally {
+    await electron.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows().forEach(win => win.destroy()));
+    await electron.close();
+  }
 });

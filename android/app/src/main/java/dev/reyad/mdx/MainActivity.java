@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
     private static final int OPEN = 1, SAVE = 2;
     private WebView webView;
     private JavaScriptReplyProxy bridge;
-    private boolean ready, dirty;
+    private boolean ready, dirty, launchIntentConsumed;
     private Intent queuedIntent;
     private int pickerId;
     private JavaScriptReplyProxy pickerReply;
@@ -61,6 +61,7 @@ public class MainActivity extends Activity {
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
+        launchIntentConsumed = state != null && state.getBoolean("launchIntentConsumed");
         if (state != null) saveExport = state.getBoolean("saveExport");
         for (android.content.UriPermission permission : getContentResolver().getPersistedUriPermissions()) {
             grantedDocuments.add(permission.getUri().toString());
@@ -95,7 +96,7 @@ public class MainActivity extends Activity {
                 if (response != null) {
                     response.setResponseHeaders(Collections.singletonMap("Content-Security-Policy",
                             "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; " +
-                            "img-src 'self' data:; font-src 'self'; connect-src 'self'; " +
+                            "img-src 'self' data:; font-src 'self' data:; connect-src 'self'; " +
                             "frame-src 'none'; base-uri 'none'; form-action 'none'"));
                     return response;
                 }
@@ -118,7 +119,7 @@ public class MainActivity extends Activity {
                     try { handle(new JSONObject(message.getData()), reply); }
                     catch (Exception error) { Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show(); }
                 });
-        queuedIntent = getIntent();
+        queuedIntent = launchIntentConsumed ? null : getIntent();
         webView.loadUrl(HOME);
     }
 
@@ -147,6 +148,17 @@ public class MainActivity extends Activity {
         int id = message.getInt("id");
         JSONArray args = message.getJSONArray("args");
         switch (message.getString("action")) {
+            case "document-state":
+                respond(reply, id, result("closed", getSharedPreferences("documents", MODE_PRIVATE).getBoolean("closed", false)));
+                break;
+            case "document-closed": {
+                boolean closed = args.getBoolean(0);
+                // A durable tombstone prevents a just-closed draft reappearing if WebView storage
+                // has not flushed to disk when Android kills the process.
+                files.execute(() -> respond(reply, id, result("ok",
+                        getSharedPreferences("documents", MODE_PRIVATE).edit().putBoolean("closed", closed).commit())));
+                break;
+            }
             case "app-info":
                 try {
                     respond(reply, id, result("version", getPackageManager().getPackageInfo(getPackageName(), 0).versionName,
@@ -168,7 +180,8 @@ public class MainActivity extends Activity {
             case "set-dirty":
                 dirty = args.getBoolean(0); respond(reply, id, result("ok", true)); break;
             case "set-title":
-                setTitle(args.getString(0) + " — ReyadMDX"); respond(reply, id, result("ok", true)); break;
+                setTitle(args.getString(0).isEmpty() ? "ReyadMDX" : args.getString(0) + " — ReyadMDX");
+                respond(reply, id, result("ok", true)); break;
             case "close-now": finish(); break;
             case "open-external":
                 openExternal(args.getString(0)); respond(reply, id, result("ok", true)); break;
@@ -342,11 +355,15 @@ public class MainActivity extends Activity {
 
     @Override protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent); setIntent(intent);
+        launchIntentConsumed = false;
         if (ready) consumeIntent(intent); else queuedIntent = intent;
     }
 
     private void consumeIntent(Intent intent) {
         if (intent == null) return;
+        launchIntentConsumed = true;
+        // An external file/share is a one-time action, not a document to replay on recreation.
+        setIntent(new Intent(this, MainActivity.class).setAction(Intent.ACTION_MAIN));
         Uri uri = intent.getData();
         if (Intent.ACTION_SEND.equals(intent.getAction())) {
             uri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
@@ -390,6 +407,7 @@ public class MainActivity extends Activity {
     }
 
     @Override protected void onSaveInstanceState(Bundle state) {
+        state.putBoolean("launchIntentConsumed", launchIntentConsumed);
         state.putBoolean("saveExport", saveExport);
         super.onSaveInstanceState(state);
     }

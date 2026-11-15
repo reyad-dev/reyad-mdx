@@ -74,6 +74,34 @@ const { execFileSync } = require('node:child_process');
       version: require('../package.json').version, platform: 'android', portable: false
     });
     assert.equal(await page.locator('#btnVersion').textContent(), 'v' + require('../package.json').version);
+    // Start independently of drafts left by a previous interrupted smoke test.
+    await page.evaluate(() => { window.smokeConfirm = window.confirm; window.confirm = () => true; });
+    await page.locator('#btnNew').click();
+    await page.waitForFunction(() => document.getElementById('editor').value === '');
+    await page.evaluate(() => { window.confirm = window.smokeConfirm; });
+    const fontWidths = [];
+    await page.locator('#btnSettings').click();
+    assert.equal(await page.locator('#fontSel option').count(), 4, 'Android should offer only available fonts');
+    for (const family of ['Cairo', 'Almarai', 'Tajawal']) {
+      await page.locator('#fontSel').selectOption('"' + family + '","Segoe UI",sans-serif');
+      const font = await page.evaluate(async family => {
+        const sample = 'اختبار العربية للتأكد من تغير الخط English';
+        const normal = await document.fonts.load('16px ' + family, sample);
+        const bold = await document.fonts.load('bold 16px ' + family, sample);
+        const canvas = document.createElement('canvas'), context = canvas.getContext('2d');
+        context.font = '24px ' + family;
+        return { loaded: normal.length > 0 && bold.length > 0 && normal.concat(bold).every(f => f.status === 'loaded'),
+          editor: getComputedStyle(document.getElementById('editor')).fontFamily,
+          preview: getComputedStyle(document.getElementById('preview')).fontFamily,
+          width: context.measureText(sample).width };
+      }, family);
+      assert.ok(font.loaded, family + ' must load actual Arabic/Latin glyphs inside Android CSP');
+      assert.ok(font.editor.includes(family) && font.preview.includes(family), 'Font must apply to editor and preview');
+      fontWidths.push(font.width);
+    }
+    assert.equal(new Set(fontWidths).size, 3, 'The three fonts must render differently');
+    await page.locator('#btnCloseSettings').click();
+    console.log('PASS: actual Android Arabic/Latin normal/bold fonts, selection and editor/preview rendering');
     assert.equal(await page.locator('#dirSel').inputValue(), 'rtl');
     for (const extension of ['md', 'markdown', 'mdown', 'mkd', 'mdx', 'txt']) {
       for (const mime of ['text/plain', 'application/octet-stream']) {
@@ -114,6 +142,24 @@ const { execFileSync } = require('node:child_process');
     await shell('am start -W -n dev.reyad.mdx/.MainActivity -a android.intent.action.SEND -t text/plain --es android.intent.extra.TEXT received-shared-text');
     await page.waitForFunction(() => document.getElementById('editor').value === 'received-shared-text');
     console.log('PASS: warm-start shared text intent');
+    await page.locator('#btnNew').click();
+    await page.waitForFunction(() => document.getElementById('editor').value === '');
+    assert.equal(await page.locator('#editor').inputValue(), '');
+    assert.equal(await page.evaluate(() => localStorage.getItem('mdx.android.draft')), null);
+    await page.locator('#editor').fill('new unsaved draft');
+    await page.evaluate(() => { window.confirm = () => false; });
+    await page.locator('#btnCloseDoc').click();
+    assert.equal(await page.locator('#editor').inputValue(), 'new unsaved draft');
+    await page.evaluate(() => { window.confirm = () => true; });
+    await page.locator('#btnCloseDoc').click();
+    await page.waitForFunction(() => document.getElementById('editor').value === '');
+    await shell('am force-stop dev.reyad.mdx');
+    await shell('am start -W -n dev.reyad.mdx/.MainActivity');
+    page = await currentPage();
+    await page.waitForFunction(() => !!window.mdxNative);
+    assert.equal(await page.locator('#editor').inputValue(), '');
+    assert.equal(await page.locator('#fontSel').inputValue(), '"Tajawal","Segoe UI",sans-serif');
+    console.log('PASS: New/Close document, discard cancellation, cold restart stays empty, font choice persists');
     await page.locator('[data-view="preview"]').click();
     fs.mkdirSync(path.resolve('test-results'), { recursive: true });
     fs.writeFileSync(path.resolve('test-results/android-smoke.png'), await device.screenshot());

@@ -348,7 +348,7 @@ html, body {
   padding: 26px 30px 120px;
   background: transparent;
   color: var(--fg);
-  font-family: var(--mono-font);
+  font-family: var(--ar-font);
   font-size: calc(var(--body-size) - 2px);
   line-height: 1.9;
   tab-size: 2;
