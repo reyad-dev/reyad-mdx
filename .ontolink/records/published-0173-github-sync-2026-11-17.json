@@ -1,0 +1,14 @@
+{
+  "id": "github-sync-2026-11-17",
+  "type": "Event",
+  "title": "Pushed complete OntoLink project knowledge to GitHub main",
+  "summary": "User-authorized git push succeeded. git ls-remote independently confirmed origin/main=2c8481f696b9efee258a8a007bbfa01c85f1994b. Complete local skills, original distribution snapshots, knowledge.owl, durable records/proofs and agent instructions were included. Clean-clone validation passed. This receipt is a follow-up commit; future agents should pull the latest main.",
+  "externalReference": "https://github.com/reyad-dev/reyad-mdx/commit/2c8481f696b9efee258a8a007bbfa01c85f1994b",
+  "usesArtifact": [
+    "checkout-portability-proof",
+    "restore-guide"
+  ],
+  "affects": [
+    "project"
+  ]
+}

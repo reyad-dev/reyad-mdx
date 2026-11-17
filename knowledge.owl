@@ -2,7 +2,7 @@
 <rdf:RDF xmlns:ol="urn:ontolink:" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1">
     <rdf:type rdf:resource="urn:ontolink:Project" />
-    <ol:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">170</ol:revision>
+    <ol:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">173</ol:revision>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MDX Reader - 1ce34f1</ol:title>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/agent-handoff">
@@ -30,6 +30,26 @@
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:40.806515+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">implementation</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHANGELOG.md</ol:path>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/checkout-portability-pass">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T09:18:51.083900+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PASS</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cd0dac72b0c1cef14881d68d7582afbfdb96c448c8840eb8368c607b27979380</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/clean-clone-2026-11-17.json</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Actual fresh local Git clone with core.autocrlf=false successfully resumed the bundled coordinator: VALID, 50 tasks, revision 170; no repeat import or global skill installation.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/checkout-portability-proof" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cd0dac72b0c1cef14881d68d7582afbfdb96c448c8840eb8368c607b27979380</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/checkout-portability-proof">
+    <rdf:type rdf:resource="urn:ontolink:Artifact" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cd0dac72b0c1cef14881d68d7582afbfdb96c448c8840eb8368c607b27979380</ol:contentHash>
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T09:18:45.811170+00:00</ol:createdAt>
+    <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">verification</ol:kind>
+    <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/clean-clone-2026-11-17.json</ol:path>
     <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/codex">
@@ -607,6 +627,27 @@
     <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/github-transfer-prepared" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T09:15:39.214178+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-171">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/checkout-portability-proof" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T09:18:50.768726+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-172">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/checkout-portability-pass" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T09:18:55.664733+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-173">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/github-sync-2026-11-17" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T09:19:00.911453+00:00</ol:createdAt>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-18">
     <rdf:type rdf:resource="urn:ontolink:Event" />
@@ -1301,6 +1342,17 @@
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">history</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/git-history.txt</ol:path>
     <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/github-sync-2026-11-17">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T09:18:56.106873+00:00</ol:createdAt>
+    <ol:externalReference rdf:datatype="http://www.w3.org/2001/XMLSchema#string">https://github.com/reyad-dev/reyad-mdx/commit/2c8481f696b9efee258a8a007bbfa01c85f1994b</ol:externalReference>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">User-authorized git push succeeded. git ls-remote independently confirmed origin/main=2c8481f696b9efee258a8a007bbfa01c85f1994b. Complete local skills, original distribution snapshots, knowledge.owl, durable records/proofs and agent instructions were included. Clean-clone validation passed. This receipt is a follow-up commit; future agents should pull the latest main.</ol:summary>
+    <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pushed complete OntoLink project knowledge to GitHub main</ol:title>
+    <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/checkout-portability-proof" />
+    <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/restore-guide" />
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/github-transfer-prepared">
     <rdf:type rdf:resource="urn:ontolink:Event" />

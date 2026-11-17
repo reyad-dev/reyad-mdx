@@ -1,0 +1,8 @@
+{
+  "id": "checkout-portability-proof",
+  "type": "Artifact",
+  "kind": "verification",
+  "path": ".ontolink/proofs/clean-clone-2026-11-17.json",
+  "contentHash": "cd0dac72b0c1cef14881d68d7582afbfdb96c448c8840eb8368c607b27979380",
+  "status": "CURRENT"
+}

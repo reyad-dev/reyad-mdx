@@ -1,0 +1,10 @@
+{
+  "id": "checkout-portability-pass",
+  "type": "Evidence",
+  "supports": "checkout-portability-proof",
+  "outcome": "PASS",
+  "proofPath": ".ontolink/proofs/clean-clone-2026-11-17.json",
+  "proofHash": "cd0dac72b0c1cef14881d68d7582afbfdb96c448c8840eb8368c607b27979380",
+  "targetHash": "cd0dac72b0c1cef14881d68d7582afbfdb96c448c8840eb8368c607b27979380",
+  "summary": "Actual fresh local Git clone with core.autocrlf=false successfully resumed the bundled coordinator: VALID, 50 tasks, revision 170; no repeat import or global skill installation."
+}
