@@ -1,0 +1,10 @@
+{
+  "id": "history-import-proof",
+  "type": "Evidence",
+  "supports": "changelog-source",
+  "outcome": "PASS",
+  "proofPath": ".ontolink/proofs/historical-import-review.txt",
+  "proofHash": "2e3fbd8195e2b2c065dd5d2094965d84409e79ff2f350a9519cf50659e573e98",
+  "targetHash": "b27f7207f3da833cacb53be95f7119aec61328c9d5ed080df6d41d7c0acc7b85",
+  "summary": "Faithful historical implementation record, not comprehensive runtime verification"
+}

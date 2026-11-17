@@ -1,0 +1,12 @@
+{
+  "id": "github-transfer-prepared",
+  "type": "Event",
+  "title": "Prepared complete project knowledge for GitHub synchronization",
+  "summary": "Local transport preparation; actual push and clean-clone validation receipts are recorded after those operations succeed.",
+  "affects": [
+    "project"
+  ],
+  "usesArtifact": [
+    "restore-guide"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "runtime-suite",
+  "type": "Artifact",
+  "kind": "verification",
+  "path": ".ontolink/proofs/playwright-2026-11-17.txt",
+  "contentHash": "b930f420f4d14a191ed6f9e65141896f6ba9003d8e0c5a81ae6927e5fd8e620c",
+  "status": "CURRENT"
+}

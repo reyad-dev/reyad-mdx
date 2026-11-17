@@ -1,0 +1,6 @@
+{
+  "id": "evidence-boundary",
+  "type": "Decision",
+  "title": "Separate documented history, current tests and proposed follow-ups",
+  "basis": "CHANGELOG, git history, source inspection and 18 current Playwright tests; no external release receipt or native Android execution in this session."
+}

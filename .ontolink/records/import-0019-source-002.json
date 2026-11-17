@@ -1,0 +1,8 @@
+{
+  "id": "source-002",
+  "type": "Artifact",
+  "kind": "source",
+  "path": ".github/workflows/add-favicon.yml",
+  "contentHash": "45a335e93cb394de53e4d6f4005b108951271c29be13d404d88c63a35f187465",
+  "status": "CURRENT"
+}

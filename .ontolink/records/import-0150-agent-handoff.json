@@ -1,0 +1,8 @@
+{
+  "id": "agent-handoff",
+  "type": "Artifact",
+  "kind": "handoff",
+  "path": ".ontolink/artifacts/agent-handoff.md",
+  "contentHash": "6d622357af299b2af410d8bbeb0f481aa76805c63154be279b6937e5a35ed6ff",
+  "status": "CURRENT"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "task-build",
+  "type": "Task",
+  "usesArtifact": [
+    "outcome-build",
+    "source-manifest",
+    "changelog-source"
+  ],
+  "dependsOn": [
+    "task-plan",
+    "ontology-primary",
+    "evidence-boundary",
+    "shared-editor",
+    "windows-host",
+    "android-host",
+    "release-pipeline"
+  ]
+}

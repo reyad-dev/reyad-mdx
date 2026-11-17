@@ -1,0 +1,10 @@
+{
+  "id": "coverage-limit",
+  "type": "Warning",
+  "affects": [
+    "project"
+  ],
+  "summary": "Knowledge coverage is the accessible local repository, release notes and current checks. Prior chats/external issue backlog and external release receipts are unavailable in this session. Preserve the distinction between history claims and tested facts.",
+  "severity": "INFO",
+  "status": "OPEN"
+}

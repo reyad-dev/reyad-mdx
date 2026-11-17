@@ -1,0 +1,8 @@
+{
+  "id": "outcome-discover",
+  "type": "Artifact",
+  "kind": "requirements",
+  "path": ".ontolink/artifacts/discover.md",
+  "contentHash": "7c6305e2055ad5cbdba684f9690725a25faea6c04a14518c6378267740205c23",
+  "status": "CURRENT"
+}

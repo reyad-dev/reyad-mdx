@@ -1,0 +1,8 @@
+{
+  "id": "source-023",
+  "type": "Artifact",
+  "kind": "source",
+  "path": "android/app/src/main/AndroidManifest.xml",
+  "contentHash": "a18722e11ef4182480e2b486a7285426c8307e0332e0d8278fc383f312eaf982",
+  "status": "CURRENT"
+}

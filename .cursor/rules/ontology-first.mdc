@@ -1,0 +1,5 @@
+---
+description: Canonical OntoLink project knowledge and task registry
+alwaysApply: true
+---
+Read AGENTS.md and .rule/ONTOLOGY-FIRST.md. Run `py .rule/ontolink.py start --root . --skill-root .agents/skills/ontolink-skills` before project work (python3 on Linux/macOS). Use knowledge.owl as the canonical task and knowledge registry and update it through the mediator before handoff.

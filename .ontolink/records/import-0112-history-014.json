@@ -1,0 +1,20 @@
+{
+  "id": "history-014",
+  "type": "Task",
+  "phase": "build",
+  "title": "Embedded local Arabic fonts: **Cairo** (كايرو), **Almarai** (المراعي), and **Tajawal** (تجوال) in WOFF2 format with zero external network dependencies and complete offline support across Windows, web, and Android.",
+  "owner": "project-owner",
+  "status": "DONE",
+  "requiredKind": [
+    "implementation"
+  ],
+  "usesArtifact": [
+    "changelog-source",
+    "source-manifest"
+  ],
+  "dependsOn": [
+    "task-plan",
+    "evidence-boundary"
+  ],
+  "summary": "Documented historical implementation: [1.2.1] - 2026-11-12; Added; CHANGELOG.md:35. DONE accepts retrospective import/provenance only; current behavior is covered only where a named test exists. Original execution receipts unavailable."
+}

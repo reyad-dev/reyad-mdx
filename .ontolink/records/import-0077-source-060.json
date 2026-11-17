@@ -1,0 +1,8 @@
+{
+  "id": "source-060",
+  "type": "Artifact",
+  "kind": "source",
+  "path": "build/icon.svg",
+  "contentHash": "c76752f37120534bc6e50f9185d4a3e3860dffbe49571549962ae0a84a8cb4e5",
+  "status": "CURRENT"
+}

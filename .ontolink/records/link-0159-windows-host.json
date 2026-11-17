@@ -1,0 +1,10 @@
+{
+  "id": "windows-host",
+  "type": "Contract",
+  "title": "Electron window and IPC boundary",
+  "summary": "Electron main process owns files/dialogs/window lifecycle; preload exposes native operations. Independent document windows are covered by documents.spec.js.",
+  "usesArtifact": [
+    "source-066",
+    "source-070"
+  ]
+}

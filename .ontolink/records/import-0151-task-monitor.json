@@ -1,0 +1,7 @@
+{
+  "id": "task-monitor",
+  "type": "Task",
+  "title": "Maintain ontology at each future project session",
+  "summary": "Future continuing work. Start, inspect current tasks, record changes and evidence, refresh context. No always-on watcher. Acceptance for a session: current monitoring artifact and validated graph.",
+  "status": "TODO"
+}

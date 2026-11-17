@@ -1,0 +1,9 @@
+{
+  "id": "task-plan",
+  "type": "Task",
+  "title": "Plan retrospective import and future-agent handoff",
+  "status": "DONE",
+  "usesArtifact": [
+    "outcome-plan"
+  ]
+}

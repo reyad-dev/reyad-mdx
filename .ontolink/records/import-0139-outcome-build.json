@@ -1,0 +1,8 @@
+{
+  "id": "outcome-build",
+  "type": "Artifact",
+  "kind": "implementation",
+  "path": ".ontolink/artifacts/build.md",
+  "contentHash": "6077ed546a65da4529b33b2d7dff3783f8a0d3aba58e507fef9dfba387200ae1",
+  "status": "CURRENT"
+}

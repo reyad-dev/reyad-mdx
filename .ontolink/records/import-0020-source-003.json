@@ -1,0 +1,8 @@
+{
+  "id": "source-003",
+  "type": "Artifact",
+  "kind": "source",
+  "path": ".github/workflows/android.yml",
+  "contentHash": "38b4be92dca884afa608d5406b8365eeeea41e18d45744b31bb33ec80a751324",
+  "status": "CURRENT"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "task-verify",
+  "type": "Task",
+  "title": "Verify imported graph provenance and current local regression suite",
+  "status": "DONE",
+  "usesArtifact": [
+    "outcome-verify"
+  ]
+}

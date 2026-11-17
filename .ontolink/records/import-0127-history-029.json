@@ -1,0 +1,20 @@
+{
+  "id": "history-029",
+  "type": "Task",
+  "phase": "build",
+  "title": "Clicking a relative or scheme-less link no longer navigates the window away (black screen); links to other Markdown files open in the app, web links open in the browser.",
+  "owner": "project-owner",
+  "status": "DONE",
+  "requiredKind": [
+    "implementation"
+  ],
+  "usesArtifact": [
+    "changelog-source",
+    "source-manifest"
+  ],
+  "dependsOn": [
+    "task-plan",
+    "evidence-boundary"
+  ],
+  "summary": "Documented historical implementation: [1.1.1] - 2026-11-04; Fixed; CHANGELOG.md:66. DONE accepts retrospective import/provenance only; current behavior is covered only where a named test exists. Original execution receipts unavailable."
+}

@@ -1,0 +1,8 @@
+{
+  "id": "outcome-plan",
+  "type": "Artifact",
+  "kind": "plan",
+  "path": ".ontolink/artifacts/plan.md",
+  "contentHash": "f56fd9c7688b0ffdcc40bca4905be9fc55a7baf760856c85390bfb99be2b12e4",
+  "status": "CURRENT"
+}

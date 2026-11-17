@@ -1,0 +1,8 @@
+{
+  "id": "restore-guide",
+  "type": "Artifact",
+  "kind": "handoff",
+  "path": ".ontolink/README.md",
+  "contentHash": "135a8de5dbf61ce87981b2e5031041ad2257fe716fde0b3173bbe9eee0f0e17f",
+  "status": "CURRENT"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "history-037",
+  "type": "Task",
+  "phase": "build",
+  "title": "Dark, midnight, light, and sepia themes.",
+  "owner": "project-owner",
+  "status": "DONE",
+  "requiredKind": [
+    "implementation"
+  ],
+  "usesArtifact": [
+    "changelog-source",
+    "source-manifest"
+  ],
+  "dependsOn": [
+    "task-plan",
+    "evidence-boundary"
+  ],
+  "summary": "Documented historical implementation: [1.1.0] - 2026-10-12; Added; CHANGELOG.md:79. DONE accepts retrospective import/provenance only; current behavior is covered only where a named test exists. Original execution receipts unavailable."
+}

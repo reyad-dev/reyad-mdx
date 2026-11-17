@@ -1,0 +1,10 @@
+{
+  "id": "android-host",
+  "type": "Contract",
+  "title": "Android native WebView and bridge",
+  "summary": "Native Android source is under android/app/src/main. Browser bridge tests are simulated; native build/device verification remains open.",
+  "usesArtifact": [
+    "source-034",
+    "source-023"
+  ]
+}

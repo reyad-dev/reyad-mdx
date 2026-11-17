@@ -1,0 +1,10 @@
+{
+  "id": "packaging-risk",
+  "type": "Warning",
+  "affects": [
+    "followup-distribution-packaging"
+  ],
+  "summary": "Existing app/ontolink-skills distribution may enter Electron app/**/* packaging. Review before release; files were preserved.",
+  "severity": "WARNING",
+  "status": "OPEN"
+}

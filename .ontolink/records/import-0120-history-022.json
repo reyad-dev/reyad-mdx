@@ -1,0 +1,20 @@
+{
+  "id": "history-022",
+  "type": "Task",
+  "phase": "build",
+  "title": "Offline Android app with system file picker, save/save as, share targets, and file associations for all six supported extensions.",
+  "owner": "project-owner",
+  "status": "DONE",
+  "requiredKind": [
+    "implementation"
+  ],
+  "usesArtifact": [
+    "changelog-source",
+    "source-manifest"
+  ],
+  "dependsOn": [
+    "task-plan",
+    "evidence-boundary"
+  ],
+  "summary": "Documented historical implementation: [1.2.0] - 2026-11-11; Added; CHANGELOG.md:51. DONE accepts retrospective import/provenance only; current behavior is covered only where a named test exists. Original execution receipts unavailable."
+}

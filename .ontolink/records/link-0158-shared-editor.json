@@ -1,0 +1,13 @@
+{
+  "id": "shared-editor",
+  "type": "Contract",
+  "title": "Shared offline editor and Markdown renderer",
+  "summary": "Vanilla JS/CSS/HTML shared across hosts; Arabic/English UI, RTL/bidi, editing/history, preview/export and local settings. Exact behavior is source-defined; current tests cover selected paths.",
+  "usesArtifact": [
+    "source-035",
+    "source-050",
+    "source-054",
+    "source-052",
+    "source-051"
+  ]
+}

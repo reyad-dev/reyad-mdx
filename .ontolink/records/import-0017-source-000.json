@@ -1,0 +1,8 @@
+{
+  "id": "source-000",
+  "type": "Artifact",
+  "kind": "source",
+  "path": ".gitattributes",
+  "contentHash": "77a780de2f0eb11f1811585309d1a881d741e99594e9dbbf997dbecdc87a5609",
+  "status": "CURRENT"
+}

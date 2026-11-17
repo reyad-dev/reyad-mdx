@@ -1,0 +1,8 @@
+{
+  "id": "source-030",
+  "type": "Artifact",
+  "kind": "source",
+  "path": "android/gradle/wrapper/gradle-wrapper.properties",
+  "contentHash": "3d91f0932da99885c41e9dc4e85c9f9a2d3bfef4f0ad87473014dc0827a94884",
+  "status": "CURRENT"
+}

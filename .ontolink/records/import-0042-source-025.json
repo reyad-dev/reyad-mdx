@@ -1,0 +1,8 @@
+{
+  "id": "source-025",
+  "type": "Artifact",
+  "kind": "source",
+  "path": "android/app/src/main/res/drawable/ic_launcher.xml",
+  "contentHash": "2a167a09e2affd3b6702695e8c7ed85a2b9dea1e1bcc351ed32f7985256b7a42",
+  "status": "CURRENT"
+}

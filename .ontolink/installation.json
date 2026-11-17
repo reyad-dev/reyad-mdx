@@ -1,0 +1,15 @@
+{
+  "previousVersion": null,
+  "sourceVersion": "1.3.0",
+  "skillsDirectory": ".agents/skills",
+  "canonicalState": "knowledge.owl",
+  "backup": ".ontolink\\backups\\bef50335da8449b8aa919658b7784bec",
+  "revision": 0,
+  "paths": [
+    ".agents\\skills\\ontolink-skills",
+    ".rule\\ontolink.py",
+    ".rule\\ONTOLOGY-FIRST.md",
+    "AGENTS.md",
+    "GEMINI.md"
+  ]
+}

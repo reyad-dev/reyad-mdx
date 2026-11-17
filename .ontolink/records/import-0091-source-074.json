@@ -1,0 +1,8 @@
+{
+  "id": "source-074",
+  "type": "Artifact",
+  "kind": "source",
+  "path": "scripts/sync-version.js",
+  "contentHash": "29e8e3b8d015013ebaa9d44d26a49c979e3f284881675618907d018d5852ac55",
+  "status": "CURRENT"
+}

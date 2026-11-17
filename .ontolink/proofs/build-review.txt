@@ -1,0 +1,1 @@
+Observed project_setup success; start returned VALID revision 0. Verified local coordinator, bundled phases and project instruction files. Historical import records passed mediator guards. Application regression suite finished with 18 passed.

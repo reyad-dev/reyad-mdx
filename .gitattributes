@@ -1,1 +1,3 @@
+# Preserve exact bytes for ontology artifact/proof hashes across operating systems.
+* -text
 android/gradlew text eol=lf

@@ -1,0 +1,31 @@
+e137334 Fix Android fonts and document reset; isolate Windows document windows
+0aeb4a3 Add version display and GitHub update checks across platforms
+f00d4da docs: update README and guide to highlight Web, Android App, and Windows Desktop v1.2.1
+c8adce0 feat: embed local Arabic fonts (Cairo, Almarai, Tajawal) and release v1.2.1
+d4664b0 Preserve Markdown filenames in Android Save As
+3a92e2b Fix Android CI SDK setup and emulator test reconnection
+d2d7b03 Release ReyadMDX 1.2.0 with editor controls and Android app
+d11b387 Fix ReyadMDX demo and canonical URLs
+df67318 Update README.md
+b4331df update tables
+eac4306 Fix link navigation black screen and broken pasted tables (v1.1.1)
+d902883 Remove remaining em dash punctuation from README
+b3ff746 Replace AI-style dash in README title
+2f88c60 Rebrand MDX Reader as ReyadMDX and improve SEO
+1ce34f1 Sync generated web pages
+d59c827 Make generated MDX Reader responsive on mobile
+f482e57 Add browser favicon
+90f5195 Add workflow to install project favicon
+8e78e29 Show MDX Reader icon in README
+89a9493 Add MDX Reader Pages icon asset
+77faf97 Add MDX Reader app icon asset
+f4adf5d Add MDX Reader repository icon
+786efe3 Sync generated web pages
+c3dde16 Add workflow to keep generated web pages in sync
+26e93b2 Update web metadata URLs to reyad-dev
+a1ea7c0 Update GitHub username references to reyad-dev
+1e165d6 Update repository URLs to reyad-dev
+4cfdbb3 Update license attribution in README.md
+5bb452f Update LICENSE
+c62617c Fix tag release workflow publishing
+a0b5ce5 Prepare MDX Reader v1.1.0 release

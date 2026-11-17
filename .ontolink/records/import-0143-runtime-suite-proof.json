@@ -1,0 +1,10 @@
+{
+  "id": "runtime-suite-proof",
+  "type": "Evidence",
+  "supports": "runtime-suite",
+  "outcome": "PASS",
+  "proofPath": ".ontolink/proofs/playwright-2026-11-17.txt",
+  "proofHash": "b930f420f4d14a191ed6f9e65141896f6ba9003d8e0c5a81ae6927e5fd8e620c",
+  "targetHash": "b930f420f4d14a191ed6f9e65141896f6ba9003d8e0c5a81ae6927e5fd8e620c",
+  "summary": "npm test: 18 passed, browser/standalone and Electron; Android bridge tests are simulated, not device execution"
+}

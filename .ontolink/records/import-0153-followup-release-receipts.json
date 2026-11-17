@@ -1,0 +1,18 @@
+{
+  "id": "followup-release-receipts",
+  "type": "Task",
+  "phase": "monitor",
+  "title": "Reconcile historical release claims with actual remote artifacts",
+  "summary": "Inspect matching GitHub tag/release and Windows installer/portable, Android signed APK and standalone assets; store actual version/hash receipts. Do not mark published from local workflow definitions.",
+  "owner": "project-maintainer",
+  "status": "TODO",
+  "requiredKind": [
+    "monitoring"
+  ],
+  "dependsOn": [
+    "task-deliver"
+  ],
+  "usesArtifact": [
+    "agent-handoff"
+  ]
+}

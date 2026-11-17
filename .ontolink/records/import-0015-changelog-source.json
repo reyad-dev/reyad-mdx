@@ -1,0 +1,8 @@
+{
+  "id": "changelog-source",
+  "type": "Artifact",
+  "kind": "implementation",
+  "path": "CHANGELOG.md",
+  "contentHash": "b27f7207f3da833cacb53be95f7119aec61328c9d5ed080df6d41d7c0acc7b85",
+  "status": "CURRENT"
+}

@@ -1,0 +1,1 @@
+Inspected actual Playwright process exit 0 and complete result log: 18 passed, no skipped tests. Reviewed tests and provenance scope; no claim of native Android or external release verification. Every imported artifact is hashed and mediator validated each guarded write.

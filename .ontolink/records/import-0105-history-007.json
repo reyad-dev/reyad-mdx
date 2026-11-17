@@ -1,0 +1,20 @@
+{
+  "id": "history-007",
+  "type": "Task",
+  "phase": "build",
+  "title": "Automatic startup checks for desktop and Android, plus manual checks against official stable GitHub Releases.",
+  "owner": "project-owner",
+  "status": "DONE",
+  "requiredKind": [
+    "implementation"
+  ],
+  "usesArtifact": [
+    "changelog-source",
+    "source-manifest"
+  ],
+  "dependsOn": [
+    "task-plan",
+    "evidence-boundary"
+  ],
+  "summary": "Documented historical implementation: [1.3.0] - 2026-11-15; Added; CHANGELOG.md:20. DONE accepts retrospective import/provenance only; current behavior is covered only where a named test exists. Original execution receipts unavailable."
+}
