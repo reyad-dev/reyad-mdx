@@ -2,7 +2,7 @@
 <rdf:RDF xmlns:ol="urn:ontolink:" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1">
     <rdf:type rdf:resource="urn:ontolink:Project" />
-    <ol:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">214</ol:revision>
+    <ol:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">218</ol:revision>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MDX Reader - 1ce34f1</ol:title>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/agent-handoff">
@@ -986,6 +986,34 @@
     <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-build" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:38.511199+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-215">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-github-handoff" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:06:18.389105+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-216">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-github-assets-pass" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:06:22.409295+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-217">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-published-apk-pass" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:06:26.505500+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-218">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-published" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:07:07.272591+00:00</ol:createdAt>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-22">
     <rdf:type rdf:resource="urn:ontolink:Event" />
@@ -2557,6 +2585,27 @@
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Apply appearance defaults and prepare ReyadMDX 1.3.2</ol:title>
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation" />
   </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-github-assets-pass">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:06:18.634707+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PASS</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">340cc2deeb67fce99d0dd074d6aa1ef217d38cccffaa363b50d2fda5efb3b804</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/release-132-github.json</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GitHub latest stable release is v1.3.2 with all four release assets and digests. Android, Windows, editor tests, and Pages workflows succeeded on the tagged commit. Public Pages serves 1.3.2.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-github-handoff" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">340cc2deeb67fce99d0dd074d6aa1ef217d38cccffaa363b50d2fda5efb3b804</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-github-handoff">
+    <rdf:type rdf:resource="urn:ontolink:Artifact" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">340cc2deeb67fce99d0dd074d6aa1ef217d38cccffaa363b50d2fda5efb3b804</ol:contentHash>
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:06:14.569538+00:00</ol:createdAt>
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation" />
+    <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">handoff</ol:kind>
+    <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/release-132-github.json</ol:path>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+  </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
@@ -2596,6 +2645,26 @@
     <ol:satisfies rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/appearance-release-consolidation" />
     <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Version 1.3.2 ships shared price rendering and highlights with Sepia/Almarai defaults. Keep explicit and previously saved font/theme values. Consolidate public notes into CHANGELOG.md and retain the historical import snapshot under .ontolink.</ol:summary>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ship a patch release and retain saved appearance choices</ol:title>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-published">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:07:03.500079+00:00</ol:createdAt>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pushed 4a6f3fb841f56c3c813a28202861fbd9db5783d9 and tag v1.3.2. GitHub published all four assets and deployed Pages. The signed Android APK passed certificate, digest, and asset checks. The historical OntoLink Build obligation is still open, so this external receipt is recorded as an event.</ol:summary>
+    <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Published and verified ReyadMDX 1.3.2</ol:title>
+    <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-github-handoff" />
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-published-apk-pass">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:06:22.667111+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PASS</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24596406c768737345dc3e2052dd34c6a396c4e92fdd8822c9e1bf48baa24613</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/release-132-published-apk.txt</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Downloaded release APK identity and digest verified, signing certificate matches 1.3.1, and all 23 reader assets match the emulator-tested debug APK.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-github-handoff" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">340cc2deeb67fce99d0dd074d6aa1ef217d38cccffaa363b50d2fda5efb3b804</ol:targetHash>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-pipeline">
     <rdf:type rdf:resource="urn:ontolink:Contract" />

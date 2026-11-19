@@ -1,0 +1,68 @@
+{
+  "sourceCommit": "4a6f3fb841f56c3c813a28202861fbd9db5783d9",
+  "release": {
+    "assets": [
+      {
+        "browser_download_url": "https://github.com/reyad-dev/reyad-mdx/releases/download/v1.3.2/MDX-Reader-Standalone.html",
+        "digest": "sha256:aac62ed598d443ad59ae4299ff4986d79d09ffd08645aad7fae46426f45bbc61",
+        "name": "MDX-Reader-Standalone.html",
+        "size": 438528
+      },
+      {
+        "browser_download_url": "https://github.com/reyad-dev/reyad-mdx/releases/download/v1.3.2/ReyadMDX-1.3.2.apk",
+        "digest": "sha256:54428367d760075782f37a95c01a02591e8c0554d330d87b53842a26b2a3471b",
+        "name": "ReyadMDX-1.3.2.apk",
+        "size": 1448507
+      },
+      {
+        "browser_download_url": "https://github.com/reyad-dev/reyad-mdx/releases/download/v1.3.2/ReyadMDX-Portable-1.3.2.exe",
+        "digest": "sha256:9899d435a0022d20b7c9900f706668b3de44156189cfb627f8133da321ec33c8",
+        "name": "ReyadMDX-Portable-1.3.2.exe",
+        "size": 78907085
+      },
+      {
+        "browser_download_url": "https://github.com/reyad-dev/reyad-mdx/releases/download/v1.3.2/ReyadMDX-Setup-1.3.2.exe",
+        "digest": "sha256:f359b7ed689f49411b4b71d73a1883f4edd16be8e297375bef367d227e7de115",
+        "name": "ReyadMDX-Setup-1.3.2.exe",
+        "size": 79272461
+      }
+    ],
+    "draft": false,
+    "html_url": "https://github.com/reyad-dev/reyad-mdx/releases/tag/v1.3.2",
+    "prerelease": false,
+    "tag_name": "v1.3.2"
+  },
+  "workflows": [
+    {
+      "conclusion": "success",
+      "headSha": "4a6f3fb841f56c3c813a28202861fbd9db5783d9",
+      "name": "Build Android app",
+      "status": "completed",
+      "url": "https://github.com/reyad-dev/reyad-mdx/actions/runs/44529640179"
+    },
+    {
+      "conclusion": "success",
+      "headSha": "4a6f3fb841f56c3c813a28202861fbd9db5783d9",
+      "name": "Build Windows release",
+      "status": "completed",
+      "url": "https://github.com/reyad-dev/reyad-mdx/actions/runs/44529640479"
+    },
+    {
+      "conclusion": "success",
+      "headSha": "4a6f3fb841f56c3c813a28202861fbd9db5783d9",
+      "name": "Test editor",
+      "status": "completed",
+      "url": "https://github.com/reyad-dev/reyad-mdx/actions/runs/44529640476"
+    },
+    {
+      "conclusion": "success",
+      "headSha": "4a6f3fb841f56c3c813a28202861fbd9db5783d9",
+      "name": "pages build and deployment",
+      "status": "completed",
+      "url": "https://github.com/reyad-dev/reyad-mdx/actions/runs/44529640083"
+    }
+  ],
+  "pages": "https://reyad-dev.github.io/reyad-mdx/",
+  "pagesVersion": "1.3.2",
+  "apkSha256": "54428367d760075782f37a95c01a02591e8c0554d330d87b53842a26b2a3471b"
+}

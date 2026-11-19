@@ -1,0 +1,8 @@
+{
+  "id": "release-132-published",
+  "type": "Event",
+  "title": "Published and verified ReyadMDX 1.3.2",
+  "summary": "Pushed 4a6f3fb841f56c3c813a28202861fbd9db5783d9 and tag v1.3.2. GitHub published all four assets and deployed Pages. The signed Android APK passed certificate, digest, and asset checks. The historical OntoLink Build obligation is still open, so this external receipt is recorded as an event.",
+  "affects": "project",
+  "usesArtifact": "release-132-github-handoff"
+}

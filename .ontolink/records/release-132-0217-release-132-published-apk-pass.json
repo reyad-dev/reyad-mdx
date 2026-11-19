@@ -1,0 +1,10 @@
+{
+  "id": "release-132-published-apk-pass",
+  "type": "Evidence",
+  "supports": "release-132-github-handoff",
+  "outcome": "PASS",
+  "proofPath": ".ontolink/proofs/release-132-published-apk.txt",
+  "proofHash": "24596406c768737345dc3e2052dd34c6a396c4e92fdd8822c9e1bf48baa24613",
+  "targetHash": "340cc2deeb67fce99d0dd074d6aa1ef217d38cccffaa363b50d2fda5efb3b804",
+  "summary": "Downloaded release APK identity and digest verified, signing certificate matches 1.3.1, and all 23 reader assets match the emulator-tested debug APK."
+}

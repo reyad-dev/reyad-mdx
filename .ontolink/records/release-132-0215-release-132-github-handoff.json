@@ -1,0 +1,9 @@
+{
+  "id": "release-132-github-handoff",
+  "type": "Artifact",
+  "kind": "handoff",
+  "path": ".ontolink/proofs/release-132-github.json",
+  "contentHash": "340cc2deeb67fce99d0dd074d6aa1ef217d38cccffaa363b50d2fda5efb3b804",
+  "status": "CURRENT",
+  "derivedFrom": "release-132-implementation"
+}
