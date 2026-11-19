@@ -2,7 +2,7 @@
 <rdf:RDF xmlns:ol="urn:ontolink:" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1">
     <rdf:type rdf:resource="urn:ontolink:Project" />
-    <ol:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">173</ol:revision>
+    <ol:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">214</ol:revision>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MDX Reader - 1ce34f1</ol:title>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/agent-handoff">
@@ -23,13 +23,20 @@
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-023" />
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-034" />
   </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/appearance-release-consolidation">
+    <rdf:type rdf:resource="urn:ontolink:Requirement" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:56.892255+00:00</ol:createdAt>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Use Sepia and the bundled Almarai font for default appearance, publish recent changes on GitHub, verify Android contains the shared updates, and keep a single public release history.</ol:summary>
+    <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ship Sepia and Almarai defaults and consolidate release documentation</ol:title>
+  </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/changelog-source">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
     <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">b27f7207f3da833cacb53be95f7119aec61328c9d5ed080df6d41d7c0acc7b85</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:40.806515+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">implementation</ol:kind>
-    <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHANGELOG.md</ol:path>
+    <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/artifacts/changelog-import-2026-11-17.txt</ol:path>
     <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/checkout-portability-pass">
@@ -58,6 +65,15 @@
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:36.432106+00:00</ol:createdAt>
     <ol:role rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Local integration and evidence inventory agent</ol:role>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Codex</ol:title>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/consider-windows-signing">
+    <rdf:type rdf:resource="urn:ontolink:Recommendation" />
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-pipeline" />
+    <ol:basis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Local installers and portable executables have no Authenticode signature. Microsoft documents SmartScreen reputation checks for files and certificates. No signing configuration or credential was supplied.</ol:basis>
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:54:07.959522+00:00</ol:createdAt>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROPOSED</ol:status>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Evaluate trusted Windows code signing for future distributed installer and portable builds.</ol:summary>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/coverage-limit">
     <rdf:type rdf:resource="urn:ontolink:Warning" />
@@ -649,6 +665,48 @@
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T09:19:00.911453+00:00</ol:createdAt>
   </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-174">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-035" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:52:56.264577+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-175">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-049" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:52:59.614460+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-176">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-050" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:02.925686+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-177">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-054" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:06.223731+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-178">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-077" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:09.582908+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-179">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-013" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:13.305858+00:00</ol:createdAt>
+  </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-18">
     <rdf:type rdf:resource="urn:ontolink:Event" />
     <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
@@ -656,12 +714,152 @@
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:41.480363+00:00</ol:createdAt>
   </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-180">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-062" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:17.098915+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-181">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-price-highlighting-request" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:21.340311+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-182">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlight-storage" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:24.738046+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-183">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-implementation" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:54.014006+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-184">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-suite-pass" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:57.379891+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-185">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-windows-retry" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:54:00.758178+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-186">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-windows-pass" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:54:04.179791+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-187">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-build" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:54:07.723098+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-188">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/consider-windows-signing" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:54:11.326083+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-189">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/changelog-source" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:00:45.879040+00:00</ol:createdAt>
+  </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-19">
     <rdf:type rdf:resource="urn:ontolink:Event" />
     <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
     <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-002" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:41.675182+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-190">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-009" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:00:49.954703+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-191">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-013" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:00:54.684198+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-192">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-014" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:00:59.324840+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-193">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-015" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:03.913513+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-194">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-016" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:08.728063+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-195">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-017" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:13.795244+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-196">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-018" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:18.149127+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-197">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-019" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:22.069815+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-198">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-035" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:26.371651+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-199">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-049" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:30.191619+00:00</ol:createdAt>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-2">
     <rdf:type rdf:resource="urn:ontolink:Event" />
@@ -677,12 +875,117 @@
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:41.871052+00:00</ol:createdAt>
   </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-200">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-056" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:33.830355+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-201">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-062" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:37.941620+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-202">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-067" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:41.709801+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-203">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-068" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:45.463511+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-204">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-075" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:49.230871+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-205">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-078" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:52.934166+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-206">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-080" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:01:56.648029+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-207">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/appearance-release-consolidation" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:01.252871+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-208">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-policy" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:04.958321+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-209">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:19.359178+00:00</ol:createdAt>
+  </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-21">
     <rdf:type rdf:resource="urn:ontolink:Event" />
     <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
     <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-004" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:42.069036+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-210">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-playwright-pass" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:23.191981+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-211">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-android-build-pass" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:26.977040+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-212">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-android-emulator-pass" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:30.754940+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-213">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-build" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:34.549473+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-214">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-build" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:38.511199+00:00</ol:createdAt>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-22">
     <rdf:type rdf:resource="urn:ontolink:Event" />
@@ -1294,7 +1597,7 @@
     <ol:owner rdf:datatype="http://www.w3.org/2001/XMLSchema#string">project-maintainer</ol:owner>
     <ol:phase rdf:resource="urn:ontolink:monitor" />
     <ol:requiredKind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">monitoring</ol:requiredKind>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">READY</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</ol:status>
     <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">package.json includes app/**/* and an existing app/ontolink-skills copy is present. Inspect packaging and agree how to exclude/relocate the user copy before building a new release; preserve the active .agents package and canonical graph.</ol:summary>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Review duplicate OntoLink distribution under application assets</ol:title>
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/agent-handoff" />
@@ -1307,7 +1610,7 @@
     <ol:owner rdf:datatype="http://www.w3.org/2001/XMLSchema#string">project-maintainer</ol:owner>
     <ol:phase rdf:resource="urn:ontolink:monitor" />
     <ol:requiredKind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">monitoring</ol:requiredKind>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">READY</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</ol:status>
     <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Run Gradle assembleDebug/lintDebug and npm run android:test with a configured SDK, unlocked device/emulator and installed debug APK. Record commands, device/build identity and logs. Browser bridge tests alone are insufficient.</ol:summary>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Collect current native Android build, lint and device regression evidence</ol:title>
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/agent-handoff" />
@@ -1320,7 +1623,7 @@
     <ol:owner rdf:datatype="http://www.w3.org/2001/XMLSchema#string">project-maintainer</ol:owner>
     <ol:phase rdf:resource="urn:ontolink:monitor" />
     <ol:requiredKind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">monitoring</ol:requiredKind>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">READY</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</ol:status>
     <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Inspect matching GitHub tag/release and Windows installer/portable, Android signed APK and standalone assets; store actual version/hash receipts. Do not mark published from local workflow definitions.</ol:summary>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reconcile historical release claims with actual remote artifacts</ol:title>
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/agent-handoff" />
@@ -2054,6 +2357,85 @@
     <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">User authorized pushing all project work to origin/main for resuming on another device. Track installed suite, graph, durable records/proofs, agent entry points and original distribution snapshots as ordinary files. Preserve exact source/proof bytes through Git attributes. Build/dependency caches and nested .git metadata remain machine-local.</ol:summary>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Version the complete project-local ontology state and byte-preserving inputs</ol:title>
   </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlight-storage">
+    <rdf:type rdf:resource="urn:ontolink:Decision" />
+    <ol:basis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The existing file save, draft, history, and export paths can retain document annotations across hosts. Ambiguous matches after text edits stay hidden.</ol:basis>
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:21.577514+00:00</ol:createdAt>
+    <ol:satisfies rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-price-highlighting-request" />
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Color selections in preview or split view. Store quote, surrounding text, and position in a versioned trailing Markdown comment while showing only the text body in the editor.</ol:summary>
+    <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Save preview highlights with Markdown files</ol:title>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-build">
+    <rdf:type rdf:resource="urn:ontolink:Task" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:54:04.428747+00:00</ol:createdAt>
+    <ol:dependsOn rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/task-plan" />
+    <ol:owner rdf:datatype="http://www.w3.org/2001/XMLSchema#string">project-maintainer</ol:owner>
+    <ol:phase rdf:resource="urn:ontolink:build" />
+    <ol:requiredKind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">implementation</ol:requiredKind>
+    <ol:satisfies rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-price-highlighting-request" />
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DONE</ol:status>
+    <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fix RTL price preview and deliver saved colored highlights</ol:title>
+    <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-implementation" />
+    <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation" />
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-implementation">
+    <rdf:type rdf:resource="urn:ontolink:Artifact" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6845c97628f0feee91dc16a48da2c084de921837c313a85e5b7b2aacfb02d6ef</ol:contentHash>
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:50.872333+00:00</ol:createdAt>
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-013" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-035" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-049" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-050" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-054" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-062" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-077" />
+    <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">implementation</ol:kind>
+    <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/artifacts/preview-highlights-2026-11-19.md</ol:path>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">STALE</ol:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-suite-pass">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:54.254885+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PASS</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">df0e7fda9b71170c886ed3eb5ba312033be611e291a1fdf77399683bea8e949e</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/preview-highlights-playwright-2026-11-19.txt</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">20 Playwright tests passed, including RTL pricing, persisted highlighting, undo/redo, removal and HTML export.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-implementation" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6845c97628f0feee91dc16a48da2c084de921837c313a85e5b7b2aacfb02d6ef</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-windows-pass">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:54:01.001158+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PASS</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10916c674bea2a1941cd5f713a8cd152aaa5e2d4b028404e18a63c4cc589b4cd</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/preview-highlights-windows-2026-11-19.txt</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The packaged Windows renderer rendered RTL prices and saved and restored a highlight. Local installer and portable EXE built and checked as NotSigned. No installation or downloaded SmartScreen prompt was run.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-implementation" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6845c97628f0feee91dc16a48da2c084de921837c313a85e5b7b2aacfb02d6ef</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-windows-retry">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:57.613557+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FAIL</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a10801297bf6ae25da85d0d4468005170a3a243be320baaf4a99a5c6fc73b155</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/preview-highlights-windows-launch-retry-2026-11-19.txt</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Initial packaged Electron Playwright launch failed with ELECTRON_RUN_AS_NODE present; retry with it unset succeeded.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-implementation" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6845c97628f0feee91dc16a48da2c084de921837c313a85e5b7b2aacfb02d6ef</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/preview-price-highlighting-request">
+    <rdf:type rdf:resource="urn:ontolink:Requirement" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T12:53:17.321876+00:00</ol:createdAt>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Correct the Arabic subscription-price preview, explain the Windows Run anyway prompt, and support colored text selection in preview with highlights saved with the document.</ol:summary>
+    <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Keep prices readable in RTL preview and persist selected text highlights</ol:title>
+  </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/project-maintainer">
     <rdf:type rdf:resource="urn:ontolink:Actor" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
@@ -2139,6 +2521,81 @@
 </ol:summary>
     <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/outcome-verify" />
     <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">534a26719ef7da6d0e05dfb7c4b27b25e35ff2ec67e9ab31df0d49fb8873cd64</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-android-build-pass">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:23.440114+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PASS</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">717953b75b9326d25ee426b743f3e79be091415284e4d8b3de8d41e634a1747f</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/release-132-android-build.txt</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gradle assembleDebug lintDebug completed successfully for Android 1.3.2.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0555d4a66124c1fbefbb713b763b9c3fd4f6d83530086306fe3c5fb80067c913</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-android-emulator-pass">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:27.222923+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PASS</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5ad887076592b57414c399609e373f527d92bdbb23ab0180de299ef78422cdcf</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/release-132-android-emulator.txt</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Actual emulator WebView and native file flow verified pricing, highlight save/restart, fonts and appearance defaults, document lifecycle, native open/save/share and undo/redo.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0555d4a66124c1fbefbb713b763b9c3fd4f6d83530086306fe3c5fb80067c913</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-build">
+    <rdf:type rdf:resource="urn:ontolink:Task" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:34.791403+00:00</ol:createdAt>
+    <ol:dependsOn rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/task-plan" />
+    <ol:owner rdf:datatype="http://www.w3.org/2001/XMLSchema#string">project-maintainer</ol:owner>
+    <ol:phase rdf:resource="urn:ontolink:build" />
+    <ol:requiredKind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">implementation</ol:requiredKind>
+    <ol:satisfies rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/appearance-release-consolidation" />
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DONE</ol:status>
+    <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Apply appearance defaults and prepare ReyadMDX 1.3.2</ol:title>
+    <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation" />
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation">
+    <rdf:type rdf:resource="urn:ontolink:Artifact" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0555d4a66124c1fbefbb713b763b9c3fd4f6d83530086306fe3c5fb80067c913</ol:contentHash>
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:15.707543+00:00</ol:createdAt>
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-009" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-013" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-035" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-049" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-050" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-054" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-056" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-062" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-068" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-075" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-078" />
+    <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">implementation</ol:kind>
+    <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/artifacts/release-1.3.2.md</ol:path>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-playwright-pass">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:19.614989+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PASS</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">f1da8f0faa3cdce4739b16e8ad52eeba15545241d5d72e07ee49854db555fa92</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/release-132-playwright.txt</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">20 browser and Electron checks on Windows passed, including the new theme/font defaults, retained choices, price rendering and highlights.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0555d4a66124c1fbefbb713b763b9c3fd4f6d83530086306fe3c5fb80067c913</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-policy">
+    <rdf:type rdf:resource="urn:ontolink:Decision" />
+    <ol:basis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Users keep established preferences; the existing Android GitHub release updater needs a higher release version and the existing signing identity.</ol:basis>
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:02:01.490568+00:00</ol:createdAt>
+    <ol:satisfies rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/appearance-release-consolidation" />
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Version 1.3.2 ships shared price rendering and highlights with Sepia/Almarai defaults. Keep explicit and previously saved font/theme values. Consolidate public notes into CHANGELOG.md and retain the historical import snapshot under .ontolink.</ol:summary>
+    <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ship a patch release and retain saved appearance choices</ol:title>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-pipeline">
     <rdf:type rdf:resource="urn:ontolink:Contract" />
@@ -2279,7 +2736,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-009">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">b27f7207f3da833cacb53be95f7119aec61328c9d5ed080df6d41d7c0acc7b85</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6df7426b9b5b963054045271992ffd48b69bf045d8049613bb983d82661062d9</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:43.129331+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CHANGELOG.md</ol:path>
@@ -2315,7 +2772,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-013">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c8f73b3a35edb80b3d068f25e73f38afbd4e1d5c66f70c79c0273c9bef286683</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aac62ed598d443ad59ae4299ff4986d79d09ffd08645aad7fae46426f45bbc61</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:43.994908+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MDX-Reader-Standalone.html</ol:path>
@@ -2324,7 +2781,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-014">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fe6be000ba20b98e99b4860e2a2d139a202ec074dcc1c5fe6ee6ebd13d1e3d16</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ff940a5b7037e1843d2adc006e4ff72a420aa9405707d4c36b0ff7588bc2eb12</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:44.215977+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">README.md</ol:path>
@@ -2337,7 +2794,7 @@
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:44.444330+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RELEASE_NOTES_v1.1.0.md</ol:path>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">STALE</ol:status>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-016">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
@@ -2346,7 +2803,7 @@
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:44.668001+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RELEASE_NOTES_v1.2.0.md</ol:path>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">STALE</ol:status>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-017">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
@@ -2355,7 +2812,7 @@
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:44.863313+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RELEASE_NOTES_v1.2.1.md</ol:path>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">STALE</ol:status>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-018">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
@@ -2364,7 +2821,7 @@
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:45.078026+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RELEASE_NOTES_v1.3.0.md</ol:path>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">STALE</ol:status>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-019">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
@@ -2373,7 +2830,7 @@
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:45.283415+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RELEASE_NOTES_v1.3.1.md</ol:path>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">STALE</ol:status>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-020">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
@@ -2513,7 +2970,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-035">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">d2d64e135f6c15d7bf7b103aac1da57728163d7d191dfa9bd648a6d81b5637e2</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">d355b602526dbe389bfa31d6bb70fcf5cc48a1bcc69552d0b7758ee6965dff9e</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:49.365873+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">app/app.js</ol:path>
@@ -2639,7 +3096,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-049">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">66313e5169d14ff0b2ae3aeed057a0aeba29e7fcce4ade23e45993ba87a4c868</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">8352e9ee841ba4ec8586ab548e460cd8a1d33ca48ad24d3816c158a032e03efb</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:53.546517+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">app/index.html</ol:path>
@@ -2648,7 +3105,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-050">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">06f5c76da63cbf542753985c38a1b36438bc535aef859093ce86a27e9a3587fa</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a5bdfc22355b879a964a8eee5be370409ad4b0ed434e8c9592a88f3bf149a9a9</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:53.867935+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">app/markdown.js</ol:path>
@@ -2684,7 +3141,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-054">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a5c423cb667b43f3caf35ebbe6e8a8a2791fb9ccfa679cd2a2eabb93d836d888</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">d434aa0fb9c8fa3f83bfae3555ede6f87e7ca397853a2332cdc37829fd4b012d</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:55.201112+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">app/styles.css</ol:path>
@@ -2702,7 +3159,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-056">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6855eb7139213601e0d51a692c3d824feca1cbdb2da9839c15a44a7cdae14f0a</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">585a68abfcac0ddb71c96de965886efa7bf26ca7e12ee080fa1ac30419e7fac5</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:55.899657+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">app/version.js</ol:path>
@@ -2756,7 +3213,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-062">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c8f73b3a35edb80b3d068f25e73f38afbd4e1d5c66f70c79c0273c9bef286683</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aac62ed598d443ad59ae4299ff4986d79d09ffd08645aad7fae46426f45bbc61</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:58.030437+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">docs/index.html</ol:path>
@@ -2801,7 +3258,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-067">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">75fb33fbfc45dcd5f51c929bcb94f0f6f7b65690992bd0b1a7687cfc14a96dd7</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5d3a3bae24031e96d56edcd018a1e629fa918f38637ca22871f70ecc8373a3ae</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:59.879797+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">package-lock.json</ol:path>
@@ -2810,7 +3267,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-068">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0cca8988ac8b9e09a09d75312c823e569d7ba58c767745257a71f3a774970b7f</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">7cd7e87f398d35cbe4f65adee04056c47e410e05969649cb73cc5e57f2d8eb5b</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:38:00.230897+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">package.json</ol:path>
@@ -2873,7 +3330,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-075">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">14aba892e028ea5a2abc9667026702b7de63e818d3d4427559e28dc65a68a829</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">86c4d4e3f0f7b177631fe786b53dea9e59a1a3bad7adc50e1a7f770ca4f29e07</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:38:03.026832+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">scripts/test-android.js</ol:path>
@@ -2891,7 +3348,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-077">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">afedb46bdc88b930b8c124e2559f69be90681544a92e0810c5a2c5b64a2288b4</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1b8d2d763ec8bde6a67f4be62a40a8335263dd3512b28d186dae76d4e8741fe0</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:38:03.879746+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">tests/editor.spec.js</ol:path>
@@ -2900,7 +3357,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-078">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0d1ed7377aafaec10fffdb8baa36e75ba719a43c6a72ca596da22a5e2080da0b</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">f2b32c00dd69b20480337a04968bff9ddc36ebedf5289030d5769a6f2497f909</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:38:04.328382+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">tests/fonts.spec.js</ol:path>
@@ -2918,7 +3375,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-080">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">7dd71022b11b7f70e1b091ffe0158a7d8c264edc783effed01498344444e9cc0</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">148d85387d9c30a3c73a65496f21c7bd72bdaff708a5af7901185e0df97cf9f1</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:38:05.176765+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">اقرأني - MDX Reader.md</ol:path>
@@ -2947,7 +3404,7 @@
     <ol:owner rdf:datatype="http://www.w3.org/2001/XMLSchema#string">coordinator</ol:owner>
     <ol:phase rdf:resource="urn:ontolink:build" />
     <ol:requiredKind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">implementation</ol:requiredKind>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DONE</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">READY</ol:status>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Install OntoLink integration and import repository knowledge</ol:title>
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/changelog-source" />
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/outcome-build" />
@@ -2962,7 +3419,7 @@
     <ol:owner rdf:datatype="http://www.w3.org/2001/XMLSchema#string">coordinator</ol:owner>
     <ol:phase rdf:resource="urn:ontolink:deliver" />
     <ol:requiredKind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">handoff</ol:requiredKind>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DONE</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</ol:status>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hand off local ontology integration and retrieval instructions</ol:title>
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/outcome-deliver" />
     <ol:weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1</ol:weight>
@@ -3002,7 +3459,7 @@
     <ol:owner rdf:datatype="http://www.w3.org/2001/XMLSchema#string">coordinator</ol:owner>
     <ol:phase rdf:resource="urn:ontolink:monitor" />
     <ol:requiredKind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">monitoring</ol:requiredKind>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">READY</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</ol:status>
     <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Future continuing work. Start, inspect current tasks, record changes and evidence, refresh context. No always-on watcher. Acceptance for a session: current monitoring artifact and validated graph.</ol:summary>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Maintain ontology at each future project session</ol:title>
     <ol:weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1</ol:weight>
@@ -3028,7 +3485,7 @@
     <ol:owner rdf:datatype="http://www.w3.org/2001/XMLSchema#string">coordinator</ol:owner>
     <ol:phase rdf:resource="urn:ontolink:verify" />
     <ol:requiredKind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">verification</ol:requiredKind>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DONE</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</ol:status>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Verify imported graph provenance and current local regression suite</ol:title>
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/outcome-verify" />
     <ol:weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1</ol:weight>

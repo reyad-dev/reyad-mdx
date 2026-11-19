@@ -1,0 +1,10 @@
+
+> reyad-mdx@1.3.2 android:test
+> node scripts/test-android.js
+
+PASS: Android Sepia/Almarai defaults and bundled normal/bold fonts in editor and preview
+PASS: WebView RTL pricing, color selection, and native save persisted after restart
+PASS: file associations, native open, UTF-8, undo/redo, scroll, save
+PASS: native Save As and document filename
+PASS: warm-start shared text intent
+PASS: New/Close document, discard cancellation, cold restart stays empty, font choice persists

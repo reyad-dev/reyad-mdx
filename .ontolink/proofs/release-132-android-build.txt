@@ -1,0 +1,90 @@
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>if "Windows_NT" == "Windows_NT" setlocal
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>set DIRNAME=C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android\ 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>if "C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android\" == "" set DIRNAME=. 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>set APP_BASE_NAME=gradlew 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>set APP_HOME=C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android\ 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>for %i in ("C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android\") do set APP_HOME=%~fi 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>set APP_HOME=C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android\ 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>set DEFAULT_JVM_OPTS="-Xmx64m" "-Xms64m" 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>if defined JAVA_HOME goto findJavaFromJavaHome 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>set JAVA_HOME=C:\Program Files\Microsoft\jdk-17.0.20.101-hotspot\ 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>set JAVA_EXE=C:\Program Files\Microsoft\jdk-17.0.20.101-hotspot\/bin/java.exe 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>if exist "C:\Program Files\Microsoft\jdk-17.0.20.101-hotspot\/bin/java.exe" goto execute 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>set CLASSPATH=C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android\\gradle\wrapper\gradle-wrapper.jar 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>"C:\Program Files\Microsoft\jdk-17.0.20.101-hotspot\/bin/java.exe" "-Xmx64m" "-Xms64m"   "-Dorg.gradle.appname=gradlew" -classpath "C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android\\gradle\wrapper\gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain assembleDebug lintDebug --console=plain 
+> Task :app:prepareReaderAssets
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:processDebugJavaRes NO-SOURCE
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:compressDebugAssets
+> Task :app:mergeDebugNativeLibs NO-SOURCE
+> Task :app:stripDebugDebugSymbols NO-SOURCE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestResValues UP-TO-DATE
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :app:preDebugUnitTestBuild
+> Task :app:processDebugManifestForPackage
+> Task :app:processDebugResources
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :app:dexBuilderDebug UP-TO-DATE
+> Task :app:mergeDebugGlobalSynthetics UP-TO-DATE
+> Task :app:mergeProjectDexDebug UP-TO-DATE
+> Task :app:bundleDebugClassesToCompileJar UP-TO-DATE
+> Task :app:generateDebugAndroidTestLintModel
+> Task :app:generateDebugLintReportModel
+> Task :app:generateDebugUnitTestLintModel
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+> Task :app:lintAnalyzeDebugAndroidTest
+> Task :app:lintAnalyzeDebugUnitTest
+> Task :app:lintAnalyzeDebug
+> Task :app:lintReportDebug UP-TO-DATE
+> Task :app:lintDebug
+
+BUILD SUCCESSFUL in 16s
+44 actionable tasks: 17 executed, 27 up-to-date
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>if 0 EQU 0 goto mainEnd 
+
+C:\Partetion D\Reyad\Me\Vibe Coding Projects\MDX Reader - 1ce34f1\android>if "Windows_NT" == "Windows_NT" endlocal

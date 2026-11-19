@@ -22,7 +22,7 @@ const { execFileSync } = require('node:child_process');
   }
   const stem = 'RMDX-' + String(Date.now()).slice(-6);
   const filename = stem + '.md', copyName = stem + '-copy.md';
-  const original = '# اختبار عربي\n\nOpened with Android\n';
+  const original = '# اختبار عربي\n\nOpened with Android\n\n- اشتراك ~100$/شهر → نص ~17$/شهر\n';
   const changed = '# محفوظ\n\n' + Array.from({ length: 200 }, (_, i) => 'سطر ' + i + ': example();').join('\n');
   try {
     device.setDefaultTimeout(15000);
@@ -81,6 +81,9 @@ const { execFileSync } = require('node:child_process');
     await page.evaluate(() => { window.confirm = window.smokeConfirm; });
     const fontWidths = [];
     await page.locator('#btnSettings').click();
+    await page.locator('#btnResetSettings').click();
+    assert.equal(await page.locator('html').getAttribute('data-theme'), 'sepia');
+    assert.equal(await page.locator('#fontSel').inputValue(), '"Almarai","Segoe UI",sans-serif');
     assert.equal(await page.locator('#fontSel option').count(), 4, 'Android should offer only available fonts');
     for (const family of ['Cairo', 'Almarai', 'Tajawal']) {
       await page.locator('#fontSel').selectOption('"' + family + '","Segoe UI",sans-serif');
@@ -101,7 +104,7 @@ const { execFileSync } = require('node:child_process');
     }
     assert.equal(new Set(fontWidths).size, 3, 'The three fonts must render differently');
     await page.locator('#btnCloseSettings').click();
-    console.log('PASS: actual Android Arabic/Latin normal/bold fonts, selection and editor/preview rendering');
+    console.log('PASS: Android Sepia/Almarai defaults and bundled normal/bold fonts in editor and preview');
     assert.equal(await page.locator('#dirSel').inputValue(), 'rtl');
     for (const extension of ['md', 'markdown', 'mdown', 'mkd', 'mdx', 'txt']) {
       for (const mime of ['text/plain', 'application/octet-stream']) {
@@ -115,6 +118,31 @@ const { execFileSync } = require('node:child_process');
     await nativeTap('text', 'Download');
     await nativeTap('text', filename);
     page = await documentPage(filename);
+    await page.locator('[data-view="preview"]').click();
+    assert.deepEqual(await page.locator('#preview .md-li bdi').allTextContents(), ['~100$', '~17$']);
+    async function selectPrice() {
+      await page.locator('#preview .md-li bdi').first().evaluate(price => {
+        const range = document.createRange();
+        range.selectNodeContents(price);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+      });
+    }
+    await selectPrice();
+    await page.locator('[data-highlight="yellow"]').click();
+    await page.locator('#preview mark.mdx-highlight[data-color="yellow"]').waitFor();
+    await page.locator('#btnSave').click();
+    await page.waitForFunction(() => !document.getElementById('pathbar').classList.contains('is-dirty'));
+    assert.match(readSavedFile(filename), /<!-- reyadmdx-highlights-v1:/);
+    await shell('am force-stop dev.reyad.mdx');
+    await shell('am start -W -n dev.reyad.mdx/.MainActivity');
+    page = await documentPage(filename);
+    assert.equal(await page.locator('#preview mark.mdx-highlight').textContent(), '~100$');
+    await selectPrice();
+    await page.locator('[data-highlight="remove"]').click();
+    await page.locator('#preview mark.mdx-highlight').waitFor({ state: 'detached' });
+    console.log('PASS: WebView RTL pricing, color selection, and native save persisted after restart');
+
     const editor = page.locator('#editor');
     assert.equal(await editor.inputValue(), original);
     await page.locator('[data-view="editor"]').click();

@@ -1,0 +1,10 @@
+{
+  "id": "preview-highlights-suite-pass",
+  "type": "Evidence",
+  "supports": "preview-highlights-implementation",
+  "outcome": "PASS",
+  "proofPath": ".ontolink/proofs/preview-highlights-playwright-2026-11-19.txt",
+  "proofHash": "df0e7fda9b71170c886ed3eb5ba312033be611e291a1fdf77399683bea8e949e",
+  "targetHash": "6845c97628f0feee91dc16a48da2c084de921837c313a85e5b7b2aacfb02d6ef",
+  "summary": "20 Playwright tests passed, including RTL pricing, persisted highlighting, undo/redo, removal and HTML export."
+}

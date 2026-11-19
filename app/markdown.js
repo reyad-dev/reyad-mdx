@@ -136,7 +136,7 @@
       var c = src[i];
 
       /* --- هروب \x --- */
-      if (c === '\\' && i + 1 < n && /[\\`*_{}\[\]()#+\-.!>~|"']/.test(src[i + 1])) {
+      if (c === '\\' && i + 1 < n && /[\\`*_{}\[\]()#+\-.!>~|"'$]/.test(src[i + 1])) {
         out += esc(src[i + 1]); i += 2; continue;
       }
 
@@ -152,14 +152,26 @@
       }
 
       /* --- معادلة $...$ (تُعرض ككود مائل) --- */
-      if (c === '$' && src[i + 1] !== '$') {
-        var mm = /^\$([^\n$]+?)\$/.exec(src.slice(i));
+      if (c === '$' && src[i - 1] !== '$' && src[i + 1] !== '$') {
+        var mm = /^\$(\S(?:[^\n$]*?[^\s$])?)\$(?![\p{Nd}$])/u.exec(src.slice(i));
+        // An amount ending in $ is common in RTL prose. A closing dollar
+        // followed by a digit belongs to the next price, not this expression.
+        if (/\p{Nd}/u.test(src[i - 1] || '')) mm = null;
+        if (mm && /^\p{Nd}[\p{Nd}.,]*(?:\/|\s+)\p{Script=Arabic}/u.test(mm[1])) mm = null;
         if (mm) {
           // رموز LaTeX البسيطة (زي $\leftarrow$) تتحول للرمز نفسه
           var sym = TEX_SYM[mm[1].trim()];
           if (sym) { out += sym; i += mm[0].length; continue; }
           out += '<span class="md-math" dir="ltr">' + esc(mm[1]) + '</span>';
           i += mm[0].length; continue;
+        }
+      }
+
+      if (/[~$\p{Nd}]/u.test(c) && !/[\w\p{Nd}.$]/u.test(src[i - 1] || '')) {
+        var amount = /^~?(?:\$\p{Nd}+(?:[.,٫٬]\p{Nd}+)*|\p{Nd}+(?:[.,٫٬]\p{Nd}+)*\$)/u.exec(src.slice(i));
+        if (amount) {
+          out += '<bdi dir="ltr">' + esc(amount[0]) + '</bdi>';
+          i += amount[0].length; continue;
         }
       }
 

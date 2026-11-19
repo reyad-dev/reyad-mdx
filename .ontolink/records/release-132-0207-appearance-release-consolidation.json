@@ -1,0 +1,6 @@
+{
+  "id": "appearance-release-consolidation",
+  "type": "Requirement",
+  "title": "Ship Sepia and Almarai defaults and consolidate release documentation",
+  "summary": "Use Sepia and the bundled Almarai font for default appearance, publish recent changes on GitHub, verify Android contains the shared updates, and keep a single public release history."
+}

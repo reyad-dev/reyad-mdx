@@ -1,0 +1,14 @@
+{
+  "id": "preview-highlights-build",
+  "type": "Task",
+  "phase": "build",
+  "owner": "project-maintainer",
+  "title": "Fix RTL price preview and deliver saved colored highlights",
+  "requiredKind": [
+    "implementation"
+  ],
+  "status": "DONE",
+  "dependsOn": "task-plan",
+  "usesArtifact": "preview-highlights-implementation",
+  "satisfies": "preview-price-highlighting-request"
+}

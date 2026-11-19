@@ -1,73 +1,61 @@
 {
   "project": "MDX Reader - 1ce34f1",
-  "revision": 173,
+  "revision": 214,
   "progress": {
-    "completed_weight": 46.0,
-    "total_weight": 50.0,
-    "percent": 92.0,
+    "completed_weight": 45.0,
+    "total_weight": 52.0,
+    "percent": 86.54,
     "definition": "Evidence-gated DONE task weights / all task weights; not confidence or likelihood"
   },
   "active_task": {
-    "id": "followup-distribution-packaging",
+    "id": "task-build",
     "type": "Task",
     "belongsTo": [
       "urn:ontolink:project:mdx-reader-1ce34f1"
     ],
     "createdAt": [
-      "2026-11-17T08:39:59.327483+00:00"
+      "2026-11-17T08:39:11.908524+00:00"
     ],
     "dependsOn": [
-      "task-deliver"
+      "android-host",
+      "evidence-boundary",
+      "ontology-primary",
+      "release-pipeline",
+      "shared-editor",
+      "task-plan",
+      "windows-host"
     ],
     "owner": [
-      "project-maintainer"
+      "coordinator"
     ],
     "phase": [
-      "urn:ontolink:monitor"
+      "urn:ontolink:build"
     ],
     "requiredKind": [
-      "monitoring"
+      "implementation"
     ],
     "status": [
       "READY"
     ],
-    "summary": [
-      "package.json includes app/**/* and an existing app/ontolink-skills copy is present. Inspect packaging and agree how to exclude/relocate the user copy before building a new release; preserve the active .agents package and canonical graph."
-    ],
     "title": [
-      "Review duplicate OntoLink distribution under application assets"
+      "Install OntoLink integration and import repository knowledge"
     ],
     "usesArtifact": [
-      "agent-handoff"
+      "changelog-source",
+      "outcome-build",
+      "source-manifest"
+    ],
+    "weight": [
+      "1"
     ]
   },
-  "workflow_skill": "ontolink-monitoring",
+  "workflow_skill": "ontolink-implementation",
   "engineering_candidates": [
-    "autotaska"
+    "full-stack",
+    "nexus-full-stack",
+    "professional-interface-builder"
   ],
   "context": [
-    {
-      "id": "agent-handoff",
-      "type": "Artifact",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "contentHash": [
-        "6d622357af299b2af410d8bbeb0f481aa76805c63154be279b6937e5a35ed6ff"
-      ],
-      "createdAt": [
-        "2026-11-17T08:39:45.150268+00:00"
-      ],
-      "kind": [
-        "handoff"
-      ],
-      "path": [
-        ".ontolink/artifacts/agent-handoff.md"
-      ],
-      "status": [
-        "CURRENT"
-      ]
-    },
     {
       "id": "android-host",
       "type": "Contract",
@@ -104,7 +92,7 @@
         "implementation"
       ],
       "path": [
-        "CHANGELOG.md"
+        ".ontolink/artifacts/changelog-import-2026-11-17.txt"
       ],
       "status": [
         "CURRENT"
@@ -159,28 +147,6 @@
       ],
       "path": [
         ".ontolink/artifacts/build.md"
-      ],
-      "status": [
-        "CURRENT"
-      ]
-    },
-    {
-      "id": "outcome-deliver",
-      "type": "Artifact",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "contentHash": [
-        "6d622357af299b2af410d8bbeb0f481aa76805c63154be279b6937e5a35ed6ff"
-      ],
-      "createdAt": [
-        "2026-11-17T08:39:35.632578+00:00"
-      ],
-      "kind": [
-        "handoff"
-      ],
-      "path": [
-        ".ontolink/artifacts/deliver.md"
       ],
       "status": [
         "CURRENT"
@@ -253,32 +219,6 @@
       ]
     },
     {
-      "id": "outcome-verify",
-      "type": "Artifact",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "contentHash": [
-        "534a26719ef7da6d0e05dfb7c4b27b25e35ff2ec67e9ab31df0d49fb8873cd64"
-      ],
-      "createdAt": [
-        "2026-11-17T08:39:23.584786+00:00"
-      ],
-      "derivedFrom": [
-        "runtime-suite",
-        "source-manifest"
-      ],
-      "kind": [
-        "verification"
-      ],
-      "path": [
-        ".ontolink/artifacts/verify.md"
-      ],
-      "status": [
-        "CURRENT"
-      ]
-    },
-    {
       "id": "release-pipeline",
       "type": "Contract",
       "belongsTo": [
@@ -301,28 +241,6 @@
         "source-057",
         "source-068",
         "source-074"
-      ]
-    },
-    {
-      "id": "runtime-suite",
-      "type": "Artifact",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "contentHash": [
-        "b930f420f4d14a191ed6f9e65141896f6ba9003d8e0c5a81ae6927e5fd8e620c"
-      ],
-      "createdAt": [
-        "2026-11-17T08:39:14.861882+00:00"
-      ],
-      "kind": [
-        "verification"
-      ],
-      "path": [
-        ".ontolink/proofs/playwright-2026-11-17.txt"
-      ],
-      "status": [
-        "CURRENT"
       ]
     },
     {
@@ -465,7 +383,7 @@
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "d2d64e135f6c15d7bf7b103aac1da57728163d7d191dfa9bd648a6d81b5637e2"
+        "d355b602526dbe389bfa31d6bb70fcf5cc48a1bcc69552d0b7758ee6965dff9e"
       ],
       "createdAt": [
         "2026-11-17T08:37:49.365873+00:00"
@@ -487,7 +405,7 @@
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "06f5c76da63cbf542753985c38a1b36438bc535aef859093ce86a27e9a3587fa"
+        "a5bdfc22355b879a964a8eee5be370409ad4b0ed434e8c9592a88f3bf149a9a9"
       ],
       "createdAt": [
         "2026-11-17T08:37:53.867935+00:00"
@@ -553,7 +471,7 @@
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "a5c423cb667b43f3caf35ebbe6e8a8a2791fb9ccfa679cd2a2eabb93d836d888"
+        "d434aa0fb9c8fa3f83bfae3555ede6f87e7ca397853a2332cdc37829fd4b012d"
       ],
       "createdAt": [
         "2026-11-17T08:37:55.201112+00:00"
@@ -641,7 +559,7 @@
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "0cca8988ac8b9e09a09d75312c823e569d7ba58c767745257a71f3a774970b7f"
+        "7cd7e87f398d35cbe4f65adee04056c47e410e05969649cb73cc5e57f2d8eb5b"
       ],
       "createdAt": [
         "2026-11-17T08:38:00.230897+00:00"
@@ -720,82 +638,6 @@
       ],
       "status": [
         "CURRENT"
-      ]
-    },
-    {
-      "id": "task-build",
-      "type": "Task",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "createdAt": [
-        "2026-11-17T08:39:11.908524+00:00"
-      ],
-      "dependsOn": [
-        "android-host",
-        "evidence-boundary",
-        "ontology-primary",
-        "release-pipeline",
-        "shared-editor",
-        "task-plan",
-        "windows-host"
-      ],
-      "owner": [
-        "coordinator"
-      ],
-      "phase": [
-        "urn:ontolink:build"
-      ],
-      "requiredKind": [
-        "implementation"
-      ],
-      "status": [
-        "DONE"
-      ],
-      "title": [
-        "Install OntoLink integration and import repository knowledge"
-      ],
-      "usesArtifact": [
-        "changelog-source",
-        "outcome-build",
-        "source-manifest"
-      ],
-      "weight": [
-        "1"
-      ]
-    },
-    {
-      "id": "task-deliver",
-      "type": "Task",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "createdAt": [
-        "2026-11-17T08:39:41.753550+00:00"
-      ],
-      "dependsOn": [
-        "task-verify"
-      ],
-      "owner": [
-        "coordinator"
-      ],
-      "phase": [
-        "urn:ontolink:deliver"
-      ],
-      "requiredKind": [
-        "handoff"
-      ],
-      "status": [
-        "DONE"
-      ],
-      "title": [
-        "Hand off local ontology integration and retrieval instructions"
-      ],
-      "usesArtifact": [
-        "outcome-deliver"
-      ],
-      "weight": [
-        "1"
       ]
     },
     {
@@ -898,40 +740,6 @@
       ]
     },
     {
-      "id": "task-verify",
-      "type": "Task",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "createdAt": [
-        "2026-11-17T08:39:29.523714+00:00"
-      ],
-      "dependsOn": [
-        "task-build"
-      ],
-      "owner": [
-        "coordinator"
-      ],
-      "phase": [
-        "urn:ontolink:verify"
-      ],
-      "requiredKind": [
-        "verification"
-      ],
-      "status": [
-        "DONE"
-      ],
-      "title": [
-        "Verify imported graph provenance and current local regression suite"
-      ],
-      "usesArtifact": [
-        "outcome-verify"
-      ],
-      "weight": [
-        "1"
-      ]
-    },
-    {
       "id": "windows-host",
       "type": "Contract",
       "belongsTo": [
@@ -1008,35 +816,6 @@
       ],
       "targetHash": [
         "6077ed546a65da4529b33b2d7dff3783f8a0d3aba58e507fef9dfba387200ae1"
-      ],
-      "current_provenance_pass": true
-    },
-    {
-      "id": "proof-deliver",
-      "type": "Evidence",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "createdAt": [
-        "2026-11-17T08:39:38.656122+00:00"
-      ],
-      "outcome": [
-        "PASS"
-      ],
-      "proofHash": [
-        "368e579b51b07b7bd24164fed95fb5bc99ad41ec9bb6fb62c920eb449d0f3f88"
-      ],
-      "proofPath": [
-        ".ontolink/proofs/deliver-review.txt"
-      ],
-      "summary": [
-        "Checked local handoff commands, project instruction entry points and retained test/source references. This handoff delivers local installation and knowledge migration, not a deployment or remote communication.\n"
-      ],
-      "supports": [
-        "outcome-deliver"
-      ],
-      "targetHash": [
-        "6d622357af299b2af410d8bbeb0f481aa76805c63154be279b6937e5a35ed6ff"
       ],
       "current_provenance_pass": true
     },
@@ -1126,64 +905,6 @@
         "f56fd9c7688b0ffdcc40bca4905be9fc55a7baf760856c85390bfb99be2b12e4"
       ],
       "current_provenance_pass": true
-    },
-    {
-      "id": "proof-verify",
-      "type": "Evidence",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "createdAt": [
-        "2026-11-17T08:39:26.513966+00:00"
-      ],
-      "outcome": [
-        "PASS"
-      ],
-      "proofHash": [
-        "6eb74c51ce912ecac997627998c591b310e7de0ca9f3f113da4836573e6d5d1c"
-      ],
-      "proofPath": [
-        ".ontolink/proofs/verify-review.txt"
-      ],
-      "summary": [
-        "Inspected actual Playwright process exit 0 and complete result log: 18 passed, no skipped tests. Reviewed tests and provenance scope; no claim of native Android or external release verification. Every imported artifact is hashed and mediator validated each guarded write.\n"
-      ],
-      "supports": [
-        "outcome-verify"
-      ],
-      "targetHash": [
-        "534a26719ef7da6d0e05dfb7c4b27b25e35ff2ec67e9ab31df0d49fb8873cd64"
-      ],
-      "current_provenance_pass": true
-    },
-    {
-      "id": "runtime-suite-proof",
-      "type": "Evidence",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "createdAt": [
-        "2026-11-17T08:39:17.756893+00:00"
-      ],
-      "outcome": [
-        "PASS"
-      ],
-      "proofHash": [
-        "b930f420f4d14a191ed6f9e65141896f6ba9003d8e0c5a81ae6927e5fd8e620c"
-      ],
-      "proofPath": [
-        ".ontolink/proofs/playwright-2026-11-17.txt"
-      ],
-      "summary": [
-        "npm test: 18 passed, browser/standalone and Electron; Android bridge tests are simulated, not device execution"
-      ],
-      "supports": [
-        "runtime-suite"
-      ],
-      "targetHash": [
-        "b930f420f4d14a191ed6f9e65141896f6ba9003d8e0c5a81ae6927e5fd8e620c"
-      ],
-      "current_provenance_pass": true
     }
   ],
   "uncertainty": [],
@@ -1209,32 +930,32 @@
       "summary": [
         "Knowledge coverage is the accessible local repository, release notes and current checks. Prior chats/external issue backlog and external release receipts are unavailable in this session. Preserve the distinction between history claims and tested facts."
       ]
-    },
+    }
+  ],
+  "blockers": [],
+  "recommendations": [
     {
-      "id": "packaging-risk",
-      "type": "Warning",
+      "id": "consider-windows-signing",
+      "type": "Recommendation",
       "affects": [
-        "followup-distribution-packaging"
+        "release-pipeline"
+      ],
+      "basis": [
+        "Local installers and portable executables have no Authenticode signature. Microsoft documents SmartScreen reputation checks for files and certificates. No signing configuration or credential was supplied."
       ],
       "belongsTo": [
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "createdAt": [
-        "2026-11-17T08:40:08.377033+00:00"
-      ],
-      "severity": [
-        "WARNING"
+        "2026-11-19T12:54:07.959522+00:00"
       ],
       "status": [
-        "OPEN"
+        "PROPOSED"
       ],
       "summary": [
-        "Existing app/ontolink-skills distribution may enter Electron app/**/* packaging. Review before release; files were preserved."
+        "Evaluate trusted Windows code signing for future distributed installer and portable builds."
       ]
-    }
-  ],
-  "blockers": [],
-  "recommendations": [
+    },
     {
       "id": "future-features",
       "type": "Recommendation",
@@ -1263,19 +984,19 @@
     {
       "id": "followup-distribution-packaging",
       "phase": "monitor",
-      "status": "READY",
+      "status": "TODO",
       "owner": "project-maintainer"
     },
     {
       "id": "followup-native-android",
       "phase": "monitor",
-      "status": "READY",
+      "status": "TODO",
       "owner": "project-maintainer"
     },
     {
       "id": "followup-release-receipts",
       "phase": "monitor",
-      "status": "READY",
+      "status": "TODO",
       "owner": "project-maintainer"
     },
     {
@@ -1519,15 +1240,27 @@
       "owner": "project-owner"
     },
     {
-      "id": "task-build",
+      "id": "preview-highlights-build",
       "phase": "build",
       "status": "DONE",
+      "owner": "project-maintainer"
+    },
+    {
+      "id": "release-132-build",
+      "phase": "build",
+      "status": "DONE",
+      "owner": "project-maintainer"
+    },
+    {
+      "id": "task-build",
+      "phase": "build",
+      "status": "READY",
       "owner": "coordinator"
     },
     {
       "id": "task-deliver",
       "phase": "deliver",
-      "status": "DONE",
+      "status": "TODO",
       "owner": "coordinator"
     },
     {
@@ -1545,7 +1278,7 @@
     {
       "id": "task-monitor",
       "phase": "monitor",
-      "status": "READY",
+      "status": "TODO",
       "owner": "coordinator"
     },
     {
@@ -1557,16 +1290,14 @@
     {
       "id": "task-verify",
       "phase": "verify",
-      "status": "DONE",
+      "status": "TODO",
       "owner": "coordinator"
     }
   ],
   "routing_graph_hash": "a023869c49076dc48ed86285c4efa5b6deefd733dda5722e5d226c0f0cc72f96",
-  "completion_gates": [
-    "missing-current-evidence:monitoring"
-  ],
+  "completion_gates": [],
   "context_budget": {
-    "estimate": 8752,
+    "estimate": 7239,
     "limit": 4000,
     "overflow": true,
     "method": "UTF-8 bytes/3 heuristic for packet only, not observed model tokens",

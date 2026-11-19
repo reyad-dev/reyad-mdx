@@ -12,6 +12,77 @@ async function edit(page) {
   return page.locator('#editor');
 }
 
+test('RTL preview keeps subscription prices in the sentence and still renders math', async ({ page }) => {
+  await page.goto(standalone);
+  const editor = await edit(page);
+  await editor.fill(['**2. اشتراكات العيلة / الطالب**', '',
+    '- اشتراك العيلة (6 أفراد) بـ ~100$/شهر → كل واحد بيقبض ~17$/شهر',
+    '- مقارنة $100/شهر و $17/شهر', '', 'معادلة $2+2$ ورمز $\\leftarrow$'].join('\n'));
+  await page.locator('[data-view="preview"]').click();
+  await expect(page.locator('#preview strong')).toHaveText('2. اشتراكات العيلة / الطالب');
+  await expect(page.locator('#preview .md-li bdi')).toHaveText(['~100$', '~17$', '$100', '$17']);
+  await expect(page.locator('#preview .md-math')).toHaveText('2+2');
+  await expect(page.locator('#preview')).toContainText('ورمز ←');
+});
+
+test('preview highlight survives save and reopen, supports undo, and can be removed', async ({ page }, testInfo) => {
+  await page.addInitScript(() => { window.showSaveFilePicker = undefined; });
+  await page.goto(standalone);
+  const editor = await edit(page);
+  const source = 'أول **نص** عربي و English آخر';
+  await editor.fill(source);
+  await page.locator('[data-view="preview"]').click();
+  const paragraph = page.locator('#preview .md-p');
+  await expect(paragraph).toContainText('نص عربي');
+  const select = async (start, startOffset, end, endOffset) => {
+    await paragraph.evaluate((p, [start, startOffset, end, endOffset]) => {
+      const node = i => p.childNodes[i].firstChild || p.childNodes[i];
+      const range = document.createRange();
+      range.setStart(node(start), startOffset);
+      range.setEnd(node(end), endOffset);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+    }, [start, startOffset, end, endOffset]);
+  };
+
+  await select(1, 0, 2, 5);
+  await page.locator('[data-highlight="green"]').click();
+  const marks = page.locator('#preview .mdx-highlight');
+  await expect(marks).toHaveText(['نص', 'عربي']);
+  await expect(marks.first()).toHaveCSS('background-color', 'rgb(164, 230, 176)');
+  await page.locator('#btnUndo').click();
+  await expect(marks).toHaveCount(0);
+  await page.locator('#btnRedo').click();
+  await expect(marks).toHaveCount(2);
+
+  const saved = page.waitForEvent('download');
+  await page.locator('#btnSave').click();
+  const filename = testInfo.outputPath('highlights.md');
+  await (await saved).saveAs(filename);
+  expect(fs.readFileSync(filename, 'utf8')).toContain('<!-- reyadmdx-highlights-v1:');
+  await page.reload();
+  await page.locator('#filePicker').setInputFiles(filename);
+  await expect(marks).toHaveText(['نص', 'عربي']);
+  await page.locator('#btnSettings').click();
+  const exported = page.waitForEvent('download');
+  await page.locator('#btnExportHtml').click();
+  expect(fs.readFileSync(await (await exported).path(), 'utf8')).toContain('<mark class="mdx-highlight" data-color="green">نص</mark>');
+  await page.locator('#btnCloseSettings').click();
+  await page.locator('[data-view="split"]').click();
+  await expect(editor).toHaveValue(source);
+  await editor.fill('سطر جديد\n\n' + source);
+  await expect(page.locator('#preview .md-p').first()).toHaveText('سطر جديد');
+  await expect(marks).toHaveCount(2);
+  await marks.first().evaluate(mark => {
+    const range = document.createRange();
+    range.selectNodeContents(mark);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+  });
+  await page.locator('[data-highlight="remove"]').click();
+  await expect(marks).toHaveText(['عربي']);
+});
+
 test('RTL default migrates once, and explicit alternatives persist', async ({ page }) => {
   await page.goto(standalone);
   await expect(page.locator('#dirSel')).toHaveValue('rtl');

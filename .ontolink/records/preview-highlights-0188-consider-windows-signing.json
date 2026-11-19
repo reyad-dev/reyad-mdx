@@ -1,0 +1,8 @@
+{
+  "id": "consider-windows-signing",
+  "type": "Recommendation",
+  "status": "PROPOSED",
+  "affects": "release-pipeline",
+  "summary": "Evaluate trusted Windows code signing for future distributed installer and portable builds.",
+  "basis": "Local installers and portable executables have no Authenticode signature. Microsoft documents SmartScreen reputation checks for files and certificates. No signing configuration or credential was supplied."
+}

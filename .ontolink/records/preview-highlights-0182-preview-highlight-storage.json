@@ -1,0 +1,8 @@
+{
+  "id": "preview-highlight-storage",
+  "type": "Decision",
+  "title": "Save preview highlights with Markdown files",
+  "summary": "Color selections in preview or split view. Store quote, surrounding text, and position in a versioned trailing Markdown comment while showing only the text body in the editor.",
+  "basis": "The existing file save, draft, history, and export paths can retain document annotations across hosts. Ambiguous matches after text edits stay hidden.",
+  "satisfies": "preview-price-highlighting-request"
+}

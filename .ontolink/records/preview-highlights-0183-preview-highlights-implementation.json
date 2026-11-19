@@ -1,0 +1,17 @@
+{
+  "id": "preview-highlights-implementation",
+  "type": "Artifact",
+  "kind": "implementation",
+  "path": ".ontolink/artifacts/preview-highlights-2026-11-19.md",
+  "contentHash": "6845c97628f0feee91dc16a48da2c084de921837c313a85e5b7b2aacfb02d6ef",
+  "status": "CURRENT",
+  "derivedFrom": [
+    "source-035",
+    "source-049",
+    "source-050",
+    "source-054",
+    "source-077",
+    "source-013",
+    "source-062"
+  ]
+}

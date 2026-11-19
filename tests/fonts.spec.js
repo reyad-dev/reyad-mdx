@@ -11,6 +11,8 @@ test.describe('Arabic local fonts (Cairo, Almarai, Tajawal)', () => {
   for (const [name, url] of [['Standalone', standalone], ['App Index', appIndex]]) {
     test(`loads and applies Cairo, Almarai, and Tajawal in ${name}`, async ({ page }) => {
       await page.goto(url);
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'sepia');
+      await expect(page.locator('#editor')).toHaveCSS('font-family', /Almarai/);
 
       // Verify fonts load successfully via FontFace API (normal and bold)
       const fontsLoaded = await page.evaluate(async () => {
@@ -56,6 +58,8 @@ test.describe('Arabic local fonts (Cairo, Almarai, Tajawal)', () => {
       // 3. Test selecting Tajawal
       await page.locator('#fontSel').selectOption('"Tajawal","Segoe UI",sans-serif');
       await expect(page.locator('#editor')).toHaveCSS('font-family', /Tajawal/);
+      await page.locator('#btnCloseSettings').click();
+      await page.locator('#themeSel').selectOption('dark');
       const tajawalFont = await page.evaluate(() => document.documentElement.style.getPropertyValue('--ar-font'));
       expect(tajawalFont).toContain('Tajawal');
 
@@ -64,6 +68,12 @@ test.describe('Arabic local fonts (Cairo, Almarai, Tajawal)', () => {
       const persistedFont = await page.evaluate(() => document.documentElement.style.getPropertyValue('--ar-font'));
       expect(persistedFont).toContain('Tajawal');
       await expect(page.locator('#fontSel')).toHaveValue('"Tajawal","Segoe UI",sans-serif');
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+
+      await page.locator('#btnSettings').click();
+      await page.locator('#btnResetSettings').click();
+      await expect(page.locator('#fontSel')).toHaveValue('"Almarai","Segoe UI",sans-serif');
+      await expect(page.locator('html')).toHaveAttribute('data-theme', 'sepia');
     });
   }
 

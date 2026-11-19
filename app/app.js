@@ -17,6 +17,7 @@
       open: 'فتح', save: 'حفظ', saveAs: 'حفظ باسم', undo: 'تراجع', redo: 'إعادة',
       scrollTop: 'إلى أعلى المستند', scrollBottom: 'إلى أسفل المستند',
       viewPreview: 'معاينة', viewSplit: 'مقسوم', viewEditor: 'تحرير',
+      highlightText: 'تمييز النص', removeHighlight: 'إزالة', yellow: 'أصفر', green: 'أخضر', pink: 'وردي',
       toc: 'الفهرس', outline: 'محتويات المستند',
       searchPh: 'بحث في المستند…',
       dirSmart: '🧠 ذكي — عربي = RTL', dirRtl: '→ فرض من اليمين لليسار',
@@ -31,7 +32,7 @@
       dropHere: 'أفلت ملف .md هنا',
       settings: 'الإعدادات', settingsSub: 'كل الإعدادات تُحفظ تلقائيًا',
       fontFamily: 'خط العرض', fontFamilyHint: 'اختر خطًا مدمجًا (كايرو، المراعي، تجوال) أو خطًا من جهازك',
-      fontDefault: 'خط النظام (افتراضي)', fontCairo: 'Cairo (كايرو)', fontAlmarai: 'Almarai (المراعي)', fontTajawal: 'Tajawal (تجوال)',
+      fontDefault: 'خط النظام', fontCairo: 'Cairo (كايرو)', fontAlmarai: 'Almarai (المراعي)', fontTajawal: 'Tajawal (تجوال)',
       fontSize: 'حجم الخط', lineHeight: 'تباعد الأسطر', contentWidth: 'عرض النص',
       syncScroll: 'تزامن التمرير في الوضع المقسوم',
       autoSave: 'حفظ تلقائي', autoSaveHint: 'يحفظ الملف بعد ثانيتين من آخر تعديل',
@@ -49,6 +50,7 @@
       open: 'Open', save: 'Save', saveAs: 'Save As', undo: 'Undo', redo: 'Redo',
       scrollTop: 'Go to document top', scrollBottom: 'Go to document bottom',
       viewPreview: 'Preview', viewSplit: 'Split', viewEditor: 'Edit',
+      highlightText: 'Highlight text', removeHighlight: 'Remove', yellow: 'Yellow', green: 'Green', pink: 'Pink',
       toc: 'Outline', outline: 'Table of contents',
       searchPh: 'Search document…',
       dirSmart: '🧠 Smart — Arabic = RTL', dirRtl: '→ Force right to left',
@@ -63,7 +65,7 @@
       dropHere: 'Drop a .md file here',
       settings: 'Settings', settingsSub: 'Everything is saved automatically',
       fontFamily: 'Display font', fontFamilyHint: 'Choose a built-in font (Cairo, Almarai, Tajawal) or system font',
-      fontDefault: 'System font (Default)', fontCairo: 'Cairo', fontAlmarai: 'Almarai', fontTajawal: 'Tajawal',
+      fontDefault: 'System font', fontCairo: 'Cairo', fontAlmarai: 'Almarai', fontTajawal: 'Tajawal',
       fontSize: 'Font size', lineHeight: 'Line height', contentWidth: 'Content width',
       syncScroll: 'Sync scrolling in split view',
       autoSave: 'Auto-save', autoSaveHint: 'Saves 2 seconds after the last edit',
@@ -79,8 +81,8 @@
 
   /* ------------------------------ الحالة --------------------------------- */
   var DEFAULTS = {
-    uiLang: 'ar', theme: 'dark', dir: 'rtl', view: 'preview', toc: true,
-    fontFamily: '"Segoe UI","IBM Plex Sans Arabic","Noto Sans Arabic",Tahoma,sans-serif',
+    uiLang: 'ar', theme: 'sepia', dir: 'rtl', view: 'preview', toc: true,
+    fontFamily: '"Almarai","Segoe UI",sans-serif',
     fontSize: 17, lineHeight: 2, contentWidth: 900,
     syncScroll: true, autoSave: false
   };
@@ -88,7 +90,7 @@
   var S = load();
   var state = {
     path: null, name: null, text: '', dirty: false, pendingClose: false, documentId: 0,
-    fileHandle: null, hits: [], hitIndex: -1, lastRenderedText: null, savedText: ''
+    fileHandle: null, hits: [], hitIndex: -1, lastRenderedText: null, savedText: '', source: '', highlights: []
   };
 
   function load() {
@@ -111,6 +113,7 @@
   var el = {
     app: $('app'), main: $('main'), toc: $('toc'), tocList: $('tocList'),
     editor: $('editor'), preview: $('preview'), welcome: $('welcome'),
+    highlightTools: $('highlightTools'),
     paneEditor: $('paneEditor'), panePreview: $('panePreview'), panes: $('panes'),
     fileName: $('fileName'), filePath: $('filePath'), pathbar: $('pathbar'),
     search: $('search'), searchCount: $('searchCount'),
@@ -142,6 +145,10 @@
     $('uiLang').value = lang;
     $('btnUndo').title = t('undo') + ' (Ctrl+Z)';
     $('btnRedo').title = t('redo') + ' (Ctrl+Y / Ctrl+Shift+Z)';
+    el.highlightTools.setAttribute('aria-label', t('highlightText'));
+    el.highlightTools.querySelectorAll('[data-color]').forEach(function (button) {
+      button.setAttribute('aria-label', t(button.dataset.color));
+    });
     updateScrollEdge();
     updateStats();
   }
@@ -150,7 +157,7 @@
     // اتجاه محتوى المستند (مستقل تمامًا عن لغة الواجهة)
     var d = S.dir;
     if (d === 'smart' || d === 'auto') {
-      var det = state.docDir || window.MDX.detectDir(state.text.slice(0, 8000));
+      var det = state.docDir || window.MDX.detectDir(state.source.slice(0, 8000));
       d = (det === 'auto') ? 'rtl' : det;
     }
     el.preview.setAttribute('dir', d);
@@ -187,6 +194,7 @@
     });
     el.stMode.textContent = t('view' + S.view.charAt(0).toUpperCase() + S.view.slice(1));
     activeScrollPane = S.view === 'preview' ? 'preview' : 'editor';
+    if (S.view === 'editor') hideHighlightTools();
     requestAnimationFrame(updateScrollEdge);
   }
 
@@ -208,7 +216,10 @@
   }
 
   function render() {
-    var src = state.text;
+    clearTimeout(renderTimer);
+    hideHighlightTools();
+    state.lastRenderedText = state.text;
+    var src = state.source;
     if (!src.trim()) {
       el.preview.innerHTML = '';
       el.preview.appendChild(el.welcome);
@@ -221,6 +232,7 @@
     }
     var res = window.MDX.render(src, { dir: S.dir });
     el.preview.innerHTML = res.html;
+    paintHighlights(el.preview);
     state.docDir = res.docDir;
     buildToc(res.toc);
     applyDir();
@@ -229,6 +241,144 @@
     updateStats();
     if (el.search.value) runSearch(el.search.value, false);
     requestAnimationFrame(updateScrollEdge);
+  }
+
+  /* Highlight anchors travel with the file in a Markdown comment. The editor
+     exposes the source without the comment; the preview anchors use its text. */
+  var highlightColors = ['yellow', 'green', 'pink'];
+  var highlightSelection = null;
+
+  function readDocument(text) {
+    var footer = /\r?\n\r?\n<!-- reyadmdx-highlights-v1: (.+) -->\r?\n?$/.exec(text);
+    if (footer) {
+      try {
+        var marks = JSON.parse(footer[1]);
+        if (Array.isArray(marks) && marks.every(function (mark) {
+          return mark && highlightColors.indexOf(mark.color) !== -1 && Number.isSafeInteger(mark.start) &&
+            mark.start >= 0 && typeof mark.quote === 'string' && mark.quote.length &&
+            typeof mark.before === 'string' && typeof mark.after === 'string';
+        })) return { source: text.slice(0, footer.index), highlights: marks };
+      } catch (e) { /* Keep malformed metadata in the original source. */ }
+    }
+    return { source: text, highlights: [] };
+  }
+
+  function writeDocument(source, marks) {
+    if (!marks.length) return source;
+    var json = JSON.stringify(marks).replace(/[-<>\u2028\u2029]/g, function (c) {
+      return '\\u' + c.charCodeAt(0).toString(16).padStart(4, '0');
+    });
+    var newline = source.indexOf('\r\n') === -1 ? '\n' : '\r\n';
+    return source + newline + newline + '<!-- reyadmdx-highlights-v1: ' + json + ' -->' + newline;
+  }
+
+  function previewText(root) {
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (node) {
+        return node.parentElement && node.parentElement.closest('.md-codebar, .md-fnback, script, style, button, [hidden]')
+          ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var nodes = [], parts = [], length = 0, node;
+    while ((node = walker.nextNode())) {
+      nodes.push({ node: node, start: length, end: length + node.length });
+      parts.push(node.data);
+      length += node.length;
+    }
+    var text = parts.join(''), hash = 2166136261;
+    for (var i = 0; i < text.length; i++) hash = Math.imul(hash ^ text.charCodeAt(i), 16777619);
+    return { text: text, nodes: nodes, fingerprint: text.length + ':' + (hash >>> 0) };
+  }
+
+  function resolveHighlight(content, mark) {
+    var text = content.text;
+    if (mark.fingerprint === content.fingerprint && text.startsWith(mark.quote, mark.start)) {
+      return { start: mark.start, end: mark.start + mark.quote.length, mark: mark };
+    }
+    var best = -1, score = 0, tied = false;
+    for (var start = text.indexOf(mark.quote); start !== -1; start = text.indexOf(mark.quote, start + 1)) {
+      var end = start + mark.quote.length;
+      var left = mark.before ? text.slice(Math.max(0, start - mark.before.length), start) === mark.before : start === 0;
+      var right = mark.after ? text.slice(end, end + mark.after.length) === mark.after : end === text.length;
+      var match = Number(left) + Number(right);
+      if (match > score) { best = start; score = match; tied = false; }
+      else if (match === score && match) tied = true;
+    }
+    if (best === -1 || tied) return null;
+    return { start: best, end: best + mark.quote.length, mark: mark };
+  }
+
+  function paintHighlights(root) {
+    if (!state.highlights.length) return;
+    var content = previewText(root);
+    var marks = state.highlights.map(function (mark) { return resolveHighlight(content, mark); })
+      .filter(Boolean).sort(function (a, b) { return a.start - b.start; });
+    var index = 0;
+    content.nodes.forEach(function (entry) {
+      while (index < marks.length && marks[index].end <= entry.start) index++;
+      var last = index;
+      while (last < marks.length && marks[last].start < entry.end) last++;
+      var limit = entry.end;
+      for (var i = last - 1; i >= index; i--) {
+        var start = Math.max(marks[i].start, entry.start);
+        var end = Math.min(marks[i].end, limit);
+        if (end <= start) continue;
+        var range = document.createRange();
+        range.setStart(entry.node, start - entry.start);
+        range.setEnd(entry.node, end - entry.start);
+        var mark = document.createElement('mark');
+        mark.className = 'mdx-highlight';
+        mark.dataset.color = marks[i].mark.color;
+        range.surroundContents(mark);
+        limit = start;
+      }
+    });
+  }
+
+  function hideHighlightTools() {
+    highlightSelection = null;
+    el.highlightTools.hidden = true;
+  }
+
+  function updateHighlightTools() {
+    var selection = window.getSelection();
+    if (S.view !== 'editor' && state.lastRenderedText === state.text && selection && selection.rangeCount &&
+        !selection.isCollapsed && !el.preview.contains(el.welcome) &&
+        el.preview.contains(selection.anchorNode) && el.preview.contains(selection.focusNode)) {
+      highlightSelection = selection.getRangeAt(0).cloneRange();
+      el.highlightTools.hidden = false;
+    } else if (!el.highlightTools.contains(document.activeElement)) hideHighlightTools();
+  }
+
+  function changeHighlight(color) {
+    var range = highlightSelection;
+    if (!range || state.lastRenderedText !== state.text || !el.preview.contains(range.commonAncestorContainer)) return;
+    var content = previewText(el.preview);
+    var selected = content.nodes.filter(function (entry) { return range.intersectsNode(entry.node); });
+    if (!selected.length) return;
+    var first = selected[0], last = selected[selected.length - 1];
+    var start = first.start + (range.startContainer === first.node ? range.startOffset : 0);
+    var end = last.start + (range.endContainer === last.node ? range.endOffset : last.node.length);
+    if (!content.text.slice(start, end).trim()) return;
+
+    function anchor(from, to, fill) {
+      return { start: from, quote: content.text.slice(from, to), color: fill, fingerprint: content.fingerprint,
+        before: content.text.slice(Math.max(0, from - 32), from), after: content.text.slice(to, to + 32) };
+    }
+    var marks = [], changed = color !== 'remove';
+    state.highlights.forEach(function (mark) {
+      var old = resolveHighlight(content, mark);
+      if (!old || old.end <= start || old.start >= end) { marks.push(mark); return; }
+      changed = true;
+      if (old.start < start) marks.push(anchor(old.start, start, mark.color));
+      if (old.end > end) marks.push(anchor(end, old.end, mark.color));
+    });
+    if (!changed) return;
+    if (color !== 'remove') marks.push(anchor(start, end, color));
+    state.highlights = marks;
+    recordEdit('highlight');
+    window.getSelection().removeAllRanges();
+    render();
   }
 
   function buildToc(toc) {
@@ -312,7 +462,7 @@
 
   /* ------------------------------ الإحصائيات ----------------------------- */
   function updateStats() {
-    var txt = state.text;
+    var txt = state.source;
     var words = (txt.match(/[؀-ۿ\w'’]+/g) || []).length;
     el.stWords.textContent = words.toLocaleString(S.uiLang === 'ar' ? 'ar-EG' : 'en-US');
     el.stChars.textContent = txt.length.toLocaleString(S.uiLang === 'ar' ? 'ar-EG' : 'en-US');
@@ -466,9 +616,12 @@
     state.docDir = null;
     state.text = text;
     state.savedText = text;
+    var doc = readDocument(text);
+    state.source = doc.source;
+    state.highlights = doc.highlights;
     state.path = path || null;
     state.name = name || (path ? path.split(/[\\/]/).pop() : null);
-    el.editor.value = text;
+    el.editor.value = state.source;
     resetHistory();
     el.fileName.textContent = state.name || t('noFile');
     el.filePath.textContent = path || '';
@@ -648,7 +801,14 @@
 
   /* --------------------------- تصدير HTML مستقل -------------------------- */
   async function exportHtml() {
-    var res = window.MDX.render(state.text, { dir: S.dir });
+    var res = window.MDX.render(state.source, { dir: S.dir });
+    var rendered = res.html;
+    if (state.highlights.length) {
+      var template = document.createElement('template');
+      template.innerHTML = rendered;
+      paintHighlights(template.content);
+      rendered = template.innerHTML;
+    }
     var css = '';
     // نسخة مستقلة: التنسيقات مضمّنة داخل <style>
     document.querySelectorAll('style').forEach(function (s) { css += s.textContent + '\n'; });
@@ -676,7 +836,7 @@
       '\nhtml,body{overflow:auto;height:auto}\n' +
       'body{--ar-font:' + S.fontFamily + ';--body-size:' + S.fontSize + 'px;--line-height:' + S.lineHeight +
       ';--content-width:' + S.contentWidth + 'px;padding:0;background:var(--bg);color:var(--fg)}\n' +
-      '</style>\n</head>\n<body>\n<div class="md-body" dir="' + dir + '">\n' + res.html + '\n</div>\n</body>\n</html>';
+      '</style>\n</head>\n<body>\n<div class="md-body" dir="' + dir + '">\n' + rendered + '\n</div>\n</body>\n</html>';
 
     var name = (state.name || 'document').replace(/\.[^.]+$/, '') + '.html';
     if (HAS_NATIVE) {
@@ -691,7 +851,7 @@
   /* ============================ مساعدات المحرر =========================== */
   var history = [], historyIndex = -1, historyTime = 0, historyType = '';
   function snapshot() {
-    return { text: el.editor.value, start: el.editor.selectionStart, end: el.editor.selectionEnd, top: el.editor.scrollTop };
+    return { text: state.text, start: el.editor.selectionStart, end: el.editor.selectionEnd, top: el.editor.scrollTop };
   }
   function updateHistoryButtons() {
     $('btnUndo').disabled = historyIndex <= 0;
@@ -706,12 +866,14 @@
     updateHistoryButtons();
   }
   function rememberSelection() {
-    if (history[historyIndex] && history[historyIndex].text === el.editor.value) {
+    if (history[historyIndex] && history[historyIndex].text === state.text) {
       history[historyIndex] = snapshot();
     }
   }
   function recordEdit(type) {
-    if (history[historyIndex] && history[historyIndex].text === el.editor.value) return;
+    if (type !== 'highlight') state.source = el.editor.value;
+    state.text = writeDocument(state.source, state.highlights);
+    if (history[historyIndex] && history[historyIndex].text === state.text) return;
     var now = Date.now();
     var group = /^(insertText|deleteContentBackward|deleteContentForward)$/.test(type) &&
       type === historyType && now - historyTime < 750 && historyIndex > 0 && historyIndex === history.length - 1;
@@ -724,7 +886,7 @@
       bytes -= history.shift().text.length * 2; historyIndex--;
     }
     historyTime = now; historyType = type || '';
-    state.text = el.editor.value; markDirty(); scheduleRender();
+    markDirty(); scheduleRender();
     updateHistoryButtons(); requestAnimationFrame(updateScrollEdge);
   }
   function editHistory(action) {
@@ -736,8 +898,11 @@
     if (next < 0 || next >= history.length) return;
     historyIndex = next;
     var entry = history[next];
-    el.editor.value = entry.text;
-    el.editor.focus({ preventScroll: true });
+    var doc = readDocument(entry.text);
+    state.source = doc.source;
+    state.highlights = doc.highlights;
+    el.editor.value = state.source;
+    if (S.view !== 'preview') el.editor.focus({ preventScroll: true });
     el.editor.setSelectionRange(entry.start, entry.end);
     el.editor.scrollTop = entry.top;
     historyTime = 0; historyType = '';
@@ -815,6 +980,14 @@
     });
 
     // المحرر
+    document.addEventListener('selectionchange', updateHighlightTools);
+    el.highlightTools.addEventListener('pointerdown', function (e) {
+      if (e.target.closest('[data-highlight]')) e.preventDefault();
+    });
+    el.highlightTools.addEventListener('click', function (e) {
+      var button = e.target.closest('[data-highlight]');
+      if (button) changeHighlight(button.dataset.highlight);
+    });
     el.editor.addEventListener('beforeinput', function (e) {
       if (e.inputType === 'historyUndo' || e.inputType === 'historyRedo') {
         e.preventDefault(); editHistory(e.inputType === 'historyUndo' ? 'undo' : 'redo');
@@ -887,7 +1060,7 @@
       var ctrl = e.ctrlKey || e.metaKey;
       if (!ctrl) return;
       var k = e.key.toLowerCase();
-      if (document.activeElement === el.editor && (k === 'z' || k === 'y')) {
+      if ((document.activeElement === el.editor || S.view === 'preview') && (k === 'z' || k === 'y')) {
         e.preventDefault(); editHistory(k === 'y' || e.shiftKey ? 'redo' : 'undo');
       }
       else if (k === 'o') { e.preventDefault(); doOpen(); }
