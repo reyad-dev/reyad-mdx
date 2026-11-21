@@ -67,13 +67,13 @@ ReyadMDX applies that logic to every heading, paragraph, table cell, list item, 
 
 ## Screenshots
 
-<!-- Screenshots will be added here after capture:
-![Mixed Arabic-English document](docs/screenshots/mixed-arabic-english.png)
-![Split editor and preview](docs/screenshots/split-view.png)
-![Themes and typography settings](docs/screenshots/themes-settings.png)
--->
+Captured in the [ReyadMDX web app](https://reyad-dev.github.io/reyad-mdx/).
 
-Screenshots are being prepared. Try the [live, single-file version](https://reyad-dev.github.io/reyad-mdx/) in the meantime.
+![ReyadMDX preview of a mixed Arabic and English Markdown document](docs/screenshots/mixed-arabic-english.jpg)
+
+![ReyadMDX split view with the Markdown editor and rendered preview side by side](docs/screenshots/split-view.jpg)
+
+![ReyadMDX Midnight theme with Arabic typography settings](docs/screenshots/themes-settings.jpg)
 
 ## Features
 
