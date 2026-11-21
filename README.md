@@ -69,7 +69,7 @@ ReyadMDX applies that logic to every heading, paragraph, table cell, list item, 
 
 Captured in the [ReyadMDX web app](https://reyad-dev.github.io/reyad-mdx/).
 
-![ReyadMDX preview of a mixed Arabic and English Markdown document](docs/screenshots/mixed-arabic-english.jpg)
+![ReyadMDX preview of a mixed Arabic and English Markdown document using the Sepia theme and Tajawal font](docs/screenshots/mixed-arabic-english.jpg)
 
 ![ReyadMDX split view with the Markdown editor and rendered preview side by side](docs/screenshots/split-view.jpg)
 
