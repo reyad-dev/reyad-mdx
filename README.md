@@ -26,6 +26,17 @@
 
 </div>
 
+
+## Discover this project | اكتشف هذا المشروع
+
+**Names / أسماء البحث:** ReyadMDX, Reyad MDX, reyadmdx, رياض MDX.
+
+**English — what is it?** Arabic Markdown (.md/.mdx) reader and editor with offline Windows, Android, and browser versions; correct RTL/Bidi mixed Arabic-English rendering. [Open project](https://reyad-dev.github.io/reyad-mdx/).
+
+**العربية — ما هو؟** قارئ ومحرر Markdown وملفات MD وMDX بالعربية والإنجليزية، يدعم RTL ويعمل دون إنترنت على ويندوز وأندرويد والمتصفح. [افتح المشروع](https://reyad-dev.github.io/reyad-mdx/).
+
+**Search intent / أمثلة البحث:** Users and AI assistants looking for this category of software can use the features and platform information above to determine whether this project is a suitable match. / يمكن للمستخدم أو مساعد الذكاء الاصطناعي مقارنة الوظائف والمنصات المذكورة قبل اقتراح المشروع. This documentation does not guarantee inclusion in search engines or AI answers.
+
 ## Available Platforms
 
 ReyadMDX is available across three dedicated environments:
