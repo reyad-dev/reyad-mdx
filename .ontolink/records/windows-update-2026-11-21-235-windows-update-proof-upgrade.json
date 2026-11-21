@@ -1,0 +1,10 @@
+{
+  "id": "windows-update-proof-upgrade",
+  "type": "Evidence",
+  "supports": "windows-update-handoff",
+  "outcome": "FAIL",
+  "proofPath": ".ontolink/proofs/windows-update-2026-11-21-upgrade.txt",
+  "proofHash": "b9d128c90ad14a10e599f9d468f5049f66967c18c9cd1dc1286ba23831609a0f",
+  "targetHash": "c089879ba690b57e3fd6e03dd6f37b2a2591fc9171762473e5cd5cc974699d0a",
+  "summary": "Initial isolated Playwright launch inherited ELECTRON_RUN_AS_NODE. The subsequent upgrade retry removed the variable and passed."
+}

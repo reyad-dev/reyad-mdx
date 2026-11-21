@@ -5,6 +5,8 @@ contextBridge.exposeInMainWorld('mdxNative', {
   platform: 'windows',
   getAppInfo:   () => ipcRenderer.invoke('app-info'),
   getLatestRelease: () => ipcRenderer.invoke('latest-release'),
+  installUpdate: (version) => ipcRenderer.invoke('install-update', version),
+  finishUpdateSave: () => ipcRenderer.invoke('finish-update-save'),
   ready:        () => ipcRenderer.invoke('ready'),
   newWindow:    () => ipcRenderer.invoke('new-window'),
   openFile:     (options) => ipcRenderer.invoke('open-file', options),

@@ -2,7 +2,7 @@
 <rdf:RDF xmlns:ol="urn:ontolink:" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1">
     <rdf:type rdf:resource="urn:ontolink:Project" />
-    <ol:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">218</ol:revision>
+    <ol:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">237</ol:revision>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MDX Reader - 1ce34f1</ol:title>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/agent-handoff">
@@ -1015,6 +1015,13 @@
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-19T13:07:07.272591+00:00</ol:createdAt>
   </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-219">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-013" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:12:46.159660+00:00</ol:createdAt>
+  </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-22">
     <rdf:type rdf:resource="urn:ontolink:Event" />
     <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
@@ -1022,12 +1029,138 @@
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:42.275427+00:00</ol:createdAt>
   </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-220">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-035" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:13:00.687782+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-221">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-055" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:13:17.800370+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-222">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-062" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:13:32.652299+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-223">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-066" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:13:44.561614+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-224">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-068" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:13:56.657526+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-225">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-070" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:14:08.768176+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-226">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-079" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:14:20.850155+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-227">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-nsis-include" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:14:33.759482+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-228">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-host-source" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:14:45.994890+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-229">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-flow" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:14:58.239159+00:00</ol:createdAt>
+  </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-23">
     <rdf:type rdf:resource="urn:ontolink:Event" />
     <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
     <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-006" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:42.486131+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-230">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-handoff" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:15:10.690199+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-231">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-proof-playwright" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:15:23.055195+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-232">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-proof-nsis-build" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:15:35.429209+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-233">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-proof-upgrade-retry" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:15:48.684038+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-234">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-proof-authenticode" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:16:01.301246+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-235">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-proof-upgrade" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:16:15.937305+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-236">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-build" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:16:28.849606+00:00</ol:createdAt>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-237">
+    <rdf:type rdf:resource="urn:ontolink:Event" />
+    <ol:action rdf:datatype="http://www.w3.org/2001/XMLSchema#string">record-upsert</ol:action>
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-authenticode-signing" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:16:41.825165+00:00</ol:createdAt>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/event-24">
     <rdf:type rdf:resource="urn:ontolink:Event" />
@@ -2403,7 +2536,7 @@
     <ol:phase rdf:resource="urn:ontolink:build" />
     <ol:requiredKind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">implementation</ol:requiredKind>
     <ol:satisfies rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-price-highlighting-request" />
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DONE</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">READY</ol:status>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fix RTL price preview and deliver saved colored highlights</ol:title>
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/preview-highlights-implementation" />
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation" />
@@ -2581,7 +2714,7 @@
     <ol:phase rdf:resource="urn:ontolink:build" />
     <ol:requiredKind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">implementation</ol:requiredKind>
     <ol:satisfies rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/appearance-release-consolidation" />
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DONE</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">READY</ol:status>
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Apply appearance defaults and prepare ReyadMDX 1.3.2</ol:title>
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation" />
   </rdf:Description>
@@ -2604,7 +2737,7 @@
     <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation" />
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">handoff</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/release-132-github.json</ol:path>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">STALE</ol:status>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-implementation">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
@@ -2624,7 +2757,7 @@
     <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-078" />
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">implementation</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/artifacts/release-1.3.2.md</ol:path>
-    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">STALE</ol:status>
   </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/release-132-playwright-pass">
     <rdf:type rdf:resource="urn:ontolink:Evidence" />
@@ -2841,7 +2974,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-013">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aac62ed598d443ad59ae4299ff4986d79d09ffd08645aad7fae46426f45bbc61</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">d1b0048e44112c6e1b06bf1de8093d2e86f14066cee14df100b51be2190780ae</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:43.994908+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MDX-Reader-Standalone.html</ol:path>
@@ -3039,7 +3172,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-035">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">d355b602526dbe389bfa31d6bb70fcf5cc48a1bcc69552d0b7758ee6965dff9e</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3a88516eceace05d3a9b0a555ca646d73dee41807ab46a040c04553a9bc37013</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:49.365873+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">app/app.js</ol:path>
@@ -3219,7 +3352,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-055">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aed73b31ae882a668a07fcd604908a16618710ca50c346517c9749b061d707a9</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">5581de51053ef6a97910d8446d0d9ff0c265fe592de3f9fd0daf14474891e54f</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:55.548600+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">app/updates.js</ol:path>
@@ -3282,7 +3415,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-062">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">aac62ed598d443ad59ae4299ff4986d79d09ffd08645aad7fae46426f45bbc61</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">d1b0048e44112c6e1b06bf1de8093d2e86f14066cee14df100b51be2190780ae</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:58.030437+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">docs/index.html</ol:path>
@@ -3318,7 +3451,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-066">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">b8378538e58ac328f0d4df819c1ad9f429db6180791de85bc26bf978f118cb26</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">26452ba81c018009abe0d3df9c9a5f31952589d523aef4e0c35376f6684d1ea0</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:37:59.515647+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">main.js</ol:path>
@@ -3336,7 +3469,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-068">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">7cd7e87f398d35cbe4f65adee04056c47e410e05969649cb73cc5e57f2d8eb5b</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">77be895a1c103158d238a9b2bce9dbb0679af3486a37b248c1a31774d26882fe</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:38:00.230897+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">package.json</ol:path>
@@ -3354,7 +3487,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-070">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">037b3d55ede1d6dac5ef052158c3fe27e6561d80d4e11be6c1a3a6cbcb6adaf1</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ad39af60739e1b2b4410b73ab13c40a63db9369b4f38fa79e06e474ee5f135d4</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:38:00.992364+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">preload.js</ol:path>
@@ -3435,7 +3568,7 @@
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/source-079">
     <rdf:type rdf:resource="urn:ontolink:Artifact" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
-    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">f272ea8ec72b24ed8c36f66b6d7f1b5b66ba5ed9afa3abf342bf78b5f497ec5b</ol:contentHash>
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">b262c02610cfc3543527fc1f1c41cdc371b2e0c10127008d52edb8a2ec5663e6</ol:contentHash>
     <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-17T08:38:04.743880+00:00</ol:createdAt>
     <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
     <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">tests/updates.spec.js</ol:path>
@@ -3559,6 +3692,17 @@
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/outcome-verify" />
     <ol:weight rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1</ol:weight>
   </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/windows-authenticode-signing">
+    <rdf:type rdf:resource="urn:ontolink:Recommendation" />
+    <ol:affects rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:basis rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Published 1.3.2 setup is NotSigned and Microsoft SmartScreen uses publisher and file reputation. Trusted signing can still show reputation warnings for new files.</ol:basis>
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:16:37.615674+00:00</ol:createdAt>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PROPOSED</ol:status>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Use one trusted Authenticode signing identity for future Windows executables and installers. The updated Windows build is local and publication remains pending.</ol:summary>
+    <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Use trusted Windows release signing</ol:title>
+    <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-handoff" />
+  </rdf:Description>
   <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/windows-host">
     <rdf:type rdf:resource="urn:ontolink:Contract" />
     <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
@@ -3567,5 +3711,117 @@
     <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Electron window and IPC boundary</ol:title>
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-066" />
     <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-070" />
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/windows-nsis-include">
+    <rdf:type rdf:resource="urn:ontolink:Artifact" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">f90d3352d05a307edc8585835438e3347f55bbf7cb4b8b68761ab8bd9dc4e649</ol:contentHash>
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:14:28.951862+00:00</ol:createdAt>
+    <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
+    <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">build/installer.nsh</ol:path>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-build">
+    <rdf:type rdf:resource="urn:ontolink:Task" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:16:24.661702+00:00</ol:createdAt>
+    <ol:dependsOn rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/task-plan" />
+    <ol:owner rdf:datatype="http://www.w3.org/2001/XMLSchema#string">project-maintainer</ol:owner>
+    <ol:phase rdf:resource="urn:ontolink:build" />
+    <ol:requiredKind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">implementation</ol:requiredKind>
+    <ol:satisfies rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-flow" />
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DONE</ol:status>
+    <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Implement and test Windows in-place update handoff locally</ol:title>
+    <ol:usesArtifact rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-handoff" />
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-flow">
+    <rdf:type rdf:resource="urn:ontolink:Requirement" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:14:54.334241+00:00</ol:createdAt>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Preserve the installed path, preferences and saved documents; let each dirty window save, discard, or cancel before a verified update closes the app.</ol:summary>
+    <ol:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Upgrade the installed Windows app in place</ol:title>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-handoff">
+    <rdf:type rdf:resource="urn:ontolink:Artifact" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c089879ba690b57e3fd6e03dd6f37b2a2591fc9171762473e5cd5cc974699d0a</ol:contentHash>
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:15:06.602001+00:00</ol:createdAt>
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-013" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-035" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-055" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-062" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-066" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-068" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-070" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/source-079" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-nsis-include" />
+    <ol:derivedFrom rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-host-source" />
+    <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">implementation</ol:kind>
+    <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/artifacts/windows-update-2026-11-21.md</ol:path>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-host-source">
+    <rdf:type rdf:resource="urn:ontolink:Artifact" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:contentHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dbf5c5e11285a1bb31a58cd47d2199a94d5c46025c1fed8bc59d6c4de1e98f64</ol:contentHash>
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:14:42.051579+00:00</ol:createdAt>
+    <ol:kind rdf:datatype="http://www.w3.org/2001/XMLSchema#string">source</ol:kind>
+    <ol:path rdf:datatype="http://www.w3.org/2001/XMLSchema#string">windows-update.js</ol:path>
+    <ol:status rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CURRENT</ol:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-proof-authenticode">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:15:57.213274+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PASS</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">318d80d756a6383d201f10a4e6a8414877048dee5ae9376b516bf422d8bde0e2</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/windows-update-2026-11-21-authenticode.txt</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Verified exact published 1.3.2 setup bytes match the GitHub SHA-256 and have Authenticode NotSigned status.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-handoff" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c089879ba690b57e3fd6e03dd6f37b2a2591fc9171762473e5cd5cc974699d0a</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-proof-nsis-build">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:15:31.451587+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PASS</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">d6bffcfdaa4d32b90eea908461434fee9db04d22d5e8f58d7a3cb5285eab9009</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/windows-update-2026-11-21-nsis-build.txt</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Final Windows x64 NSIS build succeeded through electron-builder 24.13.3.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-handoff" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c089879ba690b57e3fd6e03dd6f37b2a2591fc9171762473e5cd5cc974699d0a</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-proof-playwright">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:15:19.121016+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PASS</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c03b8e284972015832f57e615348ad6c32dbd4e24667ecc8898a1707d3a2486b</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/windows-update-2026-11-21-playwright.txt</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Twenty-two Playwright tests on Windows passed, covering download digest verification, cancellation, canceled Save As, save and discard in separate windows, and platform download behavior. The installer launch is simulated in the Playwright handoff test.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-handoff" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c089879ba690b57e3fd6e03dd6f37b2a2591fc9171762473e5cd5cc974699d0a</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-proof-upgrade">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:16:10.056084+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FAIL</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">b9d128c90ad14a10e599f9d468f5049f66967c18c9cd1dc1286ba23831609a0f</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/windows-update-2026-11-21-upgrade.txt</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Initial isolated Playwright launch inherited ELECTRON_RUN_AS_NODE. The subsequent upgrade retry removed the variable and passed.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-handoff" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c089879ba690b57e3fd6e03dd6f37b2a2591fc9171762473e5cd5cc974699d0a</ol:targetHash>
+  </rdf:Description>
+  <rdf:Description rdf:about="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-proof-upgrade-retry">
+    <rdf:type rdf:resource="urn:ontolink:Evidence" />
+    <ol:belongsTo rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1" />
+    <ol:createdAt rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-11-21T12:15:44.192887+00:00</ol:createdAt>
+    <ol:outcome rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PASS</ol:outcome>
+    <ol:proofHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c0911a48632de9dfc0762e39a8f889e16bfc4737abef47b3c0ca2220b0543837</ol:proofHash>
+    <ol:proofPath rdf:datatype="http://www.w3.org/2001/XMLSchema#string">.ontolink/proofs/windows-update-2026-11-21-upgrade-retry.txt</ol:proofPath>
+    <ol:summary rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Isolated real Windows NSIS upgrade retained the registered path, document digest and UI preference and waited for the initiating PID.</ol:summary>
+    <ol:supports rdf:resource="urn:ontolink:project:mdx-reader-1ce34f1/windows-update-handoff" />
+    <ol:targetHash rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c089879ba690b57e3fd6e03dd6f37b2a2591fc9171762473e5cd5cc974699d0a</ol:targetHash>
   </rdf:Description>
 </rdf:RDF>

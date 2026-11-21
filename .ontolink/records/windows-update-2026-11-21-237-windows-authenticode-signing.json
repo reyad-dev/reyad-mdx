@@ -1,0 +1,10 @@
+{
+  "id": "windows-authenticode-signing",
+  "type": "Recommendation",
+  "title": "Use trusted Windows release signing",
+  "affects": "project",
+  "status": "PROPOSED",
+  "usesArtifact": "windows-update-handoff",
+  "summary": "Use one trusted Authenticode signing identity for future Windows executables and installers. The updated Windows build is local and publication remains pending.",
+  "basis": "Published 1.3.2 setup is NotSigned and Microsoft SmartScreen uses publisher and file reputation. Trusted signing can still show reputation warnings for new files."
+}

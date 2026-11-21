@@ -35,11 +35,16 @@
   var N = root.mdxNative;
   var $ = function (id) { return document.getElementById(id); };
   var info = { version: root.MDX_VERSION, platform: 'web', portable: false };
-  var state = { status: 'idle' }, busy = false;
+  var state = { status: 'idle' }, busy = false, installStatus = null;
   var strings = {
     ar: {
       heading: 'الإصدار والتحديثات', version: 'الإصدار الحالي', check: 'التحقق من التحديثات',
       download: 'تنزيل التحديث', openWeb: 'فتح النسخة الأحدث', idle: 'التحديثات من GitHub Releases',
+      install: 'تنزيل وتثبيت التحديث', downloading: 'جارٍ تنزيل التحديث والتحقق منه…',
+      installing: 'جارٍ بدء التثبيت…', 'update-canceled': 'تم إيقاف التثبيت. يمكنك المحاولة مرة أخرى.',
+      'update-failed': 'تعذّر تنزيل التحديث أو بدء تثبيته. حاول مرة أخرى.',
+      'update-busy': 'التحديث جارٍ من نافذة أخرى.',
+      installHint: 'بعد التنزيل، سيطلب منك البرنامج حفظ أي تعديلات مفتوحة، ثم يُغلق ويثبّت التحديث في مكانه.',
       checking: 'جارٍ التحقق من التحديثات…', current: 'أنت تستخدم أحدث إصدار متاح.',
       available: 'تحديث جديد متاح: v', pending: 'الإصدار الجديد قيد تجهيز ملف التنزيل: v',
       network: 'تعذّر التحقق. تأكد من اتصال الإنترنت وحاول مجددًا.',
@@ -53,6 +58,11 @@
     en: {
       heading: 'Version and updates', version: 'Current version', check: 'Check for updates',
       download: 'Download update', openWeb: 'Open latest web version', idle: 'Updates from GitHub Releases',
+      install: 'Download and install update', downloading: 'Downloading and verifying the update…',
+      installing: 'Starting installation…', 'update-canceled': 'Installation stopped. You can try again.',
+      'update-failed': 'Could not download or start installing the update. Try again.',
+      'update-busy': 'The update is running in another window.',
+      installHint: 'After downloading, the app will ask about any unsaved changes, then close and install the update in place.',
       checking: 'Checking for updates…', current: 'You are using the latest available version.',
       available: 'New update available: v', pending: 'The new release download is being prepared: v',
       network: 'Could not check. Check your internet connection and try again.',
@@ -72,12 +82,13 @@
     $('appVersion').textContent = 'ReyadMDX · v' + info.version + ' · ' + s[info.platform] + (info.portable ? ' · ' + s.portable : '');
     $('btnCheckUpdates').textContent = s.check;
     $('btnCheckUpdates').disabled = busy;
-    $('updateStatus').textContent = s[state.status] + (state.status === 'available' || state.status === 'pending' ? state.version : '');
-    $('updateHint').textContent = s[info.platform === 'web' ? 'webHint' : info.portable ? 'portableHint' : 'hint'];
+    $('updateStatus').textContent = installStatus ? s[installStatus]
+      : s[state.status] + (state.status === 'available' || state.status === 'pending' ? state.version : '');
+    $('updateHint').textContent = s[info.platform === 'web' ? 'webHint' : info.portable ? 'portableHint' : info.canInstallUpdate ? 'installHint' : 'hint'];
     var download = $('btnDownloadUpdate');
-    download.textContent = info.platform === 'web' ? s.openWeb : s.download;
-    download.hidden = state.status !== 'available';
-    if (state.url && state.status === 'available') download.href = state.url;
+    download.textContent = info.platform === 'web' ? s.openWeb : info.canInstallUpdate ? s.install : s.download;
+    download.hidden = state.status !== 'available' || busy;
+    if (state.url && state.status === 'available' && !busy) download.href = state.url;
     else download.removeAttribute('href');
     $('btnVersion').classList.toggle('has-update', state.status === 'available');
     $('updateNotice').hidden = state.status !== 'available';
@@ -98,7 +109,7 @@
   var initialized = Promise.resolve();
   async function check() {
     if (busy) return;
-    busy = true; state = { status: 'checking' }; render();
+    busy = true; installStatus = null; state = { status: 'checking' }; render();
     try {
       await initialized;
       var result = N && N.getLatestRelease ? await N.getLatestRelease() : await browserRelease();
@@ -124,10 +135,17 @@
     $('btnVersion').addEventListener('click', open);
     $('updateNotice').addEventListener('click', open);
     $('btnCheckUpdates').addEventListener('click', check);
-    $('btnDownloadUpdate').addEventListener('click', function (event) {
+    $('btnDownloadUpdate').addEventListener('click', async function (event) {
       if (!N || !N.openExternal) return;
       event.preventDefault();
-      if (state.status === 'available' && state.url) N.openExternal(state.url);
+      if (busy || state.status !== 'available' || !state.url) return;
+      if (!info.canInstallUpdate) { N.openExternal(state.url); return; }
+      busy = true;
+      installStatus = 'downloading';
+      render();
+      try { installStatus = (await N.installUpdate(state.version)).status; }
+      catch (error) { installStatus = 'update-failed'; }
+      finally { busy = installStatus === 'installing'; render(); }
     });
     new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
     render();

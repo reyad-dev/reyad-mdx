@@ -1,0 +1,15 @@
+Windows NSIS smoke test, isolated app ID and HKCU registration. Production user data and registry entry were not edited.
+Installed 1.3.2 into the registered legacy-named directory via /S /currentuser.
+<workspace>\node_modules\playwright-core\lib\server\electron\electron.js:247
+  const failError = new Error("Process failed to launch!");
+                    ^
+
+Error: Process failed to launch!
+    at waitForLine (<workspace>\node_modules\playwright-core\lib\server\electron\electron.js:247:21)
+    at Electron.launch (<workspace>\node_modules\playwright-core\lib\server\electron\electron.js:195:32)
+    at async ElectronDispatcher.launch (<workspace>\node_modules\playwright-core\lib\server\dispatchers\electronDispatcher.js:38:33)
+    at async ProgressController.run (<workspace>\node_modules\playwright-core\lib\server\progress.js:98:22)
+    at async ElectronDispatcher._runCommand (<workspace>\node_modules\playwright-core\lib\server\dispatchers\dispatcher.js:91:14)
+    at async DispatcherConnection.dispatch (<workspace>\node_modules\playwright-core\lib\server\dispatchers\dispatcher.js:325:22)
+
+Node.js v24.15.0

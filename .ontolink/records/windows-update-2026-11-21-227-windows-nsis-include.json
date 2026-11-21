@@ -1,0 +1,8 @@
+{
+  "id": "windows-nsis-include",
+  "type": "Artifact",
+  "kind": "source",
+  "path": "build/installer.nsh",
+  "status": "CURRENT",
+  "contentHash": "f90d3352d05a307edc8585835438e3347f55bbf7cb4b8b68761ab8bd9dc4e649"
+}

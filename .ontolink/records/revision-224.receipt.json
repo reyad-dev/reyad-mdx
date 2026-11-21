@@ -1,0 +1,17 @@
+{
+  "input": ".ontolink/records/windows-update-2026-11-21-224-source-068.json",
+  "result": {
+    "revision": 224,
+    "recorded": "source-068",
+    "invalidated": [
+      "preview-highlights-implementation",
+      "release-132-github-handoff",
+      "release-132-implementation",
+      "source-015",
+      "source-016",
+      "source-017",
+      "source-018",
+      "source-019"
+    ]
+  }
+}

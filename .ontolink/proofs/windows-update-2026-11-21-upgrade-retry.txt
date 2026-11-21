@@ -1,0 +1,5 @@
+Windows NSIS upgrade smoke test with an isolated product ID, HKCU key and Electron profile.
+The first Playwright launch inherited ELECTRON_RUN_AS_NODE and failed. Retried without that environment variable and saved English in the isolated 1.3.2 profile.
+PASS: real NSIS waited for the initiating PID and upgraded 1.3.2 to 1.3.3 at the exact registered legacy path. External Markdown digest unchanged.
+PASS: installed 1.3.3 retained the English UI preference written by 1.3.2.
+Removed the isolated probe installation.

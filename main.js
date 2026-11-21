@@ -5,6 +5,7 @@ const { app, BrowserWindow, dialog, ipcMain, shell, Menu, nativeTheme } = requir
 const path = require('path');
 const fs = require('fs/promises');
 const fsSync = require('fs');
+const windowsUpdate = require('./windows-update');
 
 // أيقونة النافذة: يجرّب ico ثم png ثم يسيبها للنظام
 function appIcon() {
@@ -22,6 +23,8 @@ function appIcon() {
 // Each document owns its window, save state and undo state.
 const windows = new Map();
 const pendingPaths = [];
+let updating = false;
+let stagedUpdate;
 
 // عنوان النافذة بيحمل رقم الإصدار عشان تعرف أي نسخة شغالة
 const TITLE = 'ReyadMDX v' + app.getVersion();
@@ -77,12 +80,19 @@ function createWindow(initialPath = null) {
     }
   });
 
-  const context = { win, pendingPath: initialPath, isDirty: false, forceClose: false, closeAsked: false,
+  const context = { win, pendingPath: initialPath, isDirty: false, editRevision: 0, forceClose: false, closeAsked: false,
     editorHistory: { focused: false, canUndo: false, canRedo: false } };
   windows.set(win.id, context);
   win.loadFile(path.join(__dirname, 'app', 'index.html'));
   win.once('ready-to-show', () => win.show());
-  win.on('closed', () => windows.delete(win.id));
+  win.on('closed', () => {
+    windows.delete(win.id);
+    context.finishUpdateSave?.(false);
+  });
+  win.webContents.on('render-process-gone', () => context.finishUpdateSave?.(false));
+  win.webContents.on('did-start-navigation', (_event, _url, isInPlace, isMainFrame) => {
+    if (isMainFrame && !isInPlace) context.finishUpdateSave?.(false);
+  });
 
   /* سؤال الحفظ عند الإغلاق.
      بنستخدم showMessageBoxSync عن قصد: النسخة غير المتزامنة مع
@@ -95,16 +105,7 @@ function createWindow(initialPath = null) {
     let choice = 2;
     context.closeAsked = true;
     try {
-      choice = dialog.showMessageBoxSync(win, {
-        type: 'warning',
-        noLink: true,
-        buttons: ['حفظ / Save', 'إغلاق بدون حفظ / Close', 'إلغاء / Cancel'],
-        defaultId: 0,
-        cancelId: 2,
-        title: 'ReyadMDX',
-        message: 'يوجد تعديلات غير محفوظة',
-        detail: 'Save your changes before closing?'
-      });
+      choice = dialog.showMessageBoxSync(win, savePrompt(false));
     } catch (err) {
       choice = 2;
     }
@@ -155,6 +156,43 @@ function createWindow(initialPath = null) {
     Menu.buildFromTemplate(template).popup({ window: win });
   });
   return win;
+}
+
+function savePrompt(forUpdate) {
+  return {
+    type: 'warning',
+    noLink: true,
+    buttons: ['حفظ / Save', forUpdate ? 'متابعة بدون حفظ / Discard' : 'إغلاق بدون حفظ / Close', 'إلغاء / Cancel'],
+    defaultId: 0,
+    cancelId: 2,
+    title: 'ReyadMDX',
+    message: 'يوجد تعديلات غير محفوظة',
+    detail: forUpdate ? 'احفظ تعديلاتك قبل تثبيت التحديث. / Save changes before installing the update.'
+      : 'Save your changes before closing?'
+  };
+}
+
+function saveForUpdate(context) {
+  return new Promise(resolve => {
+    context.finishUpdateSave = saved => {
+      delete context.finishUpdateSave;
+      resolve(saved);
+    };
+    context.win.webContents.send('menu', 'save-for-update');
+  });
+}
+
+async function prepareUpdate() {
+  const discarded = new Map();
+  for (const context of [...windows.values()]) {
+    if (context.win.isDestroyed() || !context.isDirty) continue;
+    const revision = context.editRevision;
+    const { response } = await dialog.showMessageBox(context.win, savePrompt(true));
+    if (response === 2 || context.win.isDestroyed()) return false;
+    if (response === 1) discarded.set(context, revision);
+    else if (!await saveForUpdate(context)) return false;
+  }
+  return [...windows.values()].every(context => !context.isDirty || discarded.get(context) === context.editRevision);
 }
 
 function activeWindow() {
@@ -231,11 +269,17 @@ async function sendOpen(win, p) {
 }
 
 /* --------------------------------- IPC ---------------------------------- */
-ipcMain.handle('app-info', () => ({ version: app.getVersion(), platform: 'windows',
-  portable: !!process.env.PORTABLE_EXECUTABLE_FILE }));
+async function updateScope() {
+  if (!app.isPackaged || process.platform !== 'win32' || process.env.PORTABLE_EXECUTABLE_FILE) return null;
+  return windowsUpdate.installationScope(process.execPath);
+}
+
+ipcMain.handle('app-info', async () => ({ version: app.getVersion(), platform: 'windows',
+  portable: !!process.env.PORTABLE_EXECUTABLE_FILE,
+  canInstallUpdate: !!await updateScope().catch(() => null) }));
 
 // Fixed endpoint: renderer content cannot use this bridge to request arbitrary URLs.
-ipcMain.handle('latest-release', async () => {
+async function latestRelease() {
   try {
     const response = await fetch('https://api.github.com/repos/reyad-dev/reyad-mdx/releases/latest', {
       headers: { Accept: 'application/vnd.github+json', 'User-Agent': 'ReyadMDX/' + app.getVersion(),
@@ -247,6 +291,38 @@ ipcMain.handle('latest-release', async () => {
     if (!response.ok) throw new Error('HTTP ' + response.status);
     return { ok: true, release: await response.json() };
   } catch (error) { return { ok: false, error: 'network' }; }
+}
+ipcMain.handle('latest-release', latestRelease);
+
+ipcMain.handle('install-update', async (event, version) => {
+  windowContext(event);
+  if (updating) return { status: 'update-busy' };
+  updating = true;
+  try {
+    const scope = await updateScope();
+    if (!scope) throw new Error('No matching installed copy');
+    if (stagedUpdate?.version !== version) {
+      const { ok, release } = await latestRelease();
+      if (!ok) throw new Error('Could not refresh release metadata');
+      const installer = await windowsUpdate.downloadInstaller(release, app.getVersion(), version, app.getPath('userData'));
+      stagedUpdate = { ...installer, version };
+    }
+    await windowsUpdate.verifyInstaller(stagedUpdate);
+    if (!await prepareUpdate()) return { status: 'update-canceled' };
+    // Prevent further input while handing off to the installer.
+    for (const { win } of windows.values()) win.setEnabled(false);
+    await windowsUpdate.startInstaller(stagedUpdate, scope);
+    for (const context of windows.values()) context.forceClose = true;
+    app.quit();
+    return { status: 'installing' };
+  } catch (error) {
+    stagedUpdate = undefined;
+    for (const { win } of windows.values()) win.setEnabled(true);
+    console.error('Windows update failed:', error);
+    return { status: 'update-failed' };
+  } finally {
+    updating = false;
+  }
 });
 
 function windowContext(event) {
@@ -320,7 +396,15 @@ ipcMain.handle('save-file-as', async (event, suggested, content) => {
   } catch (err) { return { ok: false, error: String(err) }; }
 });
 
-ipcMain.handle('set-dirty', (event, v) => { windowContext(event).isDirty = !!v; });
+ipcMain.handle('set-dirty', (event, v) => {
+  const context = windowContext(event);
+  context.isDirty = !!v;
+  context.editRevision++;
+});
+ipcMain.handle('finish-update-save', (event) => {
+  const context = windowContext(event);
+  context.finishUpdateSave?.(!context.isDirty);
+});
 ipcMain.handle('edit-state', (event, state) => {
   windowContext(event).editorHistory = { focused: !!state.focused, canUndo: !!state.canUndo, canRedo: !!state.canRedo };
 });

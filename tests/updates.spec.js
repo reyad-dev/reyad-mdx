@@ -3,7 +3,9 @@ const { pathToFileURL } = require('url');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
+const { createHash } = require('node:crypto');
 const { newer, selectRelease } = require('../app/updates');
+const { downloadInstaller, verifyInstaller } = require('../windows-update');
 const { version } = require('../package.json');
 const standalone = pathToFileURL(path.resolve('MDX-Reader-Standalone.html')).href;
 const api = 'https://api.github.com/repos/reyad-dev/reyad-mdx/releases/latest';
@@ -102,19 +104,104 @@ test('Electron exposes installed version and checks/downloads through the main p
   const electron = await _electron.launch({ args: ['.', '--no-sandbox', '--user-data-dir=' + userData], env });
   try {
     const page = await electron.firstWindow();
-    await expect(page.locator('#btnCheckUpdates')).toBeEnabled({ timeout: 25000 });
     expect(await page.evaluate(() => window.mdxNative.getAppInfo())).toMatchObject({ version, platform: 'windows' });
     await electron.evaluate(({ shell }, payload) => {
       globalThis.fetch = async () => ({ status: 200, ok: true, json: async () => payload });
       shell.openExternal = async url => { globalThis.testDownload = url; };
     }, release());
-    await page.evaluate(() => window.MDXUpdates.check());
+    await page.reload();
+    await expect(page.locator('#updateStatus')).toContainText('1.10.0');
     await page.locator('#updateNotice').click();
     await page.locator('#btnDownloadUpdate').click();
     expect(await electron.evaluate(() => globalThis.testDownload)).toContain('ReyadMDX-Setup-1.10.0.exe');
     await electron.evaluate(({ Menu }) => Menu.getApplicationMenu().items.at(-1).submenu.items[0].click());
     await expect(page.locator('#settingsBack')).toHaveClass(/show/);
   } finally {
+    await electron.close();
+    fs.rmSync(userData, { recursive: true, force: true });
+  }
+});
+
+test('Windows stages only the installer matching the published SHA-256', async () => {
+  const userData = fs.mkdtempSync(path.join(os.tmpdir(), 'reyad-update-digest-'));
+  const originalFetch = global.fetch;
+  try {
+    const bytes = Buffer.from('test installer bytes');
+    const published = release();
+    const [asset] = published.assets;
+    asset.size = bytes.length;
+    asset.digest = 'sha256:' + createHash('sha256').update(bytes).digest('hex');
+    global.fetch = async () => new Response(Buffer.alloc(bytes.length));
+    await expect(downloadInstaller(published, version, '1.10.0', userData)).rejects.toThrow('verification failed');
+    expect(fs.readdirSync(path.join(userData, 'update-cache'))).toEqual([]);
+    global.fetch = async url => url === asset.browser_download_url
+      ? Response.redirect('https://release-assets.githubusercontent.com/test')
+      : new Response(bytes);
+    const cached = await downloadInstaller(published, version, '1.10.0', userData);
+    await verifyInstaller(cached);
+    fs.writeFileSync(cached.file, 'changed');
+    await expect(verifyInstaller(cached)).rejects.toThrow('verification failed');
+  } finally {
+    global.fetch = originalFetch;
+    fs.rmSync(userData, { recursive: true, force: true });
+  }
+});
+
+test('installed Windows update respects cancel and Save As, then saves and discards in separate windows', async () => {
+  test.skip(process.platform !== 'win32', 'Windows installer handoff');
+  const userData = fs.mkdtempSync(path.join(os.tmpdir(), 'reyad-update-handoff-'));
+  const savedFile = path.join(userData, 'saved.md');
+  const discardedFile = path.join(userData, 'discarded.md');
+  fs.writeFileSync(discardedFile, 'original');
+  const { ELECTRON_RUN_AS_NODE, ...env } = process.env;
+  const electron = await _electron.launch({ args: ['.', '--user-data-dir=' + userData], env });
+  try {
+    const page = await electron.firstWindow();
+    await electron.evaluate(({ app, dialog }, { published, savedFile, discardedFile }) => {
+      const requireFromApp = process.getBuiltinModule('module').createRequire(app.getAppPath() + '/package.json');
+      const updater = requireFromApp('./windows-update');
+      Object.defineProperty(app, 'isPackaged', { value: true });
+      globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => published });
+      globalThis.updateTest = { responses: [2, 0, 0, 1], downloads: 0, starts: [], saveAs: 0, closed: false };
+      const state = globalThis.updateTest;
+      updater.installationScope = async () => '/currentuser';
+      updater.downloadInstaller = async () => { state.downloads++; return { file: 'fixture' }; };
+      updater.verifyInstaller = async () => {};
+      updater.startInstaller = async (_, scope) => { state.starts.push(scope); };
+      dialog.showMessageBox = async () => ({ response: state.responses.shift() });
+      dialog.showSaveDialog = async () => state.saveAs++ === 0
+        ? { canceled: true } : { filePath: savedFile };
+      dialog.showOpenDialog = async () => ({ filePaths: [discardedFile] });
+      app.quit = () => { state.closed = true; };
+    }, { published: release(), savedFile, discardedFile });
+    await page.locator('[data-view="editor"]').click();
+    await page.locator('#editor').fill('save this');
+    const otherPromise = electron.waitForEvent('window');
+    await page.evaluate(() => window.mdxNative.openFile({ newWindow: true }));
+    const other = await otherPromise;
+    await other.locator('[data-view="editor"]').click();
+    await expect(other.locator('#editor')).toHaveValue('original');
+    await other.locator('#editor').fill('discard this');
+
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const stopped = await page.evaluate(() => window.mdxNative.installUpdate('1.10.0'));
+      expect(stopped.status).toBe('update-canceled');
+      await expect(page.locator('#editor')).toHaveValue('save this');
+      await expect(other.locator('#editor')).toHaveValue('discard this');
+      expect(fs.existsSync(savedFile)).toBe(false);
+    }
+    const installed = await page.evaluate(() => window.mdxNative.installUpdate('1.10.0'));
+    expect(installed.status).toBe('installing');
+    expect(await electron.evaluate(() => globalThis.updateTest)).toMatchObject({
+      downloads: 1, starts: ['/currentuser'], closed: true, responses: []
+    });
+    expect(fs.readFileSync(savedFile, 'utf8')).toBe('save this');
+    expect(fs.readFileSync(discardedFile, 'utf8')).toBe('original');
+  } finally {
+    await electron.evaluate(({ app, BrowserWindow }) => {
+      for (const win of BrowserWindow.getAllWindows()) win.destroy();
+      app.exit();
+    }).catch(() => {});
     await electron.close();
     fs.rmSync(userData, { recursive: true, force: true });
   }

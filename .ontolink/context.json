@@ -1,32 +1,26 @@
 {
   "project": "MDX Reader - 1ce34f1",
-  "revision": 218,
+  "revision": 237,
   "progress": {
-    "completed_weight": 45.0,
-    "total_weight": 52.0,
-    "percent": 86.54,
+    "completed_weight": 44.0,
+    "total_weight": 53.0,
+    "percent": 83.02,
     "definition": "Evidence-gated DONE task weights / all task weights; not confidence or likelihood"
   },
   "active_task": {
-    "id": "task-build",
+    "id": "preview-highlights-build",
     "type": "Task",
     "belongsTo": [
       "urn:ontolink:project:mdx-reader-1ce34f1"
     ],
     "createdAt": [
-      "2026-11-17T08:39:11.908524+00:00"
+      "2026-11-19T12:54:04.428747+00:00"
     ],
     "dependsOn": [
-      "android-host",
-      "evidence-boundary",
-      "ontology-primary",
-      "release-pipeline",
-      "shared-editor",
-      "task-plan",
-      "windows-host"
+      "task-plan"
     ],
     "owner": [
-      "coordinator"
+      "project-maintainer"
     ],
     "phase": [
       "urn:ontolink:build"
@@ -34,19 +28,18 @@
     "requiredKind": [
       "implementation"
     ],
+    "satisfies": [
+      "preview-price-highlighting-request"
+    ],
     "status": [
       "READY"
     ],
     "title": [
-      "Install OntoLink integration and import repository knowledge"
+      "Fix RTL price preview and deliver saved colored highlights"
     ],
     "usesArtifact": [
-      "changelog-source",
-      "outcome-build",
-      "source-manifest"
-    ],
-    "weight": [
-      "1"
+      "preview-highlights-implementation",
+      "release-132-implementation"
     ]
   },
   "workflow_skill": "ontolink-implementation",
@@ -56,102 +49,6 @@
     "professional-interface-builder"
   ],
   "context": [
-    {
-      "id": "android-host",
-      "type": "Contract",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "createdAt": [
-        "2026-11-17T08:40:47.332535+00:00"
-      ],
-      "summary": [
-        "Native Android source is under android/app/src/main. Browser bridge tests are simulated; native build/device verification remains open."
-      ],
-      "title": [
-        "Android native WebView and bridge"
-      ],
-      "usesArtifact": [
-        "source-023",
-        "source-034"
-      ]
-    },
-    {
-      "id": "changelog-source",
-      "type": "Artifact",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "contentHash": [
-        "b27f7207f3da833cacb53be95f7119aec61328c9d5ed080df6d41d7c0acc7b85"
-      ],
-      "createdAt": [
-        "2026-11-17T08:37:40.806515+00:00"
-      ],
-      "kind": [
-        "implementation"
-      ],
-      "path": [
-        ".ontolink/artifacts/changelog-import-2026-11-17.txt"
-      ],
-      "status": [
-        "CURRENT"
-      ]
-    },
-    {
-      "id": "evidence-boundary",
-      "type": "Decision",
-      "basis": [
-        "CHANGELOG, git history, source inspection and 18 current Playwright tests; no external release receipt or native Android execution in this session."
-      ],
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "createdAt": [
-        "2026-11-17T08:37:36.787195+00:00"
-      ],
-      "title": [
-        "Separate documented history, current tests and proposed follow-ups"
-      ]
-    },
-    {
-      "id": "ontology-primary",
-      "type": "Requirement",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "createdAt": [
-        "2026-11-17T08:37:36.621196+00:00"
-      ],
-      "summary": [
-        "User requested local OntoLink installation and import of completed, unfinished, recorded and future tasks with knowledge retrieval for future AI agents. Historical coverage is limited to accessible repository content."
-      ],
-      "title": [
-        "Make ontology the primary project knowledge and task registry"
-      ]
-    },
-    {
-      "id": "outcome-build",
-      "type": "Artifact",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "contentHash": [
-        "6077ed546a65da4529b33b2d7dff3783f8a0d3aba58e507fef9dfba387200ae1"
-      ],
-      "createdAt": [
-        "2026-11-17T08:39:06.384989+00:00"
-      ],
-      "kind": [
-        "implementation"
-      ],
-      "path": [
-        ".ontolink/artifacts/build.md"
-      ],
-      "status": [
-        "CURRENT"
-      ]
-    },
     {
       "id": "outcome-design",
       "type": "Artifact",
@@ -219,158 +116,110 @@
       ]
     },
     {
-      "id": "release-pipeline",
-      "type": "Contract",
+      "id": "preview-highlights-implementation",
+      "type": "Artifact",
       "belongsTo": [
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
-      "createdAt": [
-        "2026-11-17T08:40:51.864528+00:00"
-      ],
-      "summary": [
-        "package.json is the version authority; regenerate standalone/web output after shared source changes. Matching tags trigger native release workflows; workflow existence is not a publication receipt."
-      ],
-      "title": [
-        "Version, standalone output and release automation"
-      ],
-      "usesArtifact": [
-        "source-003",
-        "source-004",
-        "source-005",
-        "source-055",
-        "source-057",
-        "source-068",
-        "source-074"
-      ]
-    },
-    {
-      "id": "shared-editor",
-      "type": "Contract",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
+      "contentHash": [
+        "6845c97628f0feee91dc16a48da2c084de921837c313a85e5b7b2aacfb02d6ef"
       ],
       "createdAt": [
-        "2026-11-17T08:40:37.714523+00:00"
+        "2026-11-19T12:53:50.872333+00:00"
       ],
-      "summary": [
-        "Vanilla JS/CSS/HTML shared across hosts; Arabic/English UI, RTL/bidi, editing/history, preview/export and local settings. Exact behavior is source-defined; current tests cover selected paths."
-      ],
-      "title": [
-        "Shared offline editor and Markdown renderer"
-      ],
-      "usesArtifact": [
+      "derivedFrom": [
+        "source-013",
         "source-035",
+        "source-049",
         "source-050",
-        "source-051",
-        "source-052",
-        "source-054"
+        "source-054",
+        "source-062",
+        "source-077"
+      ],
+      "kind": [
+        "implementation"
+      ],
+      "path": [
+        ".ontolink/artifacts/preview-highlights-2026-11-19.md"
+      ],
+      "status": [
+        "STALE"
       ]
     },
     {
-      "id": "source-003",
+      "id": "release-132-implementation",
       "type": "Artifact",
       "belongsTo": [
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "38b4be92dca884afa608d5406b8365eeeea41e18d45744b31bb33ec80a751324"
+        "0555d4a66124c1fbefbb713b763b9c3fd4f6d83530086306fe3c5fb80067c913"
       ],
       "createdAt": [
-        "2026-11-17T08:37:41.843554+00:00"
+        "2026-11-19T13:02:15.707543+00:00"
+      ],
+      "derivedFrom": [
+        "source-009",
+        "source-013",
+        "source-035",
+        "source-049",
+        "source-050",
+        "source-054",
+        "source-056",
+        "source-062",
+        "source-068",
+        "source-075",
+        "source-078"
+      ],
+      "kind": [
+        "implementation"
+      ],
+      "path": [
+        ".ontolink/artifacts/release-1.3.2.md"
+      ],
+      "status": [
+        "STALE"
+      ]
+    },
+    {
+      "id": "source-009",
+      "type": "Artifact",
+      "belongsTo": [
+        "urn:ontolink:project:mdx-reader-1ce34f1"
+      ],
+      "contentHash": [
+        "6df7426b9b5b963054045271992ffd48b69bf045d8049613bb983d82661062d9"
+      ],
+      "createdAt": [
+        "2026-11-17T08:37:43.129331+00:00"
       ],
       "kind": [
         "source"
       ],
       "path": [
-        ".github/workflows/android.yml"
+        "CHANGELOG.md"
       ],
       "status": [
         "CURRENT"
       ]
     },
     {
-      "id": "source-004",
+      "id": "source-013",
       "type": "Artifact",
       "belongsTo": [
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "d873e38385ecbc57a1a732a5d81b9d18d3402d09e856f31e685368953aebac40"
+        "d1b0048e44112c6e1b06bf1de8093d2e86f14066cee14df100b51be2190780ae"
       ],
       "createdAt": [
-        "2026-11-17T08:37:42.043145+00:00"
+        "2026-11-17T08:37:43.994908+00:00"
       ],
       "kind": [
         "source"
       ],
       "path": [
-        ".github/workflows/build.yml"
-      ],
-      "status": [
-        "CURRENT"
-      ]
-    },
-    {
-      "id": "source-005",
-      "type": "Artifact",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "contentHash": [
-        "dc84e383207c540ea162808cb2302cfd08848b8d214eda4aeee65de7105134a9"
-      ],
-      "createdAt": [
-        "2026-11-17T08:37:42.238794+00:00"
-      ],
-      "kind": [
-        "source"
-      ],
-      "path": [
-        ".github/workflows/sync-web.yml"
-      ],
-      "status": [
-        "CURRENT"
-      ]
-    },
-    {
-      "id": "source-023",
-      "type": "Artifact",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "contentHash": [
-        "a18722e11ef4182480e2b486a7285426c8307e0332e0d8278fc383f312eaf982"
-      ],
-      "createdAt": [
-        "2026-11-17T08:37:46.225418+00:00"
-      ],
-      "kind": [
-        "source"
-      ],
-      "path": [
-        "android/app/src/main/AndroidManifest.xml"
-      ],
-      "status": [
-        "CURRENT"
-      ]
-    },
-    {
-      "id": "source-034",
-      "type": "Artifact",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "contentHash": [
-        "28cb1c1b8f4420e845ada388dd840fffaaa5942b6458386f5b67cc84c56fbc9e"
-      ],
-      "createdAt": [
-        "2026-11-17T08:37:49.084076+00:00"
-      ],
-      "kind": [
-        "source"
-      ],
-      "path": [
-        "app/android.js"
+        "MDX-Reader-Standalone.html"
       ],
       "status": [
         "CURRENT"
@@ -383,7 +232,7 @@
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "d355b602526dbe389bfa31d6bb70fcf5cc48a1bcc69552d0b7758ee6965dff9e"
+        "3a88516eceace05d3a9b0a555ca646d73dee41807ab46a040c04553a9bc37013"
       ],
       "createdAt": [
         "2026-11-17T08:37:49.365873+00:00"
@@ -393,6 +242,28 @@
       ],
       "path": [
         "app/app.js"
+      ],
+      "status": [
+        "CURRENT"
+      ]
+    },
+    {
+      "id": "source-049",
+      "type": "Artifact",
+      "belongsTo": [
+        "urn:ontolink:project:mdx-reader-1ce34f1"
+      ],
+      "contentHash": [
+        "8352e9ee841ba4ec8586ab548e460cd8a1d33ca48ad24d3816c158a032e03efb"
+      ],
+      "createdAt": [
+        "2026-11-17T08:37:53.546517+00:00"
+      ],
+      "kind": [
+        "source"
+      ],
+      "path": [
+        "app/index.html"
       ],
       "status": [
         "CURRENT"
@@ -421,50 +292,6 @@
       ]
     },
     {
-      "id": "source-051",
-      "type": "Artifact",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "contentHash": [
-        "5004d247dbd27a72c6969d2245e860bfe62f36b39e0c36d013265a2f170aff10"
-      ],
-      "createdAt": [
-        "2026-11-17T08:37:54.185529+00:00"
-      ],
-      "kind": [
-        "source"
-      ],
-      "path": [
-        "app/mobile.css"
-      ],
-      "status": [
-        "CURRENT"
-      ]
-    },
-    {
-      "id": "source-052",
-      "type": "Artifact",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "contentHash": [
-        "397950a789ca3994b6f61d5546dc83800eb8b01c67a038b42d3ab6457b4b037b"
-      ],
-      "createdAt": [
-        "2026-11-17T08:37:54.523553+00:00"
-      ],
-      "kind": [
-        "source"
-      ],
-      "path": [
-        "app/mobile.js"
-      ],
-      "status": [
-        "CURRENT"
-      ]
-    },
-    {
       "id": "source-054",
       "type": "Artifact",
       "belongsTo": [
@@ -487,66 +314,44 @@
       ]
     },
     {
-      "id": "source-055",
+      "id": "source-056",
       "type": "Artifact",
       "belongsTo": [
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "aed73b31ae882a668a07fcd604908a16618710ca50c346517c9749b061d707a9"
+        "585a68abfcac0ddb71c96de965886efa7bf26ca7e12ee080fa1ac30419e7fac5"
       ],
       "createdAt": [
-        "2026-11-17T08:37:55.548600+00:00"
+        "2026-11-17T08:37:55.899657+00:00"
       ],
       "kind": [
         "source"
       ],
       "path": [
-        "app/updates.js"
+        "app/version.js"
       ],
       "status": [
         "CURRENT"
       ]
     },
     {
-      "id": "source-057",
+      "id": "source-062",
       "type": "Artifact",
       "belongsTo": [
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "b5ca528b65c1fc10b4b2f289bd665e1bd3eeb64eeab138b17d9ebe1a57032191"
+        "d1b0048e44112c6e1b06bf1de8093d2e86f14066cee14df100b51be2190780ae"
       ],
       "createdAt": [
-        "2026-11-17T08:37:56.232385+00:00"
+        "2026-11-17T08:37:58.030437+00:00"
       ],
       "kind": [
         "source"
       ],
       "path": [
-        "build-standalone.js"
-      ],
-      "status": [
-        "CURRENT"
-      ]
-    },
-    {
-      "id": "source-066",
-      "type": "Artifact",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "contentHash": [
-        "b8378538e58ac328f0d4df819c1ad9f429db6180791de85bc26bf978f118cb26"
-      ],
-      "createdAt": [
-        "2026-11-17T08:37:59.515647+00:00"
-      ],
-      "kind": [
-        "source"
-      ],
-      "path": [
-        "main.js"
+        "docs/index.html"
       ],
       "status": [
         "CURRENT"
@@ -559,7 +364,7 @@
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "7cd7e87f398d35cbe4f65adee04056c47e410e05969649cb73cc5e57f2d8eb5b"
+        "77be895a1c103158d238a9b2bce9dbb0679af3486a37b248c1a31774d26882fe"
       ],
       "createdAt": [
         "2026-11-17T08:38:00.230897+00:00"
@@ -575,66 +380,66 @@
       ]
     },
     {
-      "id": "source-070",
+      "id": "source-075",
       "type": "Artifact",
       "belongsTo": [
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "037b3d55ede1d6dac5ef052158c3fe27e6561d80d4e11be6c1a3a6cbcb6adaf1"
+        "86c4d4e3f0f7b177631fe786b53dea9e59a1a3bad7adc50e1a7f770ca4f29e07"
       ],
       "createdAt": [
-        "2026-11-17T08:38:00.992364+00:00"
+        "2026-11-17T08:38:03.026832+00:00"
       ],
       "kind": [
         "source"
       ],
       "path": [
-        "preload.js"
+        "scripts/test-android.js"
       ],
       "status": [
         "CURRENT"
       ]
     },
     {
-      "id": "source-074",
+      "id": "source-077",
       "type": "Artifact",
       "belongsTo": [
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "29e8e3b8d015013ebaa9d44d26a49c979e3f284881675618907d018d5852ac55"
+        "1b8d2d763ec8bde6a67f4be62a40a8335263dd3512b28d186dae76d4e8741fe0"
       ],
       "createdAt": [
-        "2026-11-17T08:38:02.621212+00:00"
+        "2026-11-17T08:38:03.879746+00:00"
       ],
       "kind": [
         "source"
       ],
       "path": [
-        "scripts/sync-version.js"
+        "tests/editor.spec.js"
       ],
       "status": [
         "CURRENT"
       ]
     },
     {
-      "id": "source-manifest",
+      "id": "source-078",
       "type": "Artifact",
       "belongsTo": [
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "contentHash": [
-        "91c465cc4440ab4ade3c32d8256f947934bb7eb52b59e6ad8c9ac143dae57412"
+        "f2b32c00dd69b20480337a04968bff9ddc36ebedf5289030d5769a6f2497f909"
       ],
       "createdAt": [
-        "2026-11-17T08:37:40.620504+00:00"
+        "2026-11-17T08:38:04.328382+00:00"
       ],
       "kind": [
-        "implementation"
+        "source"
       ],
       "path": [
-        ".ontolink/artifacts/source-manifest.json"
+        "tests/fonts.spec.js"
       ],
       "status": [
         "CURRENT"
@@ -738,86 +543,95 @@
       "weight": [
         "1"
       ]
-    },
-    {
-      "id": "windows-host",
-      "type": "Contract",
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "createdAt": [
-        "2026-11-17T08:40:42.505470+00:00"
-      ],
-      "summary": [
-        "Electron main process owns files/dialogs/window lifecycle; preload exposes native operations. Independent document windows are covered by documents.spec.js."
-      ],
-      "title": [
-        "Electron window and IPC boundary"
-      ],
-      "usesArtifact": [
-        "source-066",
-        "source-070"
-      ]
     }
   ],
   "evidence": [
     {
-      "id": "history-import-proof",
+      "id": "preview-highlights-suite-pass",
       "type": "Evidence",
       "belongsTo": [
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "createdAt": [
-        "2026-11-17T08:38:05.630091+00:00"
+        "2026-11-19T12:53:54.254885+00:00"
       ],
       "outcome": [
         "PASS"
       ],
       "proofHash": [
-        "2e3fbd8195e2b2c065dd5d2094965d84409e79ff2f350a9519cf50659e573e98"
+        "df0e7fda9b71170c886ed3eb5ba312033be611e291a1fdf77399683bea8e949e"
       ],
       "proofPath": [
-        ".ontolink/proofs/historical-import-review.txt"
+        ".ontolink/proofs/preview-highlights-playwright-2026-11-19.txt"
       ],
       "summary": [
-        "Faithful historical implementation record, not comprehensive runtime verification"
+        "20 Playwright tests passed, including RTL pricing, persisted highlighting, undo/redo, removal and HTML export."
       ],
       "supports": [
-        "changelog-source"
+        "preview-highlights-implementation"
       ],
       "targetHash": [
-        "b27f7207f3da833cacb53be95f7119aec61328c9d5ed080df6d41d7c0acc7b85"
+        "6845c97628f0feee91dc16a48da2c084de921837c313a85e5b7b2aacfb02d6ef"
       ],
-      "current_provenance_pass": true
+      "current_provenance_pass": false
     },
     {
-      "id": "proof-build",
+      "id": "preview-highlights-windows-pass",
       "type": "Evidence",
       "belongsTo": [
         "urn:ontolink:project:mdx-reader-1ce34f1"
       ],
       "createdAt": [
-        "2026-11-17T08:39:09.178228+00:00"
+        "2026-11-19T12:54:01.001158+00:00"
       ],
       "outcome": [
         "PASS"
       ],
       "proofHash": [
-        "a8696f67c4feedcf22687f86622186916a309caaf35eaa031054b829ea111504"
+        "10916c674bea2a1941cd5f713a8cd152aaa5e2d4b028404e18a63c4cc589b4cd"
       ],
       "proofPath": [
-        ".ontolink/proofs/build-review.txt"
+        ".ontolink/proofs/preview-highlights-windows-2026-11-19.txt"
       ],
       "summary": [
-        "Observed project_setup success; start returned VALID revision 0. Verified local coordinator, bundled phases and project instruction files. Historical import records passed mediator guards. Application regression suite finished with 18 passed.\n"
+        "The packaged Windows renderer rendered RTL prices and saved and restored a highlight. Local installer and portable EXE built and checked as NotSigned. No installation or downloaded SmartScreen prompt was run."
       ],
       "supports": [
-        "outcome-build"
+        "preview-highlights-implementation"
       ],
       "targetHash": [
-        "6077ed546a65da4529b33b2d7dff3783f8a0d3aba58e507fef9dfba387200ae1"
+        "6845c97628f0feee91dc16a48da2c084de921837c313a85e5b7b2aacfb02d6ef"
       ],
-      "current_provenance_pass": true
+      "current_provenance_pass": false
+    },
+    {
+      "id": "preview-highlights-windows-retry",
+      "type": "Evidence",
+      "belongsTo": [
+        "urn:ontolink:project:mdx-reader-1ce34f1"
+      ],
+      "createdAt": [
+        "2026-11-19T12:53:57.613557+00:00"
+      ],
+      "outcome": [
+        "FAIL"
+      ],
+      "proofHash": [
+        "a10801297bf6ae25da85d0d4468005170a3a243be320baaf4a99a5c6fc73b155"
+      ],
+      "proofPath": [
+        ".ontolink/proofs/preview-highlights-windows-launch-retry-2026-11-19.txt"
+      ],
+      "summary": [
+        "Initial packaged Electron Playwright launch failed with ELECTRON_RUN_AS_NODE present; retry with it unset succeeded."
+      ],
+      "supports": [
+        "preview-highlights-implementation"
+      ],
+      "targetHash": [
+        "6845c97628f0feee91dc16a48da2c084de921837c313a85e5b7b2aacfb02d6ef"
+      ],
+      "current_provenance_pass": false
     },
     {
       "id": "proof-design",
@@ -905,6 +719,93 @@
         "f56fd9c7688b0ffdcc40bca4905be9fc55a7baf760856c85390bfb99be2b12e4"
       ],
       "current_provenance_pass": true
+    },
+    {
+      "id": "release-132-android-build-pass",
+      "type": "Evidence",
+      "belongsTo": [
+        "urn:ontolink:project:mdx-reader-1ce34f1"
+      ],
+      "createdAt": [
+        "2026-11-19T13:02:23.440114+00:00"
+      ],
+      "outcome": [
+        "PASS"
+      ],
+      "proofHash": [
+        "717953b75b9326d25ee426b743f3e79be091415284e4d8b3de8d41e634a1747f"
+      ],
+      "proofPath": [
+        ".ontolink/proofs/release-132-android-build.txt"
+      ],
+      "summary": [
+        "Gradle assembleDebug lintDebug completed successfully for Android 1.3.2."
+      ],
+      "supports": [
+        "release-132-implementation"
+      ],
+      "targetHash": [
+        "0555d4a66124c1fbefbb713b763b9c3fd4f6d83530086306fe3c5fb80067c913"
+      ],
+      "current_provenance_pass": false
+    },
+    {
+      "id": "release-132-android-emulator-pass",
+      "type": "Evidence",
+      "belongsTo": [
+        "urn:ontolink:project:mdx-reader-1ce34f1"
+      ],
+      "createdAt": [
+        "2026-11-19T13:02:27.222923+00:00"
+      ],
+      "outcome": [
+        "PASS"
+      ],
+      "proofHash": [
+        "5ad887076592b57414c399609e373f527d92bdbb23ab0180de299ef78422cdcf"
+      ],
+      "proofPath": [
+        ".ontolink/proofs/release-132-android-emulator.txt"
+      ],
+      "summary": [
+        "Actual emulator WebView and native file flow verified pricing, highlight save/restart, fonts and appearance defaults, document lifecycle, native open/save/share and undo/redo."
+      ],
+      "supports": [
+        "release-132-implementation"
+      ],
+      "targetHash": [
+        "0555d4a66124c1fbefbb713b763b9c3fd4f6d83530086306fe3c5fb80067c913"
+      ],
+      "current_provenance_pass": false
+    },
+    {
+      "id": "release-132-playwright-pass",
+      "type": "Evidence",
+      "belongsTo": [
+        "urn:ontolink:project:mdx-reader-1ce34f1"
+      ],
+      "createdAt": [
+        "2026-11-19T13:02:19.614989+00:00"
+      ],
+      "outcome": [
+        "PASS"
+      ],
+      "proofHash": [
+        "f1da8f0faa3cdce4739b16e8ad52eeba15545241d5d72e07ee49854db555fa92"
+      ],
+      "proofPath": [
+        ".ontolink/proofs/release-132-playwright.txt"
+      ],
+      "summary": [
+        "20 browser and Electron checks on Windows passed, including the new theme/font defaults, retained choices, price rendering and highlights."
+      ],
+      "supports": [
+        "release-132-implementation"
+      ],
+      "targetHash": [
+        "0555d4a66124c1fbefbb713b763b9c3fd4f6d83530086306fe3c5fb80067c913"
+      ],
+      "current_provenance_pass": false
     }
   ],
   "uncertainty": [],
@@ -935,28 +836,6 @@
   "blockers": [],
   "recommendations": [
     {
-      "id": "consider-windows-signing",
-      "type": "Recommendation",
-      "affects": [
-        "release-pipeline"
-      ],
-      "basis": [
-        "Local installers and portable executables have no Authenticode signature. Microsoft documents SmartScreen reputation checks for files and certificates. No signing configuration or credential was supplied."
-      ],
-      "belongsTo": [
-        "urn:ontolink:project:mdx-reader-1ce34f1"
-      ],
-      "createdAt": [
-        "2026-11-19T12:54:07.959522+00:00"
-      ],
-      "status": [
-        "PROPOSED"
-      ],
-      "summary": [
-        "Evaluate trusted Windows code signing for future distributed installer and portable builds."
-      ]
-    },
-    {
       "id": "future-features",
       "type": "Recommendation",
       "affects": [
@@ -976,6 +855,34 @@
       ],
       "summary": [
         "Import any additional user-approved backlog or prior design decisions when they become available"
+      ]
+    },
+    {
+      "id": "windows-authenticode-signing",
+      "type": "Recommendation",
+      "affects": [
+        "urn:ontolink:project:mdx-reader-1ce34f1"
+      ],
+      "basis": [
+        "Published 1.3.2 setup is NotSigned and Microsoft SmartScreen uses publisher and file reputation. Trusted signing can still show reputation warnings for new files."
+      ],
+      "belongsTo": [
+        "urn:ontolink:project:mdx-reader-1ce34f1"
+      ],
+      "createdAt": [
+        "2026-11-21T12:16:37.615674+00:00"
+      ],
+      "status": [
+        "PROPOSED"
+      ],
+      "summary": [
+        "Use one trusted Authenticode signing identity for future Windows executables and installers. The updated Windows build is local and publication remains pending."
+      ],
+      "title": [
+        "Use trusted Windows release signing"
+      ],
+      "usesArtifact": [
+        "windows-update-handoff"
       ]
     }
   ],
@@ -1242,13 +1149,13 @@
     {
       "id": "preview-highlights-build",
       "phase": "build",
-      "status": "DONE",
+      "status": "READY",
       "owner": "project-maintainer"
     },
     {
       "id": "release-132-build",
       "phase": "build",
-      "status": "DONE",
+      "status": "READY",
       "owner": "project-maintainer"
     },
     {
@@ -1292,12 +1199,20 @@
       "phase": "verify",
       "status": "TODO",
       "owner": "coordinator"
+    },
+    {
+      "id": "windows-update-build",
+      "phase": "build",
+      "status": "DONE",
+      "owner": "project-maintainer"
     }
   ],
   "routing_graph_hash": "a023869c49076dc48ed86285c4efa5b6deefd733dda5722e5d226c0f0cc72f96",
-  "completion_gates": [],
+  "completion_gates": [
+    "missing-current-evidence:implementation"
+  ],
   "context_budget": {
-    "estimate": 7239,
+    "estimate": 6878,
     "limit": 4000,
     "overflow": true,
     "method": "UTF-8 bytes/3 heuristic for packet only, not observed model tokens",

@@ -1,0 +1,8 @@
+{
+  "id": "source-079",
+  "type": "Artifact",
+  "kind": "source",
+  "path": "tests/updates.spec.js",
+  "status": "CURRENT",
+  "contentHash": "b262c02610cfc3543527fc1f1c41cdc371b2e0c10127008d52edb8a2ec5663e6"
+}

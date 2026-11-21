@@ -1,0 +1,10 @@
+{
+  "id": "windows-update-proof-authenticode",
+  "type": "Evidence",
+  "supports": "windows-update-handoff",
+  "outcome": "PASS",
+  "proofPath": ".ontolink/proofs/windows-update-2026-11-21-authenticode.txt",
+  "proofHash": "318d80d756a6383d201f10a4e6a8414877048dee5ae9376b516bf422d8bde0e2",
+  "targetHash": "c089879ba690b57e3fd6e03dd6f37b2a2591fc9171762473e5cd5cc974699d0a",
+  "summary": "Verified exact published 1.3.2 setup bytes match the GitHub SHA-256 and have Authenticode NotSigned status."
+}

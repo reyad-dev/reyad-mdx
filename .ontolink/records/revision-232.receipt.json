@@ -1,0 +1,17 @@
+{
+  "input": ".ontolink/records/windows-update-2026-11-21-232-windows-update-proof-nsis-build.json",
+  "result": {
+    "revision": 232,
+    "recorded": "windows-update-proof-nsis-build",
+    "invalidated": [
+      "preview-highlights-implementation",
+      "release-132-github-handoff",
+      "release-132-implementation",
+      "source-015",
+      "source-016",
+      "source-017",
+      "source-018",
+      "source-019"
+    ]
+  }
+}

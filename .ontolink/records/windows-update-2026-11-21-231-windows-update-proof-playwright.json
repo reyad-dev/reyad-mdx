@@ -1,0 +1,10 @@
+{
+  "id": "windows-update-proof-playwright",
+  "type": "Evidence",
+  "supports": "windows-update-handoff",
+  "outcome": "PASS",
+  "proofPath": ".ontolink/proofs/windows-update-2026-11-21-playwright.txt",
+  "proofHash": "c03b8e284972015832f57e615348ad6c32dbd4e24667ecc8898a1707d3a2486b",
+  "targetHash": "c089879ba690b57e3fd6e03dd6f37b2a2591fc9171762473e5cd5cc974699d0a",
+  "summary": "Twenty-two Playwright tests on Windows passed, covering download digest verification, cancellation, canceled Save As, save and discard in separate windows, and platform download behavior. The installer launch is simulated in the Playwright handoff test."
+}

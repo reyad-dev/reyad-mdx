@@ -1140,6 +1140,9 @@
         else if (action === 'close-document') closeDocument(false);
         else if (action === 'check-updates' && window.MDXUpdates) window.MDXUpdates.open();
         else if (action === 'save') doSave();
+        else if (action === 'save-for-update') {
+          doSave().catch(function () { toast(t('errSave')); }).finally(N.finishUpdateSave);
+        }
         else if (action === 'undo' || action === 'redo') editHistory(action);
         else if (action === 'save-then-close') {
           state.pendingClose = true;

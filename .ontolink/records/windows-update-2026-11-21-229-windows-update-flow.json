@@ -1,0 +1,6 @@
+{
+  "id": "windows-update-flow",
+  "type": "Requirement",
+  "title": "Upgrade the installed Windows app in place",
+  "summary": "Preserve the installed path, preferences and saved documents; let each dirty window save, discard, or cancel before a verified update closes the app."
+}

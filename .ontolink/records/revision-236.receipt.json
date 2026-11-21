@@ -1,0 +1,17 @@
+{
+  "input": ".ontolink/records/windows-update-2026-11-21-236-windows-update-build.json",
+  "result": {
+    "revision": 236,
+    "recorded": "windows-update-build",
+    "invalidated": [
+      "preview-highlights-implementation",
+      "release-132-github-handoff",
+      "release-132-implementation",
+      "source-015",
+      "source-016",
+      "source-017",
+      "source-018",
+      "source-019"
+    ]
+  }
+}

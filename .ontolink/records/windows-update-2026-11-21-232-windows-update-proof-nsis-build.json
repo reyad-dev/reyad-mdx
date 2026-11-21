@@ -1,0 +1,10 @@
+{
+  "id": "windows-update-proof-nsis-build",
+  "type": "Evidence",
+  "supports": "windows-update-handoff",
+  "outcome": "PASS",
+  "proofPath": ".ontolink/proofs/windows-update-2026-11-21-nsis-build.txt",
+  "proofHash": "d6bffcfdaa4d32b90eea908461434fee9db04d22d5e8f58d7a3cb5285eab9009",
+  "targetHash": "c089879ba690b57e3fd6e03dd6f37b2a2591fc9171762473e5cd5cc974699d0a",
+  "summary": "Final Windows x64 NSIS build succeeded through electron-builder 24.13.3."
+}

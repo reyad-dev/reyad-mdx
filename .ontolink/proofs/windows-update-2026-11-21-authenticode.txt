@@ -1,0 +1,6 @@
+Release: https://github.com/reyad-dev/reyad-mdx/releases/tag/v1.3.2
+Asset: ReyadMDX-Setup-1.3.2.exe
+Local asset SHA-256: f359b7ed689f49411b4b71d73a1883f4edd16be8e297375bef367d227e7de115
+Get-AuthenticodeSignature: NotSigned
+GitHub CLI Asset digest: sha256:f359b7ed689f49411b4b71d73a1883f4edd16be8e297375bef367d227e7de115
+Microsoft documentation: https://learn.microsoft.com/windows/apps/package-and-deploy/smartscreen-reputation

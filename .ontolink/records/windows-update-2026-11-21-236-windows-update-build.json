@@ -1,0 +1,14 @@
+{
+  "id": "windows-update-build",
+  "type": "Task",
+  "phase": "build",
+  "owner": "project-maintainer",
+  "title": "Implement and test Windows in-place update handoff locally",
+  "status": "DONE",
+  "requiredKind": [
+    "implementation"
+  ],
+  "dependsOn": "task-plan",
+  "usesArtifact": "windows-update-handoff",
+  "satisfies": "windows-update-flow"
+}
