@@ -1,9 +1,0 @@
-{
-  "id": "task-build",
-  "type": "Task",
-  "title": "Install OntoLink integration and import repository knowledge",
-  "status": "DONE",
-  "usesArtifact": [
-    "outcome-build"
-  ]
-}

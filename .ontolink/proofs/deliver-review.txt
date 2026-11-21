@@ -1,1 +1,0 @@
-Checked local handoff commands, project instruction entry points and retained test/source references. This handoff delivers local installation and knowledge migration, not a deployment or remote communication.

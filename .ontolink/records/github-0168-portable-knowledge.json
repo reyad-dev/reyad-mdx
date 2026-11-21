@@ -1,7 +1,0 @@
-{
-  "id": "portable-knowledge",
-  "type": "Decision",
-  "title": "Version the complete project-local ontology state and byte-preserving inputs",
-  "summary": "User authorized pushing all project work to origin/main for resuming on another device. Track installed suite, graph, durable records/proofs, agent entry points and original distribution snapshots as ordinary files. Preserve exact source/proof bytes through Git attributes. Build/dependency caches and nested .git metadata remain machine-local.",
-  "basis": "core.autocrlf=true would rewrite source/proof hashes; bundled coordinator requires Python 3.10+ standard library only."
-}

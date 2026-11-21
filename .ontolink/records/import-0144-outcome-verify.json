@@ -1,8 +1,0 @@
-{
-  "id": "outcome-verify",
-  "type": "Artifact",
-  "kind": "verification",
-  "path": ".ontolink/artifacts/verify.md",
-  "contentHash": "534a26719ef7da6d0e05dfb7c4b27b25e35ff2ec67e9ab31df0d49fb8873cd64",
-  "status": "CURRENT"
-}

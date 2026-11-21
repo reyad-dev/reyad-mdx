@@ -1,9 +1,0 @@
-{
-  "id": "task-design",
-  "type": "Task",
-  "title": "Document native architecture and ontology contracts",
-  "status": "DONE",
-  "usesArtifact": [
-    "outcome-design"
-  ]
-}

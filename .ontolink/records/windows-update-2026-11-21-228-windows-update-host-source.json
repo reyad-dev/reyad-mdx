@@ -1,8 +1,0 @@
-{
-  "id": "windows-update-host-source",
-  "type": "Artifact",
-  "kind": "source",
-  "path": "windows-update.js",
-  "status": "CURRENT",
-  "contentHash": "dbf5c5e11285a1bb31a58cd47d2199a94d5c46025c1fed8bc59d6c4de1e98f64"
-}

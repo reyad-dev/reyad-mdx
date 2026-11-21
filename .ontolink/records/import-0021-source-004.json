@@ -1,8 +1,0 @@
-{
-  "id": "source-004",
-  "type": "Artifact",
-  "kind": "source",
-  "path": ".github/workflows/build.yml",
-  "contentHash": "d873e38385ecbc57a1a732a5d81b9d18d3402d09e856f31e685368953aebac40",
-  "status": "CURRENT"
-}

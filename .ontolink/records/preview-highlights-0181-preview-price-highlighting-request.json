@@ -1,6 +1,0 @@
-{
-  "id": "preview-price-highlighting-request",
-  "type": "Requirement",
-  "title": "Keep prices readable in RTL preview and persist selected text highlights",
-  "summary": "Correct the Arabic subscription-price preview, explain the Windows Run anyway prompt, and support colored text selection in preview with highlights saved with the document."
-}

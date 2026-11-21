@@ -1,9 +1,0 @@
-{
-  "id": "preview-highlights-build",
-  "type": "Task",
-  "status": "DONE",
-  "usesArtifact": [
-    "preview-highlights-implementation",
-    "release-132-implementation"
-  ]
-}

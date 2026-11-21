@@ -1,9 +1,0 @@
-{
-  "id": "task-deliver",
-  "type": "Task",
-  "title": "Hand off local ontology integration and retrieval instructions",
-  "status": "DONE",
-  "usesArtifact": [
-    "outcome-deliver"
-  ]
-}

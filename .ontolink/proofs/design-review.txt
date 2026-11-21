@@ -1,1 +1,0 @@
-Reviewed package metadata, scripts, main/preload and app module boundaries, Android native source locations, build/test workflows. Architecture retains existing stack and distinguishes graph state from generated context and code navigation.

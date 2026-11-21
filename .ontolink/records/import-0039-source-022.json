@@ -1,8 +1,0 @@
-{
-  "id": "source-022",
-  "type": "Artifact",
-  "kind": "source",
-  "path": "android/app/build.gradle",
-  "contentHash": "64dcefebfffaf784bddfe0a33becbbb5ee5e604a3b7ce14a3e191c3e4c87c48f",
-  "status": "CURRENT"
-}

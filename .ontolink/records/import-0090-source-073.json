@@ -1,8 +1,0 @@
-{
-  "id": "source-073",
-  "type": "Artifact",
-  "kind": "source",
-  "path": "scripts/generate-fonts-css.js",
-  "contentHash": "54da948d0f2739418fd5c356dd37a13458476f70f853a4d169c1ff304b6089e5",
-  "status": "CURRENT"
-}

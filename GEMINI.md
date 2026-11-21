@@ -1,8 +1,8 @@
-<!-- ontolink:start -->
-Before project work, read `.rule/ONTOLOGY-FIRST.md`. Resolve the installed
-`ontolink-skills` coordinator and run `.rule/ontolink.py start` with its actual
-`--skill-root` and the canonical `--state` when configured. Keep generated
-OntoLink records, proofs and text under the fixed `.ontolink/` directory.
-<!-- ontolink:end -->
+# Gemini Instructions — ReyadMDX
 
-Read `AGENTS.md` for the exact installed coordinator command and knowledge maintenance contract. `knowledge.owl` is the primary task/knowledge registry; `.ontolink/artifacts/agent-handoff.md` explains historical evidence scope and open follow-ups. Update the graph through guarded mediator records and validate before handing work back.
+Read [AGENTS.md](file:///c:/Users/I-SEVEN/Downloads/Vibe%20Coding/MDX%20Reader%20-%201ce34f1/AGENTS.md) for full project architecture, development commands, and coding standards.
+
+Key Rules:
+1. Check [TODO.md](file:///c:/Users/I-SEVEN/Downloads/Vibe%20Coding/MDX%20Reader%20-%201ce34f1/TODO.md) for the active task before starting work, and keep it updated.
+2. Prioritize first-class Arabic/RTL support and typography in any UI or Markdown parsing changes.
+3. Keep the codebase lightweight; avoid introducing unnecessary dependencies or bloating the `app/` folder.

@@ -1,9 +1,0 @@
-{
-  "paths": [
-    ".agents\\skills\\ontolink-skills",
-    ".rule\\ontolink.py",
-    ".rule\\ONTOLOGY-FIRST.md",
-    "AGENTS.md",
-    "GEMINI.md"
-  ]
-}

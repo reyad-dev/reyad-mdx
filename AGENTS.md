@@ -1,18 +1,44 @@
-<!-- ontolink:start -->
-Before project work, read `.rule/ONTOLOGY-FIRST.md`. Resolve the installed
-`ontolink-skills` coordinator and run `.rule/ontolink.py start` with its actual
-`--skill-root` and the canonical `--state` when configured. Keep generated
-OntoLink records, proofs and text under the fixed `.ontolink/` directory.
-<!-- ontolink:end -->
+# Agent Guide — ReyadMDX
 
-## Canonical project knowledge
+## 📖 Project Overview
+**ReyadMDX** is an offline Markdown viewer and editor with first-class Arabic and RTL support. It runs as a desktop Electron app and as a portable standalone single-file HTML app (`MDX-Reader-Standalone.html`), with an Android build option.
 
-`knowledge.owl` is the primary project knowledge and task registry. On every session:
+---
 
-1. Run `py .rule/ontolink.py start --root . --skill-root .agents/skills/ontolink-skills` (use `python3` on Linux/macOS).
-2. Read `.ontolink/context.json`, then retrieve the relevant task and linked sources. For focused context use the mediator `context --state knowledge.owl --task <id>`.
-3. Record requirements, decisions, completed work, failures, pending work and proposed future work through the mediator with the current expected revision. Only the mediator writes `knowledge.owl`.
-4. Preserve source/proof hashes, dependencies and evidence scope. Historical completion imported from CHANGELOG is a documented claim, not universal runtime verification. See `.ontolink/artifacts/agent-handoff.md`.
-5. Validate and refresh context before handoff. Keep durable records/proofs/artifacts in version control; do not delete them as caches.
+## 🏛️ Project Architecture
+- `main.js`: Electron main process (window lifecycle, IPC handlers, app menu, update coordination).
+- `preload.js`: Context isolation bridge exposing safe native APIs to the renderer.
+- `app/`: Frontend application code:
+  - `app/index.html`: Main desktop window UI.
+  - `app/app.js`: Core renderer logic (editor, live preview, syntax highlighting, theme switching).
+  - `app/styles.css`: UI styling with robust RTL / LTR layout rules.
+  - `app/updates.js`: In-app update notifications and release staging logic.
+- `MDX-Reader-Standalone.html`: Fully self-contained portable HTML version (zero install, runs in any browser).
+- `windows-update.js`: Windows NSIS installer update helpers and staging verification.
+- `scripts/`: Helper scripts for syncing version numbers and building the standalone bundle.
+- `TODO.md`: Canonical project task list and roadmap. Always check and update this file when starting or completing work.
+- `CHANGELOG.md`: Detailed history of changes across releases.
 
-Source code remains authoritative for actual behavior. Inspect it when needed; update graph facts and affected evidence when it changes. Never invent missing history or treat proposed follow-ups as approved features. No background updater is installed.
+---
+
+## 🛠️ Common Commands & Scripts
+- `npm start`: Launch the desktop Electron application in development mode.
+- `npm run standalone`: Rebuild and synchronize `MDX-Reader-Standalone.html` from the source components.
+- `npm run dist`: Package the Windows installer executable (`dist/`).
+- `npm run portable`: Package the portable Windows executable.
+- `npm test`: Run automated tests.
+
+---
+
+## 📐 Development & Engineering Guidelines
+1. **First-Class Arabic & RTL Support:**
+   - Always ensure Bidirectional (Bidi) text isolation is preserved.
+   - Prices with currency symbols (e.g. `$`, `LE`, `SAR`) must not flip direction awkwardly in Arabic paragraphs.
+   - LaTeX math markers (`$`, `$$`) must not collide with currency symbols.
+2. **Lean & Clean Codebase:**
+   - The application relies on clean vanilla JavaScript and tested web components without heavy frameworks.
+   - Do not introduce large unnecessary npm dependencies.
+   - Keep `app/` clean: do not place non-renderer assets or development tools inside `app/` (since electron-builder packages the entire `app/**/*` directory).
+3. **Task Tracking:**
+   - Refer to [TODO.md](file:///c:/Users/I-SEVEN/Downloads/Vibe%20Coding/MDX%20Reader%20-%201ce34f1/TODO.md) for the active task and upcoming roadmap.
+   - Mark completed items `[x]` upon verifying your changes.

@@ -1,8 +1,0 @@
-{
-  "id": "release-132-policy",
-  "type": "Decision",
-  "title": "Ship a patch release and retain saved appearance choices",
-  "summary": "Version 1.3.2 ships shared price rendering and highlights with Sepia/Almarai defaults. Keep explicit and previously saved font/theme values. Consolidate public notes into CHANGELOG.md and retain the historical import snapshot under .ontolink.",
-  "basis": "Users keep established preferences; the existing Android GitHub release updater needs a higher release version and the existing signing identity.",
-  "satisfies": "appearance-release-consolidation"
-}

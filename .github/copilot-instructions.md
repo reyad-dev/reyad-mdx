@@ -1,1 +1,1 @@
-Read AGENTS.md and .rule/ONTOLOGY-FIRST.md. Before project work run `py .rule/ontolink.py start --root . --skill-root .agents/skills/ontolink-skills` (python3 on Linux/macOS). Use knowledge.owl as the canonical project knowledge/task registry; preserve evidence and record changes through the mediator before handoff.
+Read AGENTS.md for architecture, commands, and development guidelines. Check TODO.md for active tasks and keep it updated upon completing work. Prioritize first-class Arabic/RTL support and avoid bloating app/ or introducing unnecessary dependencies.

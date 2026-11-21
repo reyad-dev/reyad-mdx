@@ -1,8 +1,0 @@
-{
-  "id": "outcome-verify",
-  "type": "Artifact",
-  "derivedFrom": [
-    "runtime-suite",
-    "source-manifest"
-  ]
-}

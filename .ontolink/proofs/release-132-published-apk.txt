@@ -1,7 +1,0 @@
-Android tag workflow: https://github.com/reyad-dev/reyad-mdx/actions/runs/44529640179
-Source commit: 4a6f3fb841f56c3c813a28202861fbd9db5783d9
-package: name='dev.reyad.mdx' versionCode='10302' versionName='1.3.2' platformBuildVersionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVersionCodename='15'
-PASS: the signed 1.3.2 APK uses the same verified certificate SHA-256 as 1.3.1: 72b240671e8bb1888eff795a600e9adb97ad820ada80f107e5ee98abb1347ab3
-PASS: all 23 reader assets in the published APK match the emulator-tested build (HTML line endings normalized).
-PASS: packaged source, Almarai assets, Android bridge, and version 1.3.2 verified.
-Published APK SHA-256: 54428367d760075782f37a95c01a02591e8c0554d330d87b53842a26b2a3471b

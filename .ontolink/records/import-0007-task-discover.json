@@ -1,9 +1,0 @@
-{
-  "id": "task-discover",
-  "type": "Task",
-  "title": "Inventory existing project scope and knowledge requirements",
-  "status": "DONE",
-  "usesArtifact": [
-    "outcome-discover"
-  ]
-}

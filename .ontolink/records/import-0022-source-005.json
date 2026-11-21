@@ -1,8 +1,0 @@
-{
-  "id": "source-005",
-  "type": "Artifact",
-  "kind": "source",
-  "path": ".github/workflows/sync-web.yml",
-  "contentHash": "dc84e383207c540ea162808cb2302cfd08848b8d214eda4aeee65de7105134a9",
-  "status": "CURRENT"
-}

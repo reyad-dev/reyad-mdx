@@ -1,8 +1,0 @@
-{
-  "id": "source-manifest",
-  "type": "Artifact",
-  "kind": "implementation",
-  "path": ".ontolink/artifacts/source-manifest.json",
-  "contentHash": "91c465cc4440ab4ade3c32d8256f947934bb7eb52b59e6ad8c9ac143dae57412",
-  "status": "CURRENT"
-}

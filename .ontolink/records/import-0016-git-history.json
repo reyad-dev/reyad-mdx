@@ -1,8 +1,0 @@
-{
-  "id": "git-history",
-  "type": "Artifact",
-  "kind": "history",
-  "path": ".ontolink/proofs/git-history.txt",
-  "contentHash": "a72577c2e92dca865f6b8c35cbcf8381e1c3866b040728b9d2185c69be4e0927",
-  "status": "CURRENT"
-}

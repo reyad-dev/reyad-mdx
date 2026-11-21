@@ -1,6 +1,0 @@
-{
-  "id": "ontology-primary",
-  "type": "Requirement",
-  "title": "Make ontology the primary project knowledge and task registry",
-  "summary": "User requested local OntoLink installation and import of completed, unfinished, recorded and future tasks with knowledge retrieval for future AI agents. Historical coverage is limited to accessible repository content."
-}

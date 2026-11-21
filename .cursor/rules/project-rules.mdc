@@ -1,0 +1,5 @@
+---
+description: ReyadMDX Project Rules and Development Guidelines
+alwaysApply: true
+---
+Read AGENTS.md for architecture, commands, and development guidelines. Check TODO.md for active tasks and keep it updated upon completing work. Prioritize first-class Arabic/RTL support and avoid bloating app/ or introducing unnecessary dependencies.

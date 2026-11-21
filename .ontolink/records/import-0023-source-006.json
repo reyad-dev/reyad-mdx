@@ -1,8 +1,0 @@
-{
-  "id": "source-006",
-  "type": "Artifact",
-  "kind": "source",
-  "path": ".github/workflows/test.yml",
-  "contentHash": "1c8a49dea50b2b1c9cf4771b64474f95be4b21aeae000baeaefa223f8e7064fc",
-  "status": "CURRENT"
-}
