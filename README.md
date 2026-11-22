@@ -225,6 +225,8 @@ Run UI checks with `npx playwright install chromium` and `npm test`; the suite c
 
 Bug reports and focused pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a change. Please include a minimal Markdown sample for any bidi or rendering issue and do not add runtime dependencies without prior discussion.
 
+See [the project task list](TODO.md) and [release history](CHANGELOG.md) for current work and recent changes.
+
 ## License
 
 MIT © Mohamed Reyad (@reyad-dev). See [LICENSE](LICENSE).
