@@ -2,6 +2,21 @@
 
 All notable changes to ReyadMDX are documented here. This project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- Installed Windows copies can verify and stage GitHub release installers, prompt to save edited documents, and update in the existing installation folder.
+
+### Fixed
+
+- Windows Setup lists ReyadMDX in Open with and Default apps for `.md`, `.markdown`, `.mdown`, `.mkd`, `.mdx`, and `.txt`. Upgrades refresh the file associations and preserve the user's selected defaults.
+
+### العربية
+
+- يظهر ReyadMDX في «فتح باستخدام» و«التطبيقات الافتراضية» لملفات Markdown والنص على ويندوز. يجدّد المثبّت التسجيل عند التحديث ويحافظ على اختيار المستخدم للتطبيق الافتراضي.
+- يتحقق المحدّث من المثبّت ويتيح حفظ المستندات قبل التحديث في مجلد التثبيت الحالي.
+
 ## [1.3.2] - 2026-11-19
 
 ### Added

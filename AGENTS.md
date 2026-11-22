@@ -40,5 +40,6 @@
    - Do not introduce large unnecessary npm dependencies.
    - Keep `app/` clean: do not place non-renderer assets or development tools inside `app/` (since electron-builder packages the entire `app/**/*` directory).
 3. **Task Tracking:**
-   - Refer to [TODO.md](file:///c:/Users/I-SEVEN/Downloads/Vibe%20Coding/MDX%20Reader%20-%201ce34f1/TODO.md) for the active task and upcoming roadmap.
-   - Mark completed items `[x]` upon verifying your changes.
+   - Use [TODO.md](TODO.md) as the project task tracker. Record new tasks, remaining work, and proposed improvements there.
+   - Mark completed items `[x]` after verification and record the result.
+   - Add user-facing changes to the Unreleased section of [CHANGELOG.md](CHANGELOG.md).
